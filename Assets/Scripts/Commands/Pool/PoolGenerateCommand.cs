@@ -32,7 +32,7 @@ namespace Commands.Pool
             {
                 _emptyGameObject = new GameObject();
                 _emptyGameObject.transform.parent = _managerTranform;
-                _emptyGameObject.name = pooldata[i].ObjName;
+                _emptyGameObject.name = pooldata[i].Type.ToString();
 
                 for (int j = 0; j < pooldata[i].ObjectCount; j++)
                 {

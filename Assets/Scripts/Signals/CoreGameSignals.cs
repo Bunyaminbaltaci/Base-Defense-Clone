@@ -1,3 +1,4 @@
+using System;
 using Enums;
 using Extentions;
 using UnityEngine;
@@ -15,5 +16,7 @@ namespace Signals
         public UnityAction onEnterFinish = delegate { };
 
         public UnityAction<Transform> onSetCameraTarget = delegate { };
+        
+       public Func<GameObject> onGetammo= delegate { return default;};
     }
 }

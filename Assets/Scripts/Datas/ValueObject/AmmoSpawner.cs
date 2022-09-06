@@ -6,6 +6,7 @@ namespace Data.ValueObject
     public class AmmoSpawner
     {
         public int SpawnLimit = 10;
-        public int SpawnTime = 1;
+        public float SpawnTime = 1;
+        public int VisibleLimit = 4;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Enums;
 using UnityEngine;
 
 namespace Data.ValueObject
@@ -6,7 +7,7 @@ namespace Data.ValueObject
     [Serializable]
     public struct PoolData
     {
-        public string ObjName;
+        public PoolType Type;
         public GameObject Pref;
         public int ObjectCount;
     }

@@ -2,129 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd9a3ebd-b6b8-47bd-898f-179f3f44ff87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Pool.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/StackController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/StackController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_AmmoSpawner.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_AmmoSpawner.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_PoolGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_PoolGenerator.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/AmmoSpawner.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/AmmoSpawner.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PoolData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PoolData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/PoolType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/PoolType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/AmmoSpawnerManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/AmmoSpawnerManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PoolManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PoolManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/PoolSignals.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/PoolSignals.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/AmmoAreaManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/AmmoAreaManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animators/PlayerController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animators/PlayerController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/Example Scene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/Example Scene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/Ground.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/Ground.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/JoystickPlayerExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/JoystickPlayerExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/JoystickSetterExample.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/JoystickSetterExample.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/Player.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Examples/Player.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Dynamic Joystick.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Dynamic Joystick.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Fixed Joystick.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Fixed Joystick.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Floating Joystick.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Floating Joystick.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Variable Joystick.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Prefabs/Variable Joystick.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Base.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Base/Joystick.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Base/Joystick.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/DynamicJoystickEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/DynamicJoystickEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/FloatingJoystickEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/FloatingJoystickEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/JoystickEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/JoystickEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/VariableJoystickEditor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Editor/VariableJoystickEditor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/DynamicJoystick.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/DynamicJoystick.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/FixedJoystick.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/FixedJoystick.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/FloatingJoystick.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/FloatingJoystick.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Scripts/Joysticks/VariableJoystick.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Outline.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Outline.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Outline_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Outline_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Plain.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Plain.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Plain_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Plain_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Ridged.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Ridged.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Ridged_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/All Axis Backgrounds/AllAxis_Ridged_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Outline.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Outline.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Outline_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Outline_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Plain.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Plain.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Plain_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Plain_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Ridged.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Ridged.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Ridged_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Handles/Handle_Ridged_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Outline.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Outline.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Outline_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Outline_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Plain.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Plain.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Plain_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Plain_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Ridged.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Ridged.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Ridged_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Ridged_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Outline.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Outline.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Outline_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Outline_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Plain.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Plain.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Plain_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Plain_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Ridged.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Ridged.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Ridged_Arrows.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Joystick Pack/Sprites/Vertical Backgrounds/Vertical_Ridged_Arrows.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/new.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/new.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character/PlayerManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Character/PlayerManager.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_Input.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_Input.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Pool/PoolGenerateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Pool/PoolGenerateCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Pool/RestartPoolCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Pool/RestartPoolCommand.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/StackController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerStackController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/StackController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerStackController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/AmmoSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/AmmoSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PlayerData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PoolData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PoolData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/AmmoSpawnerManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/AmmoSpawnerManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/PoolManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/PoolManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/CoreGameSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/CoreGameSignals.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,8 +28,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c130875f7b394250a2d3617f6b5a735b13ca00/3e/e201a9e3/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Commands/Pool/PoolGenerateCommand.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Commands/Pool/RestartPoolCommand.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -195,6 +91,8 @@
       <workItem from="1662200780713" duration="3000" />
       <workItem from="1662323734540" duration="11311000" />
       <workItem from="1662404765071" duration="7827000" />
+      <workItem from="1662456775940" duration="2256000" />
+      <workItem from="1662492544995" duration="11034000" />
     </task>
     <servers />
   </component>

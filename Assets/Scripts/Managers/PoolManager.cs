@@ -21,7 +21,7 @@ namespace Managers
         private CD_PoolGenerator _cdPoolGenerator;
         private GameObject _emptyGameObject;
         private PoolGenerateCommand _poolGenerateCommand;
-        private RestartPoolCommand _restartPoolCommand;
+        
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace Managers
         {
             _poolGenerateCommand =
                 new PoolGenerateCommand(ref _cdPoolGenerator, ref poolManagerG, ref _emptyGameObject);
-            // _restartPoolCommand = new RestartPoolCommand(ref _cdPoolGenerator, ref poolManagerG); //TODO: tekrar düzenlenmesi gerekiyor.
+          
         }
 
         #region EventSubscription
@@ -89,8 +89,7 @@ namespace Managers
             var parent = transform.GetChild((int)poolType);
             var obj = parent.childCount != 0
                 ? parent.transform.GetChild(0).gameObject
-                : Instantiate(_cdPoolGenerator.PoolDataList[(int)poolType].Pref, Vector3.zero, Quaternion.identity,
-                    parent); //TODO: Yoksa yeni oluşturma boş döndür 
+                : null; 
             return obj;
         }
 

@@ -24,6 +24,7 @@ namespace Managers
 
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerMovementController playerMovementController;
+        [SerializeField] private PlayerStackController playerStackController;
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace Managers
         {
             GetReferences();
             SendPlayerDataToControllers();
+         
         }
 
         private void GetReferences()
@@ -88,10 +90,18 @@ namespace Managers
             return Resources.Load<CD_Player>("Data/CD_Player").Data;
         }
 
+        public void AddStack(GameObject obj)
+        {
+            
+            playerStackController.AddStack(obj);
+            
+        }
 
         private void SendPlayerDataToControllers()
         {
             playerMovementController.SetMovementData(Data.MovementData);
+            playerStackController.SetStackData(Data.StackData);
+            
         }
 
 

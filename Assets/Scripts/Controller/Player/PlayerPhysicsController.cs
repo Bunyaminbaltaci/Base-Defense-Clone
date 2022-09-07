@@ -1,3 +1,4 @@
+using System;
 using Enums;
 using Managers;
 using Signals;
@@ -23,9 +24,16 @@ namespace Controllers
 
          #endregion
 
-     
-    
-        private void OnTriggerStay(Collider other)
+         private void OnTriggerEnter(Collider other)
+         {
+             if (other.CompareTag("Money"))
+             {
+               playerManager.AddStack(other.gameObject);
+             }
+         }
+
+
+         private void OnTriggerStay(Collider other)
         {
             if (other.CompareTag("Ammo"))
             {

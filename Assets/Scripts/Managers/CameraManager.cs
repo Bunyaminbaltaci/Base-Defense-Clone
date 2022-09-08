@@ -1,7 +1,6 @@
 using Cinemachine;
 using Enums;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -27,17 +26,6 @@ namespace Managers
         #endregion
 
         #endregion
-
-        private void Awake()
-        {
-            GetReferences();
-            GetInitialPosition();
-        }
-
-        private void GetReferences()
-        {
-            _animator = GetComponent<Animator>();
-        }
 
         #region Event Subscriptions
 
@@ -69,19 +57,33 @@ namespace Managers
 
         #endregion
 
+        private void Awake()
+        {
+            GetReferences();
+            GetInitialPosition();
+        }
+
+        private void GetReferences()
+        {
+            _animator = GetComponent<Animator>();
+        }
+
         private void GetInitialPosition()
         {
-            _initialPosition = transform.GetChild(0).localPosition;
+            _initialPosition = transform.GetChild(0)
+                .localPosition;
         }
 
         private void MoveToInitialPosition()
         {
-            transform.GetChild(0).localPosition = _initialPosition;
+            transform.GetChild(0)
+                .localPosition = _initialPosition;
         }
 
         private void SetPlayerFollow()
         {
-            _playerManager = FindObjectOfType<PlayerManager>().transform;
+            _playerManager = FindObjectOfType<PlayerManager>()
+                .transform;
             OnSetCameraTarget(_playerManager);
         }
 
@@ -102,7 +104,6 @@ namespace Managers
                 case GameStates.Idle:
                     SetCameraState(CameraStatesType.Idle);
                     break;
-            
             }
         }
 

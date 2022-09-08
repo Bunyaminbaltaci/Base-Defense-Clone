@@ -1,6 +1,4 @@
-using System;
 using Enums;
-using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -20,7 +18,7 @@ namespace Controllers
 
         public void PlayAnim(PlayerAnimationStates playerAnimationStates, float value)
         {
-            animatorController.SetFloat(playerAnimationStates.ToString(),value);
+            animatorController.SetFloat(playerAnimationStates.ToString(), value);
         }
     }
 }

@@ -1,4 +1,4 @@
-using Data.ValueObject;
+using Data;
 using Enums;
 using Keys;
 using Managers;
@@ -8,6 +8,60 @@ namespace Controllers
 {
     public class PlayerMovementController : MonoBehaviour
     {
+        private void FixedUpdate()
+        {
+            JoystickMove();
+        }
+
+        public void SetMovementData(PlayerMovementData dataMovementData)
+        {
+            _playerMovementData = dataMovementData;
+        }
+
+        public void EnableMovement()
+        {
+            _isReadyToMove = true;
+        }
+
+        public void DeactiveMovement()
+        {
+            _isReadyToMove = false;
+        }
+
+        public void UpdateInputValue(InputParams inputParam)
+        {
+            _inputParams = inputParam;
+        }
+
+        public void IsReadyToPlay(bool state)
+        {
+            _isReadyToPlay = state;
+        }
+
+        private void JoystickMove()
+        {
+            var _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed,
+                0,
+                _inputParams.Values.z * _playerMovementData.PlayerJoystickSpeed);
+            rigidbody.velocity = _movement;
+
+            playerManager.PlayAnim(PlayerAnimationStates.Run,
+                Mathf.Abs(_inputParams.Values.x) + Mathf.Abs(_inputParams.Values.z));
+
+            if (_movement != Vector3.zero)
+            {
+                var _newDirect = Quaternion.LookRotation(_movement);
+                rigidbody.transform.GetChild(0)
+                    .rotation = _newDirect;
+            }
+        }
+
+        public void OnReset()
+        {
+            _isReadyToPlay = false;
+            _isReadyToMove = false;
+        }
+
         #region Self Variables
 
         #region Public Variables
@@ -36,59 +90,5 @@ namespace Controllers
         #endregion
 
         #endregion
-
-        public void SetMovementData(PlayerMovementData dataMovementData)
-        {
-            _playerMovementData = dataMovementData;
-        }
-
-        public void EnableMovement()
-        {
-            _isReadyToMove = true;
-        }
-
-        public void DeactiveMovement()
-        {
-            _isReadyToMove = false;
-        }
-
-        public void UpdateInputValue(InputParams inputParam)
-        {
-            _inputParams = inputParam;
-        }
-
-        public void IsReadyToPlay(bool state)
-        {
-            _isReadyToPlay = state;
-        }
-
-        private void FixedUpdate()
-        {
-            JoystickMove();
-        }
-
-        private void JoystickMove()
-        {
-            var _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed,
-                0,
-                _inputParams.Values.z * _playerMovementData.PlayerJoystickSpeed);
-            rigidbody.velocity = _movement;
-            
-            playerManager.PlayAnim(PlayerAnimationStates.Run,
-                Mathf.Abs(_inputParams.Values.x) + Mathf.Abs(_inputParams.Values.z));
-
-            if (_movement != Vector3.zero)
-            {
-                var _newDirect = Quaternion.LookRotation(_movement);
-                rigidbody.transform.GetChild(0)
-                    .rotation = _newDirect;
-            }
-        }
-
-        public void OnReset()
-        {
-            _isReadyToPlay = false;
-            _isReadyToMove = false;
-        }
     }
 }

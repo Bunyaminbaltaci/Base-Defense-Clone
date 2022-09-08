@@ -6,18 +6,6 @@ namespace Commands
 {
     public class DuringOnDraggingJoystickCommand
     {
-        #region Self Variables
-
-        #region Private Variables
-
-        private Vector3 _joystickPos;
-        private Vector3 _moveVector;
-        private readonly Joystick _joystick;
-
-        #endregion
-
-        #endregion
-
         public DuringOnDraggingJoystickCommand(ref Vector3 joystickPos, ref Vector3 moveVector, ref Joystick joystick)
         {
             _joystickPos = joystickPos;
@@ -35,5 +23,17 @@ namespace Commands
                 Values = _moveVector
             });
         }
+
+        #region Self Variables
+
+        #region Private Variables
+
+        private Vector3 _joystickPos;
+        private Vector3 _moveVector;
+        private readonly Joystick _joystick;
+
+        #endregion
+
+        #endregion
     }
 }

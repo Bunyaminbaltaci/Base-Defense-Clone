@@ -1,6 +1,5 @@
 using Commands;
-using Data.UnityObject;
-using Data.ValueObject;
+using Data;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -9,6 +8,46 @@ namespace Managers
 {
     public class InputManager : MonoBehaviour
     {
+        private void Awake()
+        {
+            _inputData = GetInputData();
+            Init();
+        }
+
+        private void Update()
+        {
+            if (!isReadyForTouch) return;
+            if (Input.GetMouseButtonUp(0))
+            {
+                _isTouching = false;
+                _endOfDraggingCommand.Execute();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _isTouching = true;
+                _startOfDraggingCommand.Execute();
+            }
+
+            if (Input.GetMouseButton(0))
+                if (_isTouching)
+                    _duringOnDraggingJoystickCommand.Execute();
+        }
+
+        private void Init()
+        {
+            _endOfDraggingCommand = new EndOfDraggingCommand(ref _joystickPos, ref _moveVector);
+            _startOfDraggingCommand = new StartOfDraggingCommand(ref _joystickPos, ref isFirstTimeTouchTaken,
+                ref joystick, ref inputManager);
+            _duringOnDraggingJoystickCommand =
+                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref joystick);
+        }
+
+        private InputData GetInputData()
+        {
+            return Resources.Load<CD_Input>("Data/CD_Input").InputData;
+        }
+
         #region Self Variables
 
         #region Public Variables
@@ -28,10 +67,10 @@ namespace Managers
 
         #region Private Variables
 
-        private bool _isTouching; 
+        private bool _isTouching;
         private float _currentVelocity;
-        private Vector3 _joystickPos; 
-        private Vector3 _moveVector; 
+        private Vector3 _joystickPos;
+        private Vector3 _moveVector;
         private InputData _inputData;
         private EndOfDraggingCommand _endOfDraggingCommand;
         private StartOfDraggingCommand _startOfDraggingCommand;
@@ -40,26 +79,6 @@ namespace Managers
         #endregion
 
         #endregion
-
-        private void Awake()
-        {
-            _inputData = GetInputData();
-            Init();
-        }
-
-        private void Init()
-        {
-            _endOfDraggingCommand = new EndOfDraggingCommand(ref _joystickPos, ref _moveVector);
-            _startOfDraggingCommand = new StartOfDraggingCommand(ref _joystickPos, ref isFirstTimeTouchTaken,
-                ref joystick, ref inputManager);
-            _duringOnDraggingJoystickCommand =
-                new DuringOnDraggingJoystickCommand(ref _joystickPos, ref _moveVector, ref joystick);
-        }
-
-        private InputData GetInputData()
-        {
-            return Resources.Load<CD_Input>("Data/CD_Input").InputData;
-        }
 
         #region EventSubscription
 
@@ -88,31 +107,6 @@ namespace Managers
         }
 
         #endregion
-
-        private void Update()
-        {
-            if (!isReadyForTouch) return;
-            if (Input.GetMouseButtonUp(0))
-            {
-                _isTouching = false;
-                _endOfDraggingCommand.Execute();
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                _isTouching = true;
-                _startOfDraggingCommand.Execute();
-            }
-
-            if (Input.GetMouseButton(0))
-                if (_isTouching)
-                {
-                  
-                        _duringOnDraggingJoystickCommand.Execute();
-                    
-                  
-                }
-        }
 
         #region SubscribedMethods
 

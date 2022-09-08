@@ -1,12 +1,10 @@
 using System;
-using UnityEngine;
 
-namespace Data.ValueObject
+namespace Data
 {
     [Serializable]
     public class InputData
     {
         public float PlayerInputSpeed = 2f;
-      
     }
 }

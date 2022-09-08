@@ -6,17 +6,6 @@ namespace Commands
 {
     public class EndOfDraggingCommand
     {
-        #region Self Variables
-
-        #region Private Variables
-
-        private Vector3 _joystickPos;
-        private Vector3 _moveVector;
-
-        #endregion
-
-        #endregion
-
         public EndOfDraggingCommand(ref Vector3 joystickPos, ref Vector3 moveVector)
         {
             _joystickPos = joystickPos;
@@ -33,5 +22,16 @@ namespace Commands
                 Values = _moveVector
             });
         }
+
+        #region Self Variables
+
+        #region Private Variables
+
+        private Vector3 _joystickPos;
+        private Vector3 _moveVector;
+
+        #endregion
+
+        #endregion
     }
 }

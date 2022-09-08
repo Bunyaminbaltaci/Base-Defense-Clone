@@ -15,7 +15,7 @@ namespace Extentions
                     _instance = FindObjectOfType<T>();
                     if (_instance == null)
                     {
-                        GameObject newGo = new GameObject();
+                        var newGo = new GameObject();
                         newGo.name = "TInstance";
                         _instance = newGo.AddComponent<T>();
                         DontDestroyOnLoad(newGo);

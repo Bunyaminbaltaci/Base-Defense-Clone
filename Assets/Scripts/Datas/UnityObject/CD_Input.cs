@@ -1,7 +1,6 @@
-using Data.ValueObject;
 using UnityEngine;
 
-namespace Data.UnityObject
+namespace Data
 {
     [CreateAssetMenu(fileName = "CD_Input", menuName = "BaseDefense/CD_Input", order = 0)]
     public class CD_Input : ScriptableObject

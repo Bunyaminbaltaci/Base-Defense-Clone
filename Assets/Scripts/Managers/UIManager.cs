@@ -1,4 +1,3 @@
-using System;
 using Controllers;
 using Enums;
 using Signals;
@@ -8,59 +7,6 @@ namespace Managers
 {
     public class UIManager : MonoBehaviour
     {
-        #region Self Variables
-
-        #region Serialized Variables
-
-        [SerializeField] private UIPanelController uiPanelController;
-        [SerializeField] private LevelPanelController levelPanelController;
-        [SerializeField] private IdlePanelController idlePanelController;
-
-        #endregion
-
-        #region Private Variables
-
-  
-
-        #endregion
-
-        #endregion
-
-        #region Event Subscriptions
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            UISignals.Instance.onOpenPanel += OnOpenPanel;
-            UISignals.Instance.onClosePanel += OnClosePanel;
-            UISignals.Instance.onSetScoreText += onSetScoreText;
-            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
-            CoreGameSignals.Instance.onPlay += OnPlay;
-          
-        }
-
-        private void UnsubscribeEvents()
-        {
-            UISignals.Instance.onOpenPanel -= OnOpenPanel;
-            UISignals.Instance.onClosePanel -= OnClosePanel;
-            UISignals.Instance.onSetScoreText -= onSetScoreText;
-            CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
-            CoreGameSignals.Instance.onPlay -= OnPlay;
-       
-
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
-        #endregion
-
         private void Awake()
         {
             InitPanels();
@@ -118,7 +64,6 @@ namespace Managers
         private void OnLevelSuccessful()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-        
         }
 
         public void Play()
@@ -128,7 +73,6 @@ namespace Managers
 
         public void NextLevel()
         {
-      
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             OnSetLevelText();
@@ -139,7 +83,6 @@ namespace Managers
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.FailPanel);
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-        
         }
 
         public void WinPanelClose()
@@ -156,8 +99,55 @@ namespace Managers
                     UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
                     UISignals.Instance.onOpenPanel?.Invoke(UIPanels.WinPanel);
                     break;
-             
             }
         }
+
+        #region Self Variables
+
+        #region Serialized Variables
+
+        [SerializeField] private UIPanelController uiPanelController;
+        [SerializeField] private LevelPanelController levelPanelController;
+        [SerializeField] private IdlePanelController idlePanelController;
+
+        #endregion
+
+        #region Private Variables
+
+        #endregion
+
+        #endregion
+
+        #region Event Subscriptions
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            UISignals.Instance.onOpenPanel += OnOpenPanel;
+            UISignals.Instance.onClosePanel += OnClosePanel;
+            UISignals.Instance.onSetScoreText += onSetScoreText;
+            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
+            CoreGameSignals.Instance.onPlay += OnPlay;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            UISignals.Instance.onOpenPanel -= OnOpenPanel;
+            UISignals.Instance.onClosePanel -= OnClosePanel;
+            UISignals.Instance.onSetScoreText -= onSetScoreText;
+            CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
     }
 }

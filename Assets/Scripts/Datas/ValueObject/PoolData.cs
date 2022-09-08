@@ -2,7 +2,7 @@ using System;
 using Enums;
 using UnityEngine;
 
-namespace Data.ValueObject
+namespace Data
 {
     [Serializable]
     public struct PoolData

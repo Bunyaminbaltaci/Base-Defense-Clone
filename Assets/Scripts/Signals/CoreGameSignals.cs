@@ -8,15 +8,15 @@ namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-        public UnityAction onPlay = delegate { };
-        public UnityAction onReset = delegate { };
-        public UnityAction<GameStates> onSetGameState = delegate { };
-        public UnityAction<GameStates> onGetGameState = delegate { };
         public UnityAction<GameObject> onCheckAreaControl = delegate { };
         public UnityAction onEnterFinish = delegate { };
 
+        public Func<GameObject> onGetammo = delegate { return default; };
+        public UnityAction<GameStates> onGetGameState = delegate { };
+        public UnityAction onPlay = delegate { };
+        public UnityAction onReset = delegate { };
+
         public UnityAction<Transform> onSetCameraTarget = delegate { };
-        
-       public Func<GameObject> onGetammo= delegate { return default;};
+        public UnityAction<GameStates> onSetGameState = delegate { };
     }
 }

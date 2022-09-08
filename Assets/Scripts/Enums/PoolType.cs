@@ -5,8 +5,6 @@ namespace Enums
         Enemy,
         Bullet,
         Money,
-        diamond,
-        
-        
+        diamond
     }
 }

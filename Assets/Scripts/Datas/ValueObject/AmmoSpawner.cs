@@ -1,6 +1,6 @@
 using System;
 
-namespace Data.ValueObject
+namespace Data
 {
     [Serializable]
     public class AmmoSpawner

@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-namespace Data.ValueObject
+namespace Data
 {
     [Serializable]
     public class PlayerData

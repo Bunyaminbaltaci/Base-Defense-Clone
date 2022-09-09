@@ -9,6 +9,13 @@ namespace Controllers
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Money")) playerManager.AddStack(other.gameObject);
+
+
+            if (other.CompareTag("BuildArea"))
+            {
+                IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
+            }
+         
         }
 
 
@@ -19,7 +26,19 @@ namespace Controllers
                 if (_timer >= 20)
                 {
                     playerManager.AddStack(CoreGameSignals.Instance.onGetammo());
-                    _timer = _timer * 50 / 100;
+                    _timer = _timer * 70 / 100;
+                }
+                else
+                {
+                    _timer++;
+                }
+            }
+
+            if (other.CompareTag("BuildArea"))
+            {
+                if (_timer >= 20)
+                {
+                  ScoreSignals.Instance.onBuyArea?.Invoke();
                 }
                 else
                 {

@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1580dcedea0b42c1b0e90744aa18ae62, type: 3}
   m_Name: CD_BuildData
   m_EditorClassIdentifier: 
-  BuildData: []
+  BuildData:
+  - AreaCost: 500
+    TurretCost: 750
+  - AreaCost: 1000
+    TurretCost: 1200
+  - AreaCost: 0
+    TurretCost: 0
+  - AreaCost: 0
+    TurretCost: 0

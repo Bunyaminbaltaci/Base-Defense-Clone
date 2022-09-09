@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Datas.ValueObject;
 using Keys;
@@ -34,18 +35,14 @@ namespace Managers
 
         private void OnSaveData()
         {
-            SaveGame(SaveSignals.Instance.onGetIdleDatas());
+            SaveGame(SaveSignals.Instance.onGetIdleData());
         }
 
-        private void Awake()
-        {
-            SetReferences();
-        }
-
-        private void SetReferences()
+        private void Start()
         {
             LoadGame();
         }
+
 
         private void SaveGame(IdleDataParams idleDataParams)
         {
@@ -55,12 +52,6 @@ namespace Managers
             if (idleDataParams.AreaDictionary != null)
                 ES3.Save("AreaDatas",
                     idleDataParams.AreaDictionary);
-            if (idleDataParams.Score != null)
-                ES3.Save("Score",
-                    idleDataParams.Score);
-            if (idleDataParams.Score != null)
-                ES3.Save("CompletedArea",
-                    idleDataParams.CompletedArea);
         }
 
         private void LoadGame()
@@ -73,14 +64,7 @@ namespace Managers
                 CityLevel = ES3.KeyExists("CityLevel")
                     ? ES3.Load<int>("CityLevel")
                     : 0,
-                Score = ES3.KeyExists("Score")
-                    ? ES3.Load<int>("Score")
-                    : 0,
-                CompletedArea = ES3.KeyExists("CompletedArea")
-                    ? ES3.Load<int>("CompletedArea")
-                    : 0
             });
-        
         }
     }
 }

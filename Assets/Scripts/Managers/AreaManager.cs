@@ -6,6 +6,7 @@ using Enums;
 using Signals;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Managers
 {
@@ -25,9 +26,9 @@ namespace Managers
         private BuildType buildType;
 
         [SerializeField] private TextMeshPro buildCost;
-        [SerializeField] private TextMeshPro gardenCost;
         [SerializeField] private GameObject buildCostArea;
-        [SerializeField] private GameObject gardenCostArea;
+        [SerializeField] private GameObject fence;
+        [SerializeField] private GameObject area;
         [SerializeField] private int areaId;
 
         #endregion
@@ -48,16 +49,18 @@ namespace Managers
             Init();
         }
 
+        private void Init()
+        {
+            CostAreaVisible();
+        }
+
+
         private void GetReferences()
         {
             _buildData = GetData();
             buildCost.text = _buildData.AreaCost.ToString();
-            gardenCost.text = _buildData.TurretCost.ToString();
         }
 
-        private void Init()
-        {
-        }
 
         private BuildData GetData()
         {
@@ -73,16 +76,16 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            IdleGameSignals.Instance.onAreaCostDown += OnAreaCostDown;
             IdleGameSignals.Instance.onCheckArea += OnCheckArea;
-            IdleGameSignals.Instance.onCostDown += OnCostDown;
             IdleGameSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
             IdleGameSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
         }
 
         private void UnSubscribeEvents()
         {
+            IdleGameSignals.Instance.onAreaCostDown -= OnAreaCostDown;
             IdleGameSignals.Instance.onCheckArea -= OnCheckArea;
-            IdleGameSignals.Instance.onCostDown -= OnCostDown;
             IdleGameSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
             IdleGameSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
         }
@@ -97,61 +100,36 @@ namespace Managers
         private void OnRefreshAreaData()
         {
             _areaData = (AreaData)IdleGameSignals.Instance.onGetAreaData?.Invoke(areaId);
-            SetAreaTexts();
             CostAreaVisible();
+            SetAreaTexts();
         }
 
-        private void OnCostDown()
+        private void OnAreaCostDown()
         {
             if (_areaCheck != gameObject) return;
             switch (_areaData.Type)
             {
-                case AreaStageType.House:
-                    _areaData.BuildMaterialValue++;
+                case AreaStageType.Build:
+                    _areaData.AreaAddedValue++;
                     SetAreaTexts();
-                    if (_buildData.AreaCost == _areaData.BuildMaterialValue) ChangeStage();
+                    if (_buildData.AreaCost == _areaData.AreaAddedValue) ChangeStage();
                     break;
-                case AreaStageType.Garden:
-                    _areaData.GardenMaterialValue++;
-                    SetAreaTexts();
-                    if (_buildData.TurretCost == _areaData.GardenMaterialValue) ChangeStage();
-                    break;
-                case AreaStageType.Complete:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
-   
 
         private void SetAreaTexts()
         {
-            switch (_areaData.Type)
-            {
-                case AreaStageType.House:
-                    buildCost.text = (_buildData.AreaCost - _areaData.BuildMaterialValue).ToString();
-                    break;
-                case AreaStageType.Garden:
-                    gardenCost.text = (_buildData.TurretCost - _areaData.GardenMaterialValue).ToString();
-                    break;
-            }
+            buildCost.text = (_buildData.AreaCost - _areaData.AreaAddedValue).ToString();
         }
 
         private void ChangeStage()
         {
-            if (_areaData.Type == AreaStageType.House)
+            if (_areaData.Type == AreaStageType.Build)
             {
-                IdleGameSignals.Instance.onStageChanged?.Invoke();
-                _areaData.Type = AreaStageType.Garden;
-                CostAreaVisible();
-            }
-            else if (_areaData.Type == AreaStageType.Garden)
-            {             
-                IdleGameSignals.Instance.onStageChanged?.Invoke();
                 _areaData.Type = AreaStageType.Complete;
-                CostAreaVisible();
                 IdleGameSignals.Instance.onAreaComplete?.Invoke();
+                CostAreaVisible();
             }
             else
             {
@@ -163,17 +141,16 @@ namespace Managers
         {
             switch (_areaData.Type)
             {
-                case AreaStageType.House:
+                case AreaStageType.Build:
                     buildCostArea.SetActive(true);
-                    gardenCostArea.SetActive(false);
-                    break;
-                case AreaStageType.Garden:
-                    buildCostArea.SetActive(false);
-                    gardenCostArea.SetActive(true);
+                    fence.SetActive(true);
+                    area.SetActive(false);
                     break;
                 case AreaStageType.Complete:
                     buildCostArea.SetActive(false);
-                    gardenCostArea.SetActive(false);
+                    fence.SetActive(false);
+                    area.SetActive(true);
+                    area.SetActive(true);
                     break;
             }
         }
@@ -187,6 +164,5 @@ namespace Managers
         {
             IdleGameSignals.Instance.onSetAreaData?.Invoke(areaId, _areaData);
         }
-        
     }
 }

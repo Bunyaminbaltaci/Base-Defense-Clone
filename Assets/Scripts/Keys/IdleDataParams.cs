@@ -7,9 +7,7 @@ namespace Keys
     [Serializable]
     public struct IdleDataParams
     {
-        public int Score;
         public int CityLevel;
         public Dictionary<int, AreaData> AreaDictionary;
-        public int CompletedArea;
     }
 }

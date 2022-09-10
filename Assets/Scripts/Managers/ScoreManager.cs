@@ -1,10 +1,12 @@
+using System;
+using Abstract;
 using Keys;
 using Signals;
 using UnityEngine;
 
 namespace Managers
 {
-    public class ScoreManager : MonoBehaviour
+    public class ScoreManager : MonoBehaviour,ISavable
     {
         #region Self Variables
 
@@ -18,7 +20,7 @@ namespace Managers
 
         #region Private Variables
 
-        private int _money=500;
+        private int _money;
         private int _diamond;
 
         #endregion
@@ -41,7 +43,7 @@ namespace Managers
             ScoreSignals.Instance.onMoneyDown += OnMoneyDown;
             ScoreSignals.Instance.onDiamondDown += OnDiamondDown;
 
-            SaveSignals.Instance.onGetScoreData += OnGetScoreData;
+            SaveSignals.Instance.onGetSaveScoreData += OnGetSaveScoreData;
         }
 
         private void UnSubscribeEvent()
@@ -52,7 +54,7 @@ namespace Managers
             ScoreSignals.Instance.onMoneyDown -= OnMoneyDown;
             ScoreSignals.Instance.onDiamondDown -= OnDiamondDown;
 
-            SaveSignals.Instance.onGetScoreData -= OnGetScoreData;
+            SaveSignals.Instance.onGetSaveScoreData -= OnGetSaveScoreData;
         }
 
 
@@ -62,8 +64,14 @@ namespace Managers
         }
 
         #endregion
-        
-        
+
+        private void Start()
+        {
+            LoadData();
+        }
+
+       
+
         private void OnBuyArea()
         {
             if (_money <= 0) return;
@@ -108,13 +116,25 @@ namespace Managers
             UISignals.Instance.onSetDiamondText?.Invoke(_diamond);
         }
 
-        private ScoreDataParams OnGetScoreData()
+        private ScoreDataParams OnGetSaveScoreData()
         {
             return new ScoreDataParams
             {
                 Money = _money,
                 Diamond = _diamond
             };
+        }
+
+        public void LoadData()
+        {
+            ScoreDataParams data = SaveSignals.Instance.onLoadScoreData();
+            _money = data.Money;
+            _diamond = data.Diamond;
+        }
+
+        public void SaveData()
+        {
+        
         }
     }
 }

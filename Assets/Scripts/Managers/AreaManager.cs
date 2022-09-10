@@ -1,6 +1,6 @@
 using System;
 using Data.UnityObject;
-using Datas.ValueObject;
+using ValueObject;
 using DG.Tweening;
 using Enums;
 using Signals;
@@ -54,6 +54,11 @@ namespace Managers
             CostAreaVisible();
         }
 
+
+        private void Start()
+        {
+            IdleGameSignals.Instance.onRefreshAreaData?.Invoke();
+        }
 
         private void GetReferences()
         {

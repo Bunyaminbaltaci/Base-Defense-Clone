@@ -57,11 +57,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: LilitaOne-Regular Outline 54 SDF
+  m_Name: LilitaOne-Regular Outline 54 3D SDF
   m_EditorClassIdentifier: 
-  hashCode: -2135769194
+  hashCode: 1534246657
   material: {fileID: 2830636965969884548}
-  materialHashCode: 1084034422
+  materialHashCode: -947172095
   m_Version: 1.1.0
   m_SourceFontFileGUID: 18656ef7a51c9493bbb7e0a789ec9bf7
   m_SourceFontFile_EditorRef: {fileID: 0}

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Datas.ValueObject
+namespace ValueObject
 {
     [Serializable]
     public struct IdleData

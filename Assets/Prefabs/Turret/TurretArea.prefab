@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9190910566192426831
 Transform:
   m_ObjectHideFlags: 0
@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 445bb440e650be84db20afd4c5f80ed2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
@@ -359,7 +359,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 445bb440e650be84db20afd4c5f80ed2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
@@ -708,7 +708,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 445bb440e650be84db20afd4c5f80ed2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
@@ -847,13 +847,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4329192716716304481}
+  - component: {fileID: 5246852406048613420}
   m_Layer: 0
   m_Name: BeforeBuy
-  m_TagString: Untagged
+  m_TagString: BuildArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4329192716716304481
 Transform:
   m_ObjectHideFlags: 0
@@ -870,6 +871,19 @@ Transform:
   m_Father: {fileID: 7709624223919792058}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5246852406048613420
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5476099527289290346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.41, y: 1, z: 2.21}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &6718043267358126358
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +955,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 445bb440e650be84db20afd4c5f80ed2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
@@ -961,6 +975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709624223919792058}
+  - component: {fileID: 2165701488217866906}
   m_Layer: 0
   m_Name: TurretArea
   m_TagString: Untagged
@@ -984,6 +999,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2165701488217866906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773003233154198897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00acde9bf68a471592c7d507fd74b7ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildType: 2
+  buildCost: {fileID: 5855658263382519646}
+  buildCostArea: {fileID: 5476099527289290346}
+  fence: {fileID: 5476099527289290346}
+  area: {fileID: 110084982704605610}
+  areaId: 0
 --- !u!1 &6851791964857522911
 GameObject:
   m_ObjectHideFlags: 0

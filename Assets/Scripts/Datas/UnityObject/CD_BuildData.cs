@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Datas.ValueObject;
+using ValueObject;
 using UnityEngine;
 
 namespace Data.UnityObject
@@ -8,5 +8,9 @@ namespace Data.UnityObject
     public class CD_BuildData : ScriptableObject
     {
         public List<BuildData> BuildData;
+        
+        
+            
+            
     }
 }

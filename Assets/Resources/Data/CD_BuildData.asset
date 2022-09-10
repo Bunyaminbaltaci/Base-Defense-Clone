@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CD_BuildData
   m_EditorClassIdentifier: 
   BuildData:
-  - AreaCost: 500
-    TurretCost: 750
-  - AreaCost: 1000
-    TurretCost: 1200
-  - AreaCost: 0
-    TurretCost: 0
-  - AreaCost: 0
-    TurretCost: 0
+  - Name: Area1
+    AreaCost: 10
+  - Name: Area2
+    AreaCost: 20
+  - Name: Turret1
+    AreaCost: 10
+  - Name: Turret2
+    AreaCost: 20

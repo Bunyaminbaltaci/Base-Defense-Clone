@@ -1,7 +1,7 @@
 using System;
 using Enums;
 
-namespace Datas.ValueObject
+namespace ValueObject
 {
     [Serializable]
     public struct AreaData

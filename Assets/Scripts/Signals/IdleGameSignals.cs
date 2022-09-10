@@ -1,5 +1,5 @@
 using System;
-using Datas.ValueObject;
+using ValueObject;
 using Extentions;
 using UnityEngine;
 using UnityEngine.Events;

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Abstract;
 using Data.UnityObject;
-using Datas.ValueObject;
+using ValueObject;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class IdleManager : MonoBehaviour
+    public class IdleManager : MonoBehaviour, ISavable
     {
         #region Self Variables
 
@@ -36,6 +37,7 @@ namespace Managers
             GetReferences();
         }
 
+
         private void GetReferences()
         {
             _cdIdleData = GetIdleData();
@@ -59,9 +61,11 @@ namespace Managers
             IdleGameSignals.Instance.onSetAreaData += OnSetAreaData;
             IdleGameSignals.Instance.onGetAreaData += OnGetAreaData;
             IdleGameSignals.Instance.onCityComplete += OnCityComplete;
+
             // LevelSignals.Instance.onNextLevel += OnNextLevel;
-             SaveSignals.Instance.onGetIdleData += OnGetIdleDatas;
-             SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
+
+            SaveSignals.Instance.onGetSaveIdleData += OnGetIdleDatas;
+
             //     ScoreSignals.Instance.onGetIdleScore += OnGetIdleScore;
             //     ScoreSignals.Instance.onSetIdleScore += OnSetIdleScore;
         }
@@ -72,9 +76,11 @@ namespace Managers
             IdleGameSignals.Instance.onSetAreaData -= OnSetAreaData;
             IdleGameSignals.Instance.onGetAreaData -= OnGetAreaData;
             IdleGameSignals.Instance.onCityComplete -= OnCityComplete;
+
             // LevelSignals.Instance.onNextLevel -= OnNextLevel;
-             SaveSignals.Instance.onGetIdleData -= OnGetIdleDatas;
-             SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
+
+            SaveSignals.Instance.onGetSaveIdleData -= OnGetIdleDatas;
+
             // ScoreSignals.Instance.onGetIdleScore -= OnGetIdleScore;
             // ScoreSignals.Instance.onSetIdleScore -= OnSetIdleScore;
         }
@@ -88,6 +94,7 @@ namespace Managers
 
         private void Start()
         {
+            LoadData();
             OnInitializeLevel();
         }
 
@@ -104,24 +111,23 @@ namespace Managers
         {
             return _score;
         }
-        
+
 
         private void OnAreaComplete()
         {
-           IdleGameSignals.Instance.onPrepareAreaWithSave?.Invoke();
-        
+            IdleGameSignals.Instance.onPrepareAreaWithSave?.Invoke();
         }
 
         private void OnInitializeLevel()
         {
             Instantiate(
-                Resources.Load<GameObject>($"Prefabs/BasePrefabs/Base {_cityLevel %_cdIdleData.DataList.Count }"),
+                Resources.Load<GameObject>($"Prefabs/BasePrefabs/Base {_cityLevel % _cdIdleData.DataList.Count}"),
                 BaseHolder.transform);
-            IdleGameSignals.Instance.onRefreshAreaData?.Invoke();
         }
 
         private AreaData OnGetAreaData(int id)
         {
+            Debug.Log(id);
             return _areaDictionary.ContainsKey(id)
                 ? _areaDictionary[id]
                 : new AreaData();
@@ -135,7 +141,7 @@ namespace Managers
             else
                 _areaDictionary.Add(id,
                     araeData);
-            SaveSignals.Instance.onSaveData?.Invoke();
+            SaveData();
         }
 
         private void OnCityComplete()
@@ -167,12 +173,18 @@ namespace Managers
             }
         }
 
-        private void OnLoadIdleData(IdleDataParams dataParams)
+
+        public void LoadData()
         {
-            _areaDictionary = dataParams.AreaDictionary;
-            _cityLevel = dataParams.CityLevel;
+            IdleDataParams _data = SaveSignals.Instance.onLoadIdleData();
+
+            _areaDictionary = _data.AreaDictionary;
+            _cityLevel = _data.CityLevel;
         }
 
-        
+        public void SaveData()
+        {
+            SaveSignals.Instance.onSaveIdleData?.Invoke();
+        }
     }
 }

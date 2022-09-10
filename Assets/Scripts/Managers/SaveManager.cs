@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Datas.ValueObject;
+using ValueObject;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -18,12 +17,18 @@ namespace Managers
 
         private void Subscribe()
         {
-            SaveSignals.Instance.onSaveData += OnSaveData;
+            SaveSignals.Instance.onSaveIdleData += onSaveIdleData;
+            SaveSignals.Instance.onSaveScoreData += onSaveScoreData;
+            SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
+            SaveSignals.Instance.onLoadScoreData += OnLoadScoreData;
         }
 
         private void Unsubscribe()
         {
-            SaveSignals.Instance.onSaveData -= OnSaveData;
+            SaveSignals.Instance.onSaveIdleData -= onSaveIdleData;
+            SaveSignals.Instance.onSaveScoreData -= onSaveScoreData;
+            SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
+            SaveSignals.Instance.onLoadScoreData -= OnLoadScoreData;
         }
 
         private void OnDisable()
@@ -35,36 +40,76 @@ namespace Managers
 
         private void OnSaveData()
         {
-            SaveGame(SaveSignals.Instance.onGetIdleData());
+            SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
         }
 
-        private void Start()
+        private void onSaveIdleData()
         {
-            LoadGame();
+            SaveIdleData(SaveSignals.Instance.onGetSaveIdleData());
         }
 
+        private void onSaveScoreData()
+        {
+            SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
+        }
 
-        private void SaveGame(IdleDataParams idleDataParams)
+        private void SaveIdleData(IdleDataParams idleDataParams)
         {
             if (idleDataParams.CityLevel != null)
                 ES3.Save("CityLevel",
-                    idleDataParams.CityLevel);
+                    idleDataParams.CityLevel,
+                    "IdleData.json");
             if (idleDataParams.AreaDictionary != null)
                 ES3.Save("AreaDatas",
-                    idleDataParams.AreaDictionary);
+                    idleDataParams.AreaDictionary,
+                    "IdleData.json");
         }
 
-        private void LoadGame()
+        private void SaveScoreData(ScoreDataParams scoreDataParams)
         {
-            SaveSignals.Instance.onLoadIdleData?.Invoke(new IdleDataParams
+            if (scoreDataParams.Money != null)
+                ES3.Save("Money",
+                    scoreDataParams.Money,
+                    "ScoreData.json");
+            if (scoreDataParams.Diamond != null)
+                ES3.Save("Diamond",
+                    scoreDataParams.Diamond,
+                    "ScoreData.json");
+        }
+
+        private IdleDataParams OnLoadIdleData()
+        {
+            return new IdleDataParams
             {
-                AreaDictionary = ES3.KeyExists("AreaDatas")
-                    ? ES3.Load<Dictionary<int, AreaData>>("AreaDatas")
-                    : new Dictionary<int, AreaData>(),
-                CityLevel = ES3.KeyExists("CityLevel")
-                    ? ES3.Load<int>("CityLevel")
+                AreaDictionary =
+                    ES3.KeyExists("AreaDatas",
+                        "IdleData.json")
+                        ? ES3.Load<Dictionary<int, AreaData>>("AreaDatas",
+                            "IdleData.json")
+                        : new Dictionary<int, AreaData>(),
+                CityLevel = ES3.KeyExists("CityLevel",
+                    "IdleData.json")
+                    ? ES3.Load<int>("CityLevel",
+                        "IdleData.json")
+                    : 0
+            };
+        }
+
+        private ScoreDataParams OnLoadScoreData()
+        {
+            return new ScoreDataParams
+            {
+                Money = ES3.KeyExists("Money",
+                    "ScoreData.json")
+                    ? ES3.Load<int>("Money",
+                        "ScoreData.json")
                     : 0,
-            });
+                Diamond = ES3.KeyExists("Diamond",
+                    "ScoreData.json")
+                    ? ES3.Load<int>("Diamond",
+                        "ScoreData.json")
+                    : 0
+            };
         }
     }
 }

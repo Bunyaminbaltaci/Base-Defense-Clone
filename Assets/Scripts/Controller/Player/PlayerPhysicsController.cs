@@ -13,7 +13,7 @@ namespace Controllers
 
             if (other.CompareTag("BuildArea"))
             {
-                IdleGameSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
+                BaseSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
             }
          
         }

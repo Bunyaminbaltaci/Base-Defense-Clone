@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7835655987520841098}
   - component: {fileID: 9174254174312872566}
   m_Layer: 0
-  m_Name: MONEY
+  m_Name: Money
   m_TagString: Money
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

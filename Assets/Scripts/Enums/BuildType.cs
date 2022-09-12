@@ -2,13 +2,14 @@ namespace Enums
 {
     public enum BuildType
     {
-        GuitarShop,
-        Shop,
-        Hospital,
-        PoliceStation,
-        TacoShop,
-        Pub
+        AreaLevel1,
+        AreaLevel2,
+        Turret1,
+        Turret2,
+        AmmoWorker,
+        Harvester,
+
         
-        
+
     }
 }

@@ -1,13 +1,12 @@
 using System;
 using Enums;
 
-namespace Datas.ValueObject
+namespace ValueObject
 {
     [Serializable]
     public struct AreaData
     {
-        public float GardenMaterialValue;
-        public float BuildMaterialValue;
+        public float AreaAddedValue;
         public AreaStageType Type;
     }
 }

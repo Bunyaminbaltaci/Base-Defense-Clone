@@ -2,8 +2,7 @@ namespace Enums
 {
     public enum AreaStageType
     {
-        House,
-        Garden,
+        Build,
         Complete
     }
 }

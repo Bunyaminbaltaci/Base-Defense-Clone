@@ -70,5 +70,7 @@ namespace Managers
             CurrentState = state;
             CurrentState.EnterState();
         }
+
+     
     }
 }

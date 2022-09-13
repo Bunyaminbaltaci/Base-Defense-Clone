@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Managers.Npc
 {
-    public class MinerPhysicController:MonoBehaviour
+    public class MinerPhysic : MonoBehaviour
     {
         #region Self Variables
 
@@ -17,14 +17,15 @@ namespace Managers.Npc
 
         [SerializeField] private MinerManager minerManager;
 
-
         #endregion
 
         #region Private Variables
 
+
         #endregion
 
         #endregion
+
 
         private void OnTriggerEnter(Collider other)
         {

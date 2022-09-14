@@ -19,6 +19,9 @@ MonoBehaviour:
   - Type: 1
     Pref: {fileID: 1432083113632981368, guid: 01352ef61bb2e8647926e18af498d9fb, type: 3}
     ObjectCount: 20
+  - Type: 2
+    Pref: {fileID: 0}
+    ObjectCount: 0
   - Type: 3
     Pref: {fileID: 6418770167869038347, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
     ObjectCount: 100

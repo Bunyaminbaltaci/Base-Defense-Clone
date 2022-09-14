@@ -9,6 +9,8 @@ TagManager:
   - Money
   - BuildArea
   - Mine
+  - MineWareHouse
+  - Miner
   layers:
   - Default
   - TransparentFX

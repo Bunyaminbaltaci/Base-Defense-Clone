@@ -15,6 +15,8 @@ namespace Controllers
             {
                 BaseSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
             }
+
+        
          
         }
 

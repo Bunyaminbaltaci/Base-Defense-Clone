@@ -11,8 +11,8 @@ namespace Signals
         #region Mine
 
         public Func<GameObject> onGetMineTarget= delegate { return default;};
-        public UnityAction onAddDiamondStack= delegate { };   
-        public UnityAction<Transform> onGetDiamondInStack= delegate { };
+        public Func<GameObject> onGetMineStackTarget= delegate { return default;};
+        public UnityAction<GameObject> onAddDiamondStack= delegate { };   
     
 
         #endregion

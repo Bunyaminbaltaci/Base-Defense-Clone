@@ -48,6 +48,8 @@ namespace Managers
 
         private void OnSendPool(GameObject poolObject, PoolType poolType)
         {
+            poolObject.SetActive(false);
+            poolObject.transform.localPosition = Vector3.zero;
             poolObject.transform.parent = transform.GetChild((int)poolType);
         }
 

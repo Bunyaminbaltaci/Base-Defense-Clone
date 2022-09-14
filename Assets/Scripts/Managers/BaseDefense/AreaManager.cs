@@ -155,7 +155,6 @@ namespace Managers
                     buildCostArea.SetActive(false);
                     fence.SetActive(false);
                     area.SetActive(true);
-                    area.SetActive(true);
                     break;
             }
         }

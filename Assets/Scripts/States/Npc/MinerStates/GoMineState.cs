@@ -1,6 +1,8 @@
 using Abstract;
+using Enums.Npc;
 using Managers;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace States.MinerStates
 {
@@ -23,16 +25,21 @@ namespace States.MinerStates
         #region Private Variables
 
         private MinerManager _manager;
-        #endregion
+        private NavMeshAgent _agent;
 
         #endregion
 
-        public GoMineState( MinerManager manager)
+        #endregion
+
+        public GoMineState( MinerManager manager,ref NavMeshAgent agent)
         {
             _manager = manager;
+            _agent = agent;
         }
         public void EnterState()
         {
+            _agent.SetDestination(_manager.Target.transform.position);
+            _manager.SetAnim(MinerAnimType.Run);
             
         }
 

@@ -7568,16 +7568,6 @@
             A utility class for finding types in various asssembly.
             </summary>
         </member>
-        <member name="M:Sirenix.Utilities.AssemblyUtilities.#cctor">
-            <summary>
-            Initializes the <see cref="T:Sirenix.Utilities.AssemblyUtilities"/> class.
-            </summary>
-        </member>
-        <member name="M:Sirenix.Utilities.AssemblyUtilities.Load(System.Reflection.Assembly[])">
-            <summary>
-            Re-scans the entire AppDomain.
-            </summary>
-        </member>
         <member name="M:Sirenix.Utilities.AssemblyUtilities.GetAllAssemblies">
             <summary>
             Gets an <see cref="T:Sirenix.Utilities.ImmutableList"/> of all assemblies in the current <see cref="T:System.AppDomain"/>.
@@ -7591,17 +7581,6 @@
             <param name="assembly">The assembly.</param>
             <returns>The <see cref="T:Sirenix.Utilities.AssemblyTypeFlags"/> for a given assembly.</returns>
             <exception cref="T:System.NullReferenceException"><paramref name="assembly"/> is null.</exception>
-        </member>
-        <member name="M:Sirenix.Utilities.AssemblyUtilities.GetTypeByCachedFullName(System.String)">
-            <summary>
-            Gets the type.
-            </summary>
-            <param name="fullName">The full name of the type without any assembly information.</param>
-        </member>
-        <member name="M:Sirenix.Utilities.AssemblyUtilities.GetType(System.String)">
-            <summary>
-            Gets the type.
-            </summary>
         </member>
         <member name="M:Sirenix.Utilities.AssemblyUtilities.IsDependentOn(System.Reflection.Assembly,System.Reflection.Assembly)">
             <summary>
@@ -7639,6 +7618,12 @@
             </summary>
             <param name="assembly">The assembly.</param>
             <returns>The full directory path in which a given assembly is located, or <c>Null</c> if no file path was found.</returns>
+        </member>
+        <member name="M:Sirenix.Utilities.AssemblyUtilities.GetTypeByCachedFullName(System.String)">
+            <summary>
+            Gets the type.
+            </summary>
+            <param name="fullName">The full name of the type, with or without any assembly information.</param>
         </member>
         <member name="M:Sirenix.Utilities.AssemblyUtilities.GetTypes(Sirenix.Utilities.AssemblyTypeFlags)">
             <summary>

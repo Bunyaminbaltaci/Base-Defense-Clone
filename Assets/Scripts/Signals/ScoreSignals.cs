@@ -9,10 +9,11 @@ namespace Signals
     {
 
 
-        public UnityAction onBuyArea=delegate {  };
+        public Func<int> onGetMoney;
+        public Func<int> onGetDiamond;
+        
         public UnityAction<int> onMoneyDown=delegate {  };
         public UnityAction<int> onDiamondDown=delegate {  };
-        
         
         public UnityAction<int> onAddMoney=delegate {  };
         public UnityAction<int> onAddDiamond=delegate {  };

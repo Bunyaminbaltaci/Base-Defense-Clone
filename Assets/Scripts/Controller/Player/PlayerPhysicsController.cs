@@ -36,17 +36,17 @@ namespace Controllers
                 }
             }
 
-            if (other.CompareTag("BuildArea"))
-            {
-                if (_timer >= 20)
-                {
-                  ScoreSignals.Instance.onBuyArea?.Invoke();
-                }
-                else
-                {
-                    _timer++;
-                }
-            }
+            // if (other.CompareTag("BuildArea"))
+            // {
+            //     if (_timer >= 20)
+            //     {
+            //       ScoreSignals.Instance.onBuyArea?.Invoke();
+            //     }
+            //     else
+            //     {
+            //         _timer++;
+            //     }
+            // }
         }
 
         #region Self Variables

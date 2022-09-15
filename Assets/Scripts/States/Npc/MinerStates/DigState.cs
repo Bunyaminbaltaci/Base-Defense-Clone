@@ -49,7 +49,7 @@ namespace States.MinerStates
 
         private async void DigDiamond()
         {
-            await Task.Delay(2000);
+            await Task.Delay(7000);
             SwitchState();
         }
 

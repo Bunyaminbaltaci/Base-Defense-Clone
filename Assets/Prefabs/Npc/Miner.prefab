@@ -59,11 +59,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 5080905476774938243}
   m_Enabled: 1
   m_AgentTypeID: -1923039037
-  m_Radius: 0.2
+  m_Radius: 0.05
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 300
+  m_AngularSpeed: 360
   m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -71,7 +71,7 @@ NavMeshAgent:
   m_Height: 0.2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1 &9044685111689235883
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8ca57571a8b6cbf48849c1aefe22e321, type: 2}
+    - target: {fileID: 5866666021909216657, guid: b689aabdd9657344da0f1a8225637288, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b689aabdd9657344da0f1a8225637288, type: 3}
 --- !u!1 &4827465734450427047 stripped

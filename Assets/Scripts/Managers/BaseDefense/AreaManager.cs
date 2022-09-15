@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Data;
 using ValueObject;
 using DG.Tweening;
@@ -36,7 +37,6 @@ namespace Managers
         #region Private Variables
 
         private BuildData _buildData;
-        private GameObject _areaCheck;
         private AreaData _areaData;
 
         #endregion
@@ -81,16 +81,14 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onAreaCostDown += OnAreaCostDown;
-            BaseSignals.Instance.onCheckArea += OnCheckArea;
+           
             BaseSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
             BaseSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
         }
 
         private void UnSubscribeEvents()
         {
-            BaseSignals.Instance.onAreaCostDown -= OnAreaCostDown;
-            BaseSignals.Instance.onCheckArea -= OnCheckArea;
+           
             BaseSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
             BaseSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
         }
@@ -109,9 +107,8 @@ namespace Managers
             SetAreaTexts();
         }
 
-        private void OnAreaCostDown()
+        private void AreaCostDown()
         {
-            if (_areaCheck != gameObject) return;
             switch (_areaData.Type)
             {
                 case AreaStageType.Build:
@@ -134,6 +131,7 @@ namespace Managers
             {
                 _areaData.Type = AreaStageType.Complete;
                 BaseSignals.Instance.onAreaComplete?.Invoke();
+                StopBuy();
                 CostAreaVisible();
             }
             else
@@ -159,10 +157,46 @@ namespace Managers
             }
         }
 
-        private void OnCheckArea(GameObject Check)
+        public void StartBuy()
         {
-            _areaCheck = Check;
+            StartCoroutine(Buy());
+        } 
+        public void StopBuy()
+        {
+           StopAllCoroutines();
         }
+
+        IEnumerator Buy()
+        {
+           int money= ScoreSignals.Instance.onGetMoney();
+           WaitForSeconds timer = new WaitForSeconds(0.1f);
+            while (money>_buildData.AreaCost)
+            {
+                AreaCostDown();
+                ScoreSignals.Instance.onMoneyDown?.Invoke(1);
+                yield return timer;
+                
+            }
+            
+            yield return null;
+
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        // private void OnCheckArea(GameObject Check)
+        // {
+        //     _areaCheck = Check;
+        // }
 
         private void OnPrepareAreaWithSave()
         {

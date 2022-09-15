@@ -9,15 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1580dcedea0b42c1b0e90744aa18ae62, type: 3}
-  m_Name: CD_BuildData
+  m_Script: {fileID: 11500000, guid: 3c0b916d87fd4f53a6eb09d06ed52e8e, type: 3}
+  m_Name: CD_MinerData
   m_EditorClassIdentifier: 
-  BuildData:
-  - Name: Area1
-    AreaCost: 100
-  - Name: Area2
-    AreaCost: 20
-  - Name: Turret1
-    AreaCost: 10
-  - Name: Turret2
-    AreaCost: 20
+  MinData:
+    Speed: 0

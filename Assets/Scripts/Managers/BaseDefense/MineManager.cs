@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Data;
+using Datas.ValueObject;
 using DG.Tweening;
 using Enums;
 using Signals;
@@ -26,6 +28,7 @@ namespace Managers
 
         #region Private Variables
 
+        private MineStackData _data;
         private List<GameObject> _diamondList = new List<GameObject>();
         private float _directY;
         private float _directZ;
@@ -35,6 +38,12 @@ namespace Managers
 
         #endregion
 
+        private void Awake()
+        {
+            _data = GetMineData();
+        }
+
+        private MineStackData GetMineData() => Resources.Load<CD_MineData>("Data/CD_MineData").Data;
 
         #region EventSubscription
 
@@ -50,14 +59,12 @@ namespace Managers
             IdleSignals.Instance.onAddDiamondStack += OnAddDiamondStack;
         }
 
-
         private void UnSubscribeEvent()
         {
             IdleSignals.Instance.onGetMineTarget -= OnGetMineTarget;
             IdleSignals.Instance.onGetMineStackTarget -= OnGetMineStackTarget;
             IdleSignals.Instance.onAddDiamondStack -= OnAddDiamondStack;
         }
-
 
         private void OnDisable()
         {
@@ -66,47 +73,48 @@ namespace Managers
 
         #endregion
 
-        private GameObject OnGetMineTarget() =>
-            targetList[Random.Range(0,
-                targetList.Count - 1)];
-
-        private GameObject OnGetMineStackTarget() =>
-            diamondHolder;
-
+        private GameObject OnGetMineTarget() => targetList[Random.Range(0, targetList.Count - 1)];
+        private GameObject OnGetMineStackTarget() => diamondHolder;
 
         public void StartCollectDiamond(GameObject target)
         {
             int limit = _diamondList.Count;
-            for (int i = 0;
-                 i < limit;
-                 i++)
+            for (int i = 0; i < limit; i++)
             {
                 var obj = _diamondList[0];
                 _diamondList.RemoveAt(0);
                 _diamondList.TrimExcess();
-                obj.transform.DOMove(target.transform.position,
+                obj.transform.parent = target.transform;
+                obj.transform.DOLocalMove(
+                    new Vector3(Random.Range(0f,
+                            0.5f),
+                        Random.Range(0f,
+                            0.5f),
+                        Random.Range(0f,
+                            0.5f)),
+                    0.5f);
+                obj.transform.DOLocalMove(new Vector3(0,
+                            0.1f,
+                            0),
                         0.5f)
+                    .SetDelay(0.5f)
                     .OnComplete(() =>
-                        {
-                            PoolSignals.Instance.onSendPool?.Invoke(obj,
-                                PoolType.diamond);
-                        }
-                    );
-
-
+                    {
+                        PoolSignals.Instance.onSendPool?.Invoke(obj,
+                            PoolType.diamond);
+                    });
                 ScoreSignals.Instance.onAddDiamond?.Invoke(1);
             }
 
             SaveSignals.Instance.onSaveScoreData?.Invoke();
         }
 
-
         private void OnAddDiamondStack(GameObject target)
         {
-            GameObject obj = PoolSignals.Instance.onGetPoolObject(PoolType.diamond);
+            var obj = PoolSignals.Instance.onGetPoolObject(PoolType.diamond);
+            if (obj == null) return;
             obj.transform.parent = diamondHolder.transform;
-            obj.transform.position = new Vector3(target.transform.position.x,
-                target.transform.position.y + 1,
+            obj.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 1,
                 target.transform.position.z);
             SetObjPosition(obj);
             obj.SetActive(true);
@@ -115,13 +123,13 @@ namespace Managers
 
         private void SetObjPosition(GameObject obj)
         {
-            _directX = ((int)(_diamondList.Count % 3)) / 2f;
-            _directY = ((int)(_diamondList.Count / 9)) / 2f;
-            _directZ = ((int)(_diamondList.Count % 9) / 3) / 2f;
-            obj.transform.DOLocalMove(new Vector3(_directX,
-                    _directY,
-                    _directZ),
-                0.5f);
+            // _directX = ((int)(_diamondList.Count % 3)) / 2f;
+            // _directY = ((int)(_diamondList.Count / 9)) / 2f;
+            // _directZ = ((int)(_diamondList.Count % 9) / 3) / 2f;
+            _directX = ((int)(_diamondList.Count % _data.LimitX)) * _data.OffsetX;
+            _directY = ((int)(_diamondList.Count / (_data.LimitX * _data.LimitZ))) * _data.OffsetY;
+            _directZ = ((int)(_diamondList.Count % (_data.LimitX * _data.LimitZ)) / _data.LimitX) * _data.OffsetZ;
+            obj.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
         }
     }
 }

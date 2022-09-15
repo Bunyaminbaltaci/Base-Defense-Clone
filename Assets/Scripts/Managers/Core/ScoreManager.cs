@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class ScoreManager : MonoBehaviour,ISavable
+    public class ScoreManager : MonoBehaviour, ISavable
     {
         #region Self Variables
 
@@ -37,22 +37,25 @@ namespace Managers
 
         private void SubscribeEvent()
         {
-            ScoreSignals.Instance.onBuyArea += OnBuyArea;
             ScoreSignals.Instance.onAddDiamond += OnAddDiamond;
             ScoreSignals.Instance.onAddMoney += OnAddMoney;
             ScoreSignals.Instance.onMoneyDown += OnMoneyDown;
             ScoreSignals.Instance.onDiamondDown += OnDiamondDown;
+            ScoreSignals.Instance.onGetDiamond += OnGetDiamond;
+            ScoreSignals.Instance.onGetMoney += OnGetMoney;
 
             SaveSignals.Instance.onGetSaveScoreData += OnGetSaveScoreData;
         }
 
+
         private void UnSubscribeEvent()
         {
-            ScoreSignals.Instance.onBuyArea -= OnBuyArea;
             ScoreSignals.Instance.onAddDiamond -= OnAddDiamond;
             ScoreSignals.Instance.onAddMoney -= OnAddMoney;
             ScoreSignals.Instance.onMoneyDown -= OnMoneyDown;
             ScoreSignals.Instance.onDiamondDown -= OnDiamondDown;
+            ScoreSignals.Instance.onGetDiamond -= OnGetDiamond;
+            ScoreSignals.Instance.onGetMoney -= OnGetMoney;
 
             SaveSignals.Instance.onGetSaveScoreData -= OnGetSaveScoreData;
         }
@@ -70,15 +73,8 @@ namespace Managers
             LoadData();
         }
 
-       
-
-        private void OnBuyArea()
-        {
-            if (_money <= 0) return;
-            _money--;
-            BaseSignals.Instance.onAreaCostDown?.Invoke();
-            SetMoneyText();
-        }
+        private int OnGetMoney() => _money;
+        private int OnGetDiamond() => _diamond;
 
 
         private void OnAddMoney(int value)
@@ -134,7 +130,6 @@ namespace Managers
 
         public void SaveData()
         {
-        
         }
     }
 }

@@ -37,6 +37,7 @@ namespace States.MinerStates
         {
             DigDiamond();
             _manager.SetAnim(MinerAnimType.Dig);
+            _manager.Axe.SetActive(true);
         }
 
         public void UpdateState()

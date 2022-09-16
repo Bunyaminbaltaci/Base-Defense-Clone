@@ -73,7 +73,7 @@ namespace Managers
 
         #endregion
 
-        private GameObject OnGetMineTarget() => targetList[Random.Range(0, targetList.Count - 1)];
+        private GameObject OnGetMineTarget() => targetList[Random.Range(0, targetList.Count)];
         private GameObject OnGetMineStackTarget() => diamondHolder;
 
         public void StartCollectDiamond(GameObject target)
@@ -86,13 +86,14 @@ namespace Managers
                 _diamondList.TrimExcess();
                 obj.transform.parent = target.transform;
                 obj.transform.DOLocalMove(
-                    new Vector3(Random.Range(0f,
+                    new Vector3(Random.Range(-0.5f,
                             0.5f),
-                        Random.Range(0f,
+                        Random.Range(0,
                             0.5f),
-                        Random.Range(0f,
+                        Random.Range(-0.5f,
                             0.5f)),
                     0.5f);
+                
                 obj.transform.DOLocalMove(new Vector3(0,
                             0.1f,
                             0),

@@ -3,6 +3,7 @@ using System.Net.NetworkInformation;
 using Abstract;
 using Data;
 using Datas.ValueObject;
+using Enums;
 using Enums.Npc;
 using Managers.Npc;
 using Signals;
@@ -25,6 +26,8 @@ namespace Managers
         public IStateMachine CurrentState;
         public GameObject Target;
         public GameObject Stack;
+        public GameObject Diamond;
+        public GameObject Axe;
 
         #endregion
 
@@ -86,6 +89,12 @@ namespace Managers
         public void SetAnim(MinerAnimType animType)
         {
             animationController.SetAnim(animType);
+        }
+
+        public void SetAnimLayer(AnimLayerType type,float weight)
+        {
+            animationController.SetLayer(type,weight);
+            
         }
     }
 }

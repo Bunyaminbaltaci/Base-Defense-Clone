@@ -177,26 +177,12 @@ namespace Managers
                 yield return timer;
                 
             }
-            
+
+            OnPrepareAreaWithSave();
             yield return null;
 
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        // private void OnCheckArea(GameObject Check)
-        // {
-        //     _areaCheck = Check;
-        // }
+ 
 
         private void OnPrepareAreaWithSave()
         {

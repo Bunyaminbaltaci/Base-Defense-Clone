@@ -1,3 +1,4 @@
+using Enums;
 using Enums.Npc;
 using UnityEngine;
 
@@ -29,6 +30,10 @@ namespace Managers.Npc
         public void SetAnim(MinerAnimType animType)
         {
             animator.SetTrigger(animType.ToString());
+        }  
+        public void SetLayer(AnimLayerType type,float weight )
+        {
+            animator.SetLayerWeight((int)type,weight);
         }
     }
 }

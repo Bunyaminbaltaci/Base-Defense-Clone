@@ -1,10 +1,9 @@
-using Enums;
 using Enums.Npc;
 using UnityEngine;
 
-namespace Managers.Npc
+namespace Managers.Npc.Hostage
 {
-    public class MinerAnimationController : MonoBehaviour
+    public class HostageAnimationController : MonoBehaviour
     {
         #region Self Variables
 
@@ -27,13 +26,13 @@ namespace Managers.Npc
 
         #endregion
 
-        public void SetAnim(MinerAnimType animType)
+        public void SetTriggerAnim(HostageAnimType animType)
         {
             animator.SetTrigger(animType.ToString());
-        }  
-        public void SetLayer(AnimLayerType type,float weight )
+        }
+        public void SetBoolAnim(HostageAnimType animType,bool check )
         {
-            animator.SetLayerWeight((int)type,weight);
+            animator.SetBool(animType.ToString(),check);
         }
     }
 }

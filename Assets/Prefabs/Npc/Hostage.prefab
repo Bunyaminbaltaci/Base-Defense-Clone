@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5604958641279048761}
-  - component: {fileID: 5080905476774938253}
   - component: {fileID: 5080905476774938242}
+  - component: {fileID: 5368455363726590929}
   m_Layer: 0
-  m_Name: Miner
+  m_Name: Hostage
   m_TagString: Miner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,25 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5080905476774938253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5080905476774938243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 730b975523104ef7ac560907bf5213c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MinerSType: 2
-  Target: {fileID: 0}
-  Stack: {fileID: 0}
-  agent: {fileID: 5080905476774938242}
-  animationController: {fileID: 8050777206840022764}
-  diamond: {fileID: 282339924113950706}
-  axe: {fileID: 1714668041881480788}
 --- !u!195 &5080905476774938242
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -61,7 +42,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5080905476774938243}
   m_Enabled: 1
-  m_AgentTypeID: -1923039037
+  m_AgentTypeID: -902729914
   m_Radius: 0.06
   m_Speed: 3.5
   m_Acceleration: 10
@@ -74,7 +55,23 @@ NavMeshAgent:
   m_Height: 0.3
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 0
+--- !u!114 &5368455363726590929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5080905476774938243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a623d8147fea4de6b57a98be5aeadc47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HostageSType: 0
+  Target: {fileID: 0}
+  agent: {fileID: 5080905476774938242}
+  animationController: {fileID: 7375866500610710527}
 --- !u!1 &9044685111689235883
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +83,7 @@ GameObject:
   - component: {fileID: 9044685111689235882}
   - component: {fileID: 9044685111689235892}
   - component: {fileID: 9044685111689235895}
-  - component: {fileID: 1859565929698588391}
+  - component: {fileID: 6835250269601621068}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Miner
@@ -138,7 +135,7 @@ CapsuleCollider:
   m_Height: 0.22
   m_Direction: 1
   m_Center: {x: 0, y: 0.08571168, z: 0}
---- !u!114 &1859565929698588391
+--- !u!114 &6835250269601621068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,10 +144,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9044685111689235883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8ae98ab774143c88816887b77bef069, type: 3}
+  m_Script: {fileID: 11500000, guid: 514479ef67ce4aaf98b9c5dd90242455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minerManager: {fileID: 5080905476774938253}
+  hostageManager: {fileID: 5368455363726590929}
 --- !u!1001 &1713677927128856084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,11 +221,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ae9c24609d7b434abb59e33165faee2, type: 3}
---- !u!1 &1714668041881480788 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1000010422294592, guid: 6ae9c24609d7b434abb59e33165faee2, type: 3}
-  m_PrefabInstance: {fileID: 1713677927128856084}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5638492799776360950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,7 +303,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: b689aabdd9657344da0f1a8225637288, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 8ca57571a8b6cbf48849c1aefe22e321, type: 2}
+      objectReference: {fileID: 9100000, guid: 05e5f80bb3092f648a63e9473ee025b4, type: 2}
     - target: {fileID: 5866666021909216657, guid: b689aabdd9657344da0f1a8225637288, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -338,7 +330,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6686643647145634331, guid: b689aabdd9657344da0f1a8225637288, type: 3}
   m_PrefabInstance: {fileID: 5638492799776360950}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8050777206840022764
+--- !u!114 &7375866500610710527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -347,7 +339,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4827465734450427047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49223780e4db4f8f9335e5a8c4710965, type: 3}
+  m_Script: {fileID: 11500000, guid: 370c338ca24642c3bedc729ffa28fdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2257824013005108327}
@@ -424,8 +416,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
---- !u!1 &282339924113950706 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
-  m_PrefabInstance: {fileID: 6222894577284609516}
-  m_PrefabAsset: {fileID: 0}

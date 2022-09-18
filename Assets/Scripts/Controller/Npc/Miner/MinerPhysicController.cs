@@ -32,4 +32,4 @@ namespace Managers.Npc
             minerManager.CurrentState.OnCollisionDetectionState(other);
         }
     }
-}
+} 

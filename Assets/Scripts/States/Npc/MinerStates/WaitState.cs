@@ -1,4 +1,5 @@
 using Abstract;
+using Enums.Npc;
 using Managers;
 using UnityEngine;
 using UnityEngine.AI;
@@ -37,11 +38,13 @@ namespace States.MinerStates
         }
         public void EnterState()
         {
-            _agent.SetDestination(_manager.Target.transform.position);
+           
+          _manager.SetTriggerAnim(MinerAnimType.Idle);
         }
 
         public void UpdateState()
         {
+        
         }
 
         public void OnCollisionDetectionState(Collider other)
@@ -50,6 +53,7 @@ namespace States.MinerStates
 
         public void SwitchState()
         {
+            _manager.SwitchState(MinerStatesType.GoStack);
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace Enums.Npc
 {
-    public enum HarvesterEnum
+    public enum HarvesterStateType
     {
         Collect,
         Disturbed

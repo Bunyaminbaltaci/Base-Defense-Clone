@@ -1,5 +1,4 @@
 using Abstract;
-using Enums;
 using Enums.Npc;
 using Managers;
 using Signals;
@@ -8,7 +7,7 @@ using UnityEngine.AI;
 
 namespace States.MinerStates
 {
-    public class GoStackState : IStateMachine
+    public class TerrifiedState : IStateMachine
     {
         #region Self Variables
 
@@ -22,24 +21,22 @@ namespace States.MinerStates
 
         #region Private Variables
 
-        private MinerManager _manager;
+        private HostageManager _manager;
         private NavMeshAgent _agent;
 
         #endregion
 
-        #endregion
-
-        public GoStackState(MinerManager manager, ref NavMeshAgent agent)
+        public TerrifiedState(HostageManager manager, ref NavMeshAgent agent)
         {
             _manager = manager;
             _agent = agent;
         }
 
+        #endregion
+
         public void EnterState()
         {
-            _agent.SetDestination(_manager.Stack.transform.position);
-            _manager.SetTriggerAnim(MinerAnimType.Run);
-            _manager.SetAnimLayer(AnimLayerType.UpperBody,1);
+            _manager.SetTriggerAnim(HostageAnimType.Terrified);
         }
 
         public void UpdateState()
@@ -48,22 +45,24 @@ namespace States.MinerStates
 
         public void OnCollisionDetectionState(Collider other)
         {
-            if (other.CompareTag("MineWareHouse"))
+            if (other.CompareTag("Player"))
             {
-                PushDiamondOnStack();
+                SetFollowTarget(other);
             }
-        }
-
-        private void PushDiamondOnStack()
-        {
-            IdleSignals.Instance.onAddDiamondStack?.Invoke(_manager.transform.gameObject);
-            SwitchState();
         }
 
 
         public void SwitchState()
         {
-            _manager.SwitchState(MinerStatesType.GoMine);
+            _manager.SwitchState(HostageStateType.Follow);
+        }
+
+        private void SetFollowTarget(Collider other)
+        {
+            _manager.Target = CoreGameSignals.Instance.onGetHostageTarget(_manager.transform.gameObject);
+
+          
+            SwitchState();
         }
     }
 }

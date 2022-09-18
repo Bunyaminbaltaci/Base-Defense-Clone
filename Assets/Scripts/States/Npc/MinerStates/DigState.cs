@@ -5,6 +5,7 @@ using Enums.Npc;
 using Managers;
 using UnityEngine;
 using UnityEngine.AI;
+using Enums.Npc;
 
 namespace States.MinerStates
 {
@@ -28,7 +29,7 @@ namespace States.MinerStates
 
         #endregion
 
-        public DigState(MinerManager manager, ref NavMeshAgent agent)
+        public DigState(MinerManager manager  )
         {
             _manager = manager;
         }
@@ -36,8 +37,8 @@ namespace States.MinerStates
         public void EnterState()
         {
             DigDiamond();
-            _manager.SetAnim(MinerAnimType.Dig);
-            _manager.Axe.SetActive(true);
+            _manager.SetTriggerAnim(MinerAnimType.Dig);
+         
         }
 
         public void UpdateState()
@@ -48,15 +49,14 @@ namespace States.MinerStates
         {
         }
 
-        private async void DigDiamond()
+        private  void DigDiamond()
         {
-            await Task.Delay(7000);
-            SwitchState();
+            _manager.StartCoroutine(_manager.DigDiamond());
         }
 
         public void SwitchState()
         {
-            _manager.SwitchState(_manager.GoStack);
+            _manager.SwitchState(MinerStatesType.GoStack);
         }
     }
 }

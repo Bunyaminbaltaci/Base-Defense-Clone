@@ -71,6 +71,8 @@ namespace Managers
         private void Start()
         {
             LoadData();
+            SetMoneyText();
+            SetDiamondText();
         }
 
         private int OnGetMoney() => _money;
@@ -130,6 +132,7 @@ namespace Managers
 
         public void SaveData()
         {
+            SaveSignals.Instance.onGetSaveScoreData?.Invoke();
         }
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     MovementData:
-      PlayerJoystickSpeed: 5
+      PlayerJoystickSpeed: 4
     StackData:
       StackLimit: 3
       StackoffsetY: 0.5

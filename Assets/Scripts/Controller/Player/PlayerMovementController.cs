@@ -8,6 +8,29 @@ namespace Controllers
 {
     public class PlayerMovementController : MonoBehaviour
     {
+        #region Self Variables
+
+        #region Public Variables
+
+        #endregion
+
+        #region Serialized Variables
+
+        [SerializeField] private Rigidbody rigidbody;
+        [SerializeField] private PlayerManager playerManager;
+
+        #endregion
+
+        #region Private Variables
+
+        [Header("Data")] private PlayerMovementData _playerMovementData;
+        private bool _isReadyToMove, _isReadyToPlay;
+        private InputParams _inputParams;
+
+        #endregion
+
+        #endregion
+
         private void FixedUpdate()
         {
             JoystickMove();
@@ -40,19 +63,15 @@ namespace Controllers
 
         private void JoystickMove()
         {
-            var _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed,
-                0,
+            var _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed, 0,
                 _inputParams.Values.z * _playerMovementData.PlayerJoystickSpeed);
             rigidbody.velocity = _movement;
-
             playerManager.PlayAnim(PlayerAnimationStates.Run,
                 Mathf.Abs(_inputParams.Values.x) + Mathf.Abs(_inputParams.Values.z));
-
             if (_movement != Vector3.zero)
             {
                 var _newDirect = Quaternion.LookRotation(_movement);
-                rigidbody.transform.GetChild(0)
-                    .rotation = _newDirect;
+                rigidbody.transform.GetChild(0).rotation = _newDirect;
             }
         }
 
@@ -61,34 +80,5 @@ namespace Controllers
             _isReadyToPlay = false;
             _isReadyToMove = false;
         }
-
-        #region Self Variables
-
-        #region Public Variables
-
-        #endregion
-
-        #region Serialized Variables
-
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private PlayerManager playerManager;
-
-        #endregion
-
-        #region Private Variables
-
-        [Header("Data")] private PlayerMovementData _playerMovementData;
-
-        private bool _isReadyToMove,
-            _isReadyToPlay;
-
-        private float _colorAreaSpeed = 1;
-        private Vector3 _inputValue;
-        private Vector2 _clampValues;
-        private InputParams _inputParams;
-
-        #endregion
-
-        #endregion
     }
 }

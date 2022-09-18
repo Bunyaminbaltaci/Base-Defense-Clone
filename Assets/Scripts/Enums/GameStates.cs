@@ -2,6 +2,9 @@ namespace Enums
 {
     public enum GameStates
     {
-        Idle
+        Idle,
+        Drone,
+        Turret
+        
     }
 }

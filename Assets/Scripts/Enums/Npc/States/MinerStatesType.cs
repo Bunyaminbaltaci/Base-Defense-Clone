@@ -1,10 +1,11 @@
 namespace Enums.Npc
 {
-    public enum MinerEnum
+    public enum MinerStatesType
     {
         Dig,
         GoMine,
-        GoStack
+        GoStack,
+        Wait
         
     }
 }

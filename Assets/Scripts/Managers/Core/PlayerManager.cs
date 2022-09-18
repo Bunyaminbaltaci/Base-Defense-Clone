@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Controllers;
 using Data;
 using Enums;
@@ -9,61 +10,9 @@ namespace Managers
 {
     public class PlayerManager : MonoBehaviour
     {
-        private void Awake()
-        {
-            GetReferences();
-            SendPlayerDataToControllers();
-        }
-
-        private void GetReferences()
-        {
-            Data = GetPlayerData();
-        }
-
-        private PlayerData GetPlayerData()
-        {
-            return Resources.Load<CD_Player>("Data/CD_Player").Data;
-        }
-
-        public void AddStack(GameObject obj)
-        {
-            playerStackController.AddStack(obj);
-        }
-
-        private void SendPlayerDataToControllers()
-        {
-            playerMovementController.SetMovementData(Data.MovementData);
-            playerStackController.SetStackData(Data.StackData);
-        }
-
-
-        private void OnInputDragged(InputParams InputParam)
-        {
-            playerMovementController.UpdateInputValue(InputParam);
-        }
-
-
-        public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
-        {
-            playerAnimationController.PlayAnim(playerAnimationStates, isTrue);
-        }
-
-        private void OnPlay()
-        {
-            playerMovementController.IsReadyToPlay(true);
-        }
-
-        private void OnReset()
-        {
-            playerMovementController.OnReset();
-        }
-
         #region Self Variables
 
         #region Public Variables
-
-        [Header("Data")] public PlayerData Data;
-        public Rigidbody Rbody;
 
         #endregion
 
@@ -77,6 +26,8 @@ namespace Managers
 
         #region Private Variables
 
+        private PlayerData _data;
+        private List<GameObject> _hostageList;
         private PlayerAnimationStates _animationState;
 
         #endregion
@@ -84,6 +35,12 @@ namespace Managers
         #endregion
 
         #region Event Subscription
+
+        private void Awake()
+        {
+            GetReferences();
+            SendPlayerDataToControllers();
+        }
 
         private void OnEnable()
         {
@@ -98,6 +55,7 @@ namespace Managers
             InputSignals.Instance.onInputDragged += OnInputDragged;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onGetHostageTarget += OnGetHostageTarget;
         }
 
 
@@ -109,6 +67,7 @@ namespace Managers
 
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onGetHostageTarget -= OnGetHostageTarget;
         }
 
 
@@ -118,5 +77,61 @@ namespace Managers
         }
 
         #endregion
+
+        private void GetReferences()
+        {
+            _data = GetPlayerData();
+            _hostageList = new List<GameObject>();
+        }
+
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").Data;
+        }
+
+        public void AddStack(GameObject obj)
+        {
+            playerStackController.AddStack(obj);
+        }
+
+        private void SendPlayerDataToControllers()
+        {
+            playerMovementController.SetMovementData(_data.MovementData);
+            playerStackController.SetStackData(_data.StackData);
+        }
+
+
+        private void OnInputDragged(InputParams InputParam)
+        {
+            playerMovementController.UpdateInputValue(InputParam);
+        }
+
+
+        public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
+        {
+            playerAnimationController.PlayAnim(playerAnimationStates, isTrue);
+        }
+
+        private GameObject OnGetHostageTarget(GameObject hostage)
+        {
+            if (_hostageList.Count == 0)
+            {
+                _hostageList.Add(hostage);
+                return transform.gameObject;
+            }
+            _hostageList.Add(hostage);
+                return _hostageList[_hostageList.Count - 2];
+            
+        }
+
+        private void OnPlay()
+        {
+            playerMovementController.IsReadyToPlay(true);
+        }
+
+        private void OnReset()
+        {
+            playerMovementController.OnReset();
+        }
     }
 }

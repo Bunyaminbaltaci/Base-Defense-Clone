@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Net.NetworkInformation;
 using Abstract;
 using Data;
@@ -18,16 +19,13 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
+        
 
-        public GoMineState GoMine;
-        public GoStackState GoStack;
-        public DigState Dig;
-        public WaitState Wait;
-        public IStateMachine CurrentState;
+        public MinerStatesType MinerSType;
         public GameObject Target;
         public GameObject Stack;
-        public GameObject Diamond;
-        public GameObject Axe;
+        public IStateMachine CurrentState;
+       
 
         #endregion
 
@@ -36,12 +34,17 @@ namespace Managers
   
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private MinerAnimationController animationController;
+        [SerializeField] private GameObject diamond;
+        [SerializeField] private GameObject axe;
 
         #endregion
 
         #region Private Variables
 
-        private MinerData _minerData;
+        private GoMineState _goMine;
+        private GoStackState _goStack;
+        private DigState _dig;
+        private WaitState _wait;
 
         #endregion
 
@@ -50,26 +53,25 @@ namespace Managers
         private void Awake()
         {
             GetReferences();
-            _minerData = GetMinerData();
+           
         }
 
-        private MinerData GetMinerData() => Resources.Load<CD_MinerData>("NpcData/CD_MinerData").MinData;
+       
 
 
         private void GetReferences()
         {
-            Dig = new DigState(this, ref agent);
-            GoStack = new GoStackState(this, ref agent);
-            GoMine = new GoMineState(this, ref agent);
-            Wait = new WaitState(this, ref agent);
-            CurrentState = GoMine;
+            _dig = new DigState(this);
+            _goStack = new GoStackState(this, ref agent);
+            _goMine = new GoMineState(this, ref agent);
+            _wait = new WaitState(this, ref agent);
+            CurrentState = _goMine;
         }
 
-        private void Start()
+        private void OnEnable()
         {
             Target = IdleSignals.Instance.onGetMineTarget();
             Stack = IdleSignals.Instance.onGetMineStackTarget();
-            SetAnim(MinerAnimType.Idle);
             CurrentState.EnterState();
             
         }
@@ -80,13 +82,33 @@ namespace Managers
         }
 
 
-        public void SwitchState(IStateMachine state)
+        public void SwitchState( MinerStatesType stateType)
         {
-            CurrentState = state;
+            switch (stateType)
+            {
+                case MinerStatesType.Dig:
+                    CurrentState = _dig;
+                    diamond.SetActive(false);
+                    axe.SetActive(true);
+                    break;
+                case MinerStatesType.GoMine:
+                    CurrentState = _goMine;
+                    diamond.SetActive(false);
+                    break;
+                case MinerStatesType.GoStack:
+                    CurrentState = _goStack;
+                    axe.SetActive(false);
+                    diamond.SetActive(true);
+                    break;
+                case MinerStatesType.Wait:
+                    CurrentState = _wait;
+                    break;
+            }
+
             CurrentState.EnterState();
         }
 
-        public void SetAnim(MinerAnimType animType)
+        public void SetTriggerAnim(MinerAnimType animType)
         {
             animationController.SetAnim(animType);
         }
@@ -95,6 +117,12 @@ namespace Managers
         {
             animationController.SetLayer(type,weight);
             
+        }
+
+        public IEnumerator DigDiamond()
+        {
+            yield return new WaitForSeconds(7);
+            SwitchState(MinerStatesType.GoStack);
         }
     }
 }

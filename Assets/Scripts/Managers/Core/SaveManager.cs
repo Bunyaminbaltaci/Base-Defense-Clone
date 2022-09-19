@@ -17,18 +17,22 @@ namespace Managers
 
         private void Subscribe()
         {
-            SaveSignals.Instance.onSaveIdleData += onSaveIdleData;
-            SaveSignals.Instance.onSaveScoreData += onSaveScoreData;
-            SaveSignals.Instance.onLoadBaseData += OnLoadIdleData;
+            SaveSignals.Instance.onSaveBaseData += OnSaveBaseData;
+            SaveSignals.Instance.onLoadBaseData += OnLoadBaseData;
+            SaveSignals.Instance.onSaveScoreData += OnSaveScoreData;
             SaveSignals.Instance.onLoadScoreData += OnLoadScoreData;
+            SaveSignals.Instance.onSaveIdleData += OnSaveIdleData;
+            SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
         }
 
         private void Unsubscribe()
         {
-            SaveSignals.Instance.onSaveIdleData -= onSaveIdleData;
-            SaveSignals.Instance.onSaveScoreData -= onSaveScoreData;
-            SaveSignals.Instance.onLoadBaseData -= OnLoadIdleData;
+            SaveSignals.Instance.onSaveBaseData -= OnSaveBaseData;
+            SaveSignals.Instance.onLoadBaseData -= OnLoadBaseData;
+            SaveSignals.Instance.onSaveScoreData -= OnSaveScoreData;
             SaveSignals.Instance.onLoadScoreData -= OnLoadScoreData;
+            SaveSignals.Instance.onSaveIdleData -= OnSaveIdleData;
+            SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
         }
 
         private void OnDisable()
@@ -38,31 +42,31 @@ namespace Managers
 
         #endregion
 
-        private void OnSaveData()
+        private void OnSaveIdleData()
+        {
+            SaveIdleData(SaveSignals.Instance.onGetSaveIdleData());
+        }
+
+        private void OnSaveBaseData()
+        {
+            SaveBaseData(SaveSignals.Instance.onGetBaseData());
+        }
+
+        private void OnSaveScoreData()
         {
             SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
         }
 
-        private void onSaveIdleData()
-        {
-            SaveIdleData(SaveSignals.Instance.onGetBaseData());
-        }
-
-        private void onSaveScoreData()
-        {
-            SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
-        }
-
-        private void SaveIdleData(BaseDataParams baseDataParams)
+        private void SaveBaseData(BaseDataParams baseDataParams)
         {
             if (baseDataParams.BaseLevel != null)
                 ES3.Save("CityLevel",
                     baseDataParams.BaseLevel,
-                    "IdleData.json");
+                    "BaseData.json");
             if (baseDataParams.AreaDictionary != null)
                 ES3.Save("AreaDatas",
                     baseDataParams.AreaDictionary,
-                    "IdleData.json");
+                    "BaseData.json");
         }
 
         private void SaveScoreData(ScoreDataParams scoreDataParams)
@@ -77,25 +81,37 @@ namespace Managers
                     "ScoreData.json");
         }
 
-        private BaseDataParams OnLoadIdleData()
+        private void SaveIdleData(IdleDataParams idleDataparams)
+        {
+            if (idleDataparams.MinerCount != null)
+                ES3.Save("MinerCount",
+                    idleDataparams.MinerCount,
+                    "IdleData.json");
+            if (idleDataparams.SoldierCount != null)
+                ES3.Save("SoldierCount",
+                    idleDataparams.SoldierCount,
+                    "IdleData.json");
+        }
+
+        private BaseDataParams OnLoadBaseData()
         {
             return new BaseDataParams
             {
                 AreaDictionary =
                     ES3.KeyExists("AreaDatas",
-                        "IdleData.json")
+                        "BaseData.json")
                         ? ES3.Load<Dictionary<int, AreaData>>("AreaDatas",
-                            "IdleData.json")
+                            "BaseData.json")
                         : new Dictionary<int, AreaData>(),
                 BaseLevel = ES3.KeyExists("CityLevel",
-                    "IdleData.json")
+                    "BaseData.json")
                     ? ES3.Load<int>("CityLevel",
-                        "IdleData.json")
+                        "BaseData.json")
                     : 0
             };
         }
 
-        private ScoreDataParams OnLoadScoreData()   
+        private ScoreDataParams OnLoadScoreData()
         {
             return new ScoreDataParams
             {
@@ -109,6 +125,24 @@ namespace Managers
                     ? ES3.Load<int>("Diamond",
                         "ScoreData.json")
                     : 0
+            };
+        }
+
+        private IdleDataParams OnLoadIdleData()
+        {
+            return new IdleDataParams()
+            {
+                MinerCount =
+                    ES3.KeyExists("MinerCount",
+                        "IdleData.json")
+                        ? ES3.Load<int>("MinerCount",
+                            "IdleData.json")
+                        : 0,
+                SoldierCount = ES3.KeyExists("SoldierCount",
+                    "IdleData.json")
+                    ? ES3.Load<int>("SoldierCount",
+                        "IdleData.json")
+                    : 0,
             };
         }
     }

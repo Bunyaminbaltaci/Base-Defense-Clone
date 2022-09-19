@@ -19,3 +19,4 @@ MonoBehaviour:
     LimitX: 4
     LimitY: 0
     LimitZ: 4
+    MinerCapacity: 7

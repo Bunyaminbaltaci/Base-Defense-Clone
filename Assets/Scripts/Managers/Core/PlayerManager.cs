@@ -124,6 +124,27 @@ namespace Managers
             
         }
 
+        public void HostageAddMine()
+        {
+           Debug.Log("Girdik");
+           Debug.Log(IdleSignals.Instance.onGetMinerCapacity());
+            while (IdleSignals.Instance.onGetMinerCapacity()>0 && _hostageList.Count>0 )
+            {
+                Debug.Log("Whileİçindeyim");
+                Debug.Log(IdleSignals.Instance.onGetMinerCapacity());
+                int lastHostage = _hostageList.Count - 1;
+                var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Miner);
+                obj.transform.position = _hostageList[lastHostage].transform.position;
+                obj.transform.rotation = _hostageList[lastHostage].transform.rotation;
+                PoolSignals.Instance.onSendPool(_hostageList[lastHostage],PoolType.Hostage);
+                obj.SetActive(true);
+                IdleSignals.Instance.onAddMinerInMine?.Invoke(obj);
+                _hostageList.RemoveAt(lastHostage);
+                _hostageList.TrimExcess();
+                
+            }
+        }
+
         private void OnPlay()
         {
             playerMovementController.IsReadyToPlay(true);

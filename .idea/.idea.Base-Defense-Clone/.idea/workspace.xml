@@ -2,63 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd9a3ebd-b6b8-47bd-898f-179f3f44ff87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostageAnimationController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostageAnimationController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostagePhysicController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostagePhysicController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/Anim/HostageAnimType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/Anim/HostageAnimType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/HostageStateType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/HostageStateType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/FollowState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/FollowState.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/TerrifiedState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/TerrifiedState.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/IdleDataParams.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/IdleDataParams.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animators/Miner.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animators/Miner.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Hostage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Hostage.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Miner.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Miner.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/pickaxe.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/pickaxe.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_Player.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_Player.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_MineData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_MineData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_MinerData.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_MinerData.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_PoolGenerator.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_PoolGenerator.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Base 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Base 0.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Miner.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Miner.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Miner.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Miner.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Enemy.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Enemy.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Hostage.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Hostage.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Miner.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Miner.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/MinerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerAnimationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/MinerAnimationController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerAnimationController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/MinerPhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerPhysicController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/MinerPhysicController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerPhysicController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerMovementController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/IdlePanelController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/IdlePanelController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/LevelPanelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/LevelPanelController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/LevelPanelController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/LevelPanelController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_MinerData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_MinerData.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MinerData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MinerData.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/GameStates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/GameStates.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/Anim/MinerAnimType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/Anim/MinerAnimType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/HarvesterEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/HarvesterEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/MinerEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/MinerStatesType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/MinerEnum.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Npc/States/MinerStatesType.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/UIPanels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/UIPanels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Mine/MinePhysicController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Mine/MinePhysicController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_MineData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_MineData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MineStackData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MineData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MineStackData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MineData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/PoolType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/PoolType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Keys/InputParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/InputParams.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/AreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/AreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BaseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BaseManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/IdleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/IdleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PlayerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/ScoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/ScoreManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/MinerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/MinerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/CoreGameSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/CoreGameSignals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/SaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/BaseSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/BaseSignals.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/IdleSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/IdleSignals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/DigState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/DigState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoMineState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoMineState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoStackState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoStackState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/WaitState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/WaitState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/SaveSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/SaveSignals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/FollowState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/FollowState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +147,8 @@
       <workItem from="1663347915851" duration="9798000" />
       <workItem from="1663407168966" duration="6235000" />
       <workItem from="1663446040254" duration="4497000" />
-      <workItem from="1663495038668" duration="17187000" />
+      <workItem from="1663495038668" duration="17311000" />
+      <workItem from="1663577413886" duration="16495000" />
     </task>
     <servers />
   </component>

@@ -25,3 +25,12 @@ MonoBehaviour:
   - Type: 3
     Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
     ObjectCount: 100
+  - Type: 4
+    Pref: {fileID: 5080905476774938243, guid: e2eb55abbd7bc6d48b31759b0d6b9e6e, type: 3}
+    ObjectCount: 16
+  - Type: 5
+    Pref: {fileID: 5080905476774938243, guid: 16a1fa760bc5a504d8c94fb3b371eca2, type: 3}
+    ObjectCount: 4
+  - Type: 6
+    Pref: {fileID: 0}
+    ObjectCount: 0

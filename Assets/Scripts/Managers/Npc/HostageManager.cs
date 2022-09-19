@@ -46,6 +46,17 @@ namespace Managers
            
         }
 
+        private void OnEnable()
+        {
+            CurrentState.EnterState();
+        }
+
+        private void OnDisable()
+        {
+            Target = null;
+            CurrentState = _terrified;
+        }
+
         private void GetReferences()
         {
             

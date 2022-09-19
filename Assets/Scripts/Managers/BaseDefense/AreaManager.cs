@@ -15,7 +15,7 @@ namespace Managers
     {
         #region Self Variables
 
-        [Header("Data")]
+
 
         #region Public Variables
 
@@ -48,30 +48,10 @@ namespace Managers
             GetReferences();
             Init();
         }
-
         private void Init()
         {
             CostAreaVisible();
         }
-
-
-        private void Start()
-        {
-            BaseSignals.Instance.onRefreshAreaData?.Invoke();
-        }
-
-        private void GetReferences()
-        {
-            _buildData = GetData();
-            buildCost.text = _buildData.AreaCost.ToString();
-        }
-
-
-        private BuildData GetData()
-        {
-            return Resources.Load<CD_BuildData>("Data/CD_BuildData").BuildData[(int)buildType];
-        }
-
         #region Event Subscription
 
         private void OnEnable()
@@ -100,6 +80,28 @@ namespace Managers
 
         #endregion
 
+
+     
+
+
+        private void Start()
+        {
+            BaseSignals.Instance.onRefreshAreaData?.Invoke();
+        }
+
+        private void GetReferences()
+        {
+            _buildData = GetData();
+            buildCost.text = _buildData.AreaCost.ToString();
+        }
+
+
+        private BuildData GetData()
+        {
+            return Resources.Load<CD_BuildData>("Data/CD_BuildData").BuildData[(int)buildType];
+        }
+
+    
         private void OnRefreshAreaData()
         {
             _areaData = (AreaData)BaseSignals.Instance.onGetAreaData?.Invoke(areaId);

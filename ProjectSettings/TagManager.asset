@@ -10,7 +10,9 @@ TagManager:
   - BuildArea
   - Mine
   - MineWareHouse
+  - Hostage
   - Miner
+  - MineDoor
   layers:
   - Default
   - TransparentFX

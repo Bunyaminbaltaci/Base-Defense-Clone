@@ -57,7 +57,12 @@ namespace States.MinerStates
         {
             var position = _manager.Target.transform.position;
             _agent.SetDestination(position) ;
-            if (_agent.remainingDistance<=_agent.stoppingDistance)
+            SetAnim();
+        }
+
+        private void SetAnim()
+        {
+            if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
                 _manager.SetBoolAnim(HostageAnimType.Run, false);
                 return;

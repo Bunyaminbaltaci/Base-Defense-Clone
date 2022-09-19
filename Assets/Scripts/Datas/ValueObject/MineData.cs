@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Datas.ValueObject
 {
     [Serializable]
-    public class MineStackData
+    public class MineData
     {
         #region OffSet
 
@@ -21,7 +21,14 @@ namespace Datas.ValueObject
         public int LimitX;
         public int LimitY;
         public int LimitZ;
+        [Space(15)]
 
+        #endregion 
+        #region Worker
+
+        [Header("Worker")] 
+        public int MinerCapacity;
+        
         #endregion
     }
 }

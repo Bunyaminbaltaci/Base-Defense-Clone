@@ -161,7 +161,7 @@ namespace Managers
 
         public void SaveData()
         {
-            SaveSignals.Instance.onSaveIdleData?.Invoke();
+            SaveSignals.Instance.onSaveBaseData?.Invoke();
             SaveSignals.Instance.onSaveScoreData?.Invoke();
         }
     }

@@ -5,6 +5,10 @@ namespace Enums
         Enemy,
         Bullet,
         Money,
-        diamond
+        Diamond,
+        Miner,
+        Hostage,
+        Soldier,
+        
     }
 }

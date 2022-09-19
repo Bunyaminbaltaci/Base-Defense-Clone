@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildData:
   - Name: Area1
-    AreaCost: 10
+    AreaCost: 100
   - Name: Area2
     AreaCost: 20
   - Name: Turret1

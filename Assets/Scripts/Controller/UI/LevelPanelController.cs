@@ -5,24 +5,26 @@ namespace Controllers
 {
     public class LevelPanelController : MonoBehaviour
     {
-        public void SetLevelText()
-        {
-        }
-
-        public void SetMultipler()
-        {
-            multiplierText.alpha = 1;
-        }
-
         #region Self Variables
 
         #region Serialized Variables
 
-        [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private TextMeshProUGUI multiplierText;
+        [SerializeField] private TextMeshProUGUI money;
+        [SerializeField] private TextMeshProUGUI diamond;
 
         #endregion
 
         #endregion
+
+        public void SetMoneyText(int value)
+        {
+            money.text = value.ToString();
+        }
+
+        public void SetDiamondText(int value)
+        {
+            diamond.text=value.ToString();
+            
+        }
     }
 }

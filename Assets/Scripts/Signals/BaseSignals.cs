@@ -8,7 +8,6 @@ namespace Signals
 {
     public class BaseSignals : MonoSingleton<BaseSignals>
     {
-        public UnityAction onAreaCostDown = delegate { };
         public UnityAction onAreaComplete = delegate { };
         public UnityAction onBaseComplete = delegate { };
         public UnityAction onRefreshAreaData = delegate { };

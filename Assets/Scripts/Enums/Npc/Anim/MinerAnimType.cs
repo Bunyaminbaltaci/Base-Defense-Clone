@@ -5,6 +5,9 @@ namespace Enums.Npc
         Idle,
         Run,
         Dig,
-        Carry
+        Carry,
+        
+        
+        
     }
 }

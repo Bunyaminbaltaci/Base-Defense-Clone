@@ -1,4 +1,5 @@
 using Abstract;
+using Enums;
 using Enums.Npc;
 using Managers;
 using Signals;
@@ -37,7 +38,8 @@ namespace States.MinerStates
         public void EnterState()
         {
             _agent.SetDestination(_manager.Stack.transform.position);
-            _manager.SetAnim(MinerAnimType.Carry);
+            _manager.SetTriggerAnim(MinerAnimType.Run);
+            _manager.SetAnimLayer(AnimLayerType.UpperBody,1);
         }
 
         public void UpdateState()
@@ -61,7 +63,7 @@ namespace States.MinerStates
 
         public void SwitchState()
         {
-            _manager.SwitchState(_manager.GoMine);
+            _manager.SwitchState(MinerStatesType.GoMine);
         }
     }
 }

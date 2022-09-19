@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Data;
 using ValueObject;
 using DG.Tweening;
@@ -14,7 +15,7 @@ namespace Managers
     {
         #region Self Variables
 
-        [Header("Data")]
+
 
         #region Public Variables
 
@@ -36,7 +37,6 @@ namespace Managers
         #region Private Variables
 
         private BuildData _buildData;
-        private GameObject _areaCheck;
         private AreaData _areaData;
 
         #endregion
@@ -48,11 +48,40 @@ namespace Managers
             GetReferences();
             Init();
         }
-
         private void Init()
         {
             CostAreaVisible();
         }
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+           
+            BaseSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
+            BaseSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
+        }
+
+        private void UnSubscribeEvents()
+        {
+           
+            BaseSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
+            BaseSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+
+        #endregion
+
+
+     
 
 
         private void Start()
@@ -72,36 +101,7 @@ namespace Managers
             return Resources.Load<CD_BuildData>("Data/CD_BuildData").BuildData[(int)buildType];
         }
 
-        #region Event Subscription
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            BaseSignals.Instance.onAreaCostDown += OnAreaCostDown;
-            BaseSignals.Instance.onCheckArea += OnCheckArea;
-            BaseSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
-            BaseSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
-        }
-
-        private void UnSubscribeEvents()
-        {
-            BaseSignals.Instance.onAreaCostDown -= OnAreaCostDown;
-            BaseSignals.Instance.onCheckArea -= OnCheckArea;
-            BaseSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
-            BaseSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
-        }
-
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-
-        #endregion
-
+    
         private void OnRefreshAreaData()
         {
             _areaData = (AreaData)BaseSignals.Instance.onGetAreaData?.Invoke(areaId);
@@ -109,9 +109,8 @@ namespace Managers
             SetAreaTexts();
         }
 
-        private void OnAreaCostDown()
+        private void AreaCostDown()
         {
-            if (_areaCheck != gameObject) return;
             switch (_areaData.Type)
             {
                 case AreaStageType.Build:
@@ -134,6 +133,7 @@ namespace Managers
             {
                 _areaData.Type = AreaStageType.Complete;
                 BaseSignals.Instance.onAreaComplete?.Invoke();
+                StopBuy();
                 CostAreaVisible();
             }
             else
@@ -159,10 +159,32 @@ namespace Managers
             }
         }
 
-        private void OnCheckArea(GameObject Check)
+        public void StartBuy()
         {
-            _areaCheck = Check;
+            StartCoroutine(Buy());
+        } 
+        public void StopBuy()
+        {
+           StopAllCoroutines();
         }
+
+        IEnumerator Buy()
+        {
+           int money= ScoreSignals.Instance.onGetMoney();
+           WaitForSeconds timer = new WaitForSeconds(0.1f);
+            while (money>_buildData.AreaCost)
+            {
+                AreaCostDown();
+                ScoreSignals.Instance.onMoneyDown?.Invoke(1);
+                yield return timer;
+                
+            }
+
+            OnPrepareAreaWithSave();
+            yield return null;
+
+        }
+ 
 
         private void OnPrepareAreaWithSave()
         {

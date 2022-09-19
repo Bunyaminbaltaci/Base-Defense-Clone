@@ -6,6 +6,22 @@ namespace Controllers
 {
     public class PlayerPhysicsController : MonoBehaviour
     {
+        #region Self Variables
+
+        #region Serialized Variables
+
+        [SerializeField] private PlayerManager playerManager;
+
+        #endregion
+
+        #region Private Variables
+
+        private int _timer;
+
+        #endregion
+
+        #endregion
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Money")) playerManager.AddStack(other.gameObject);
@@ -16,7 +32,16 @@ namespace Controllers
                 BaseSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
             }
 
-        
+            if (other.CompareTag("MineWareHouse"))
+            {
+                IdleSignals.Instance.OnStartCollectDiamond?.Invoke(gameObject);
+            }
+
+            if (other.CompareTag("MineDoor"))
+            {
+                playerManager.HostageAddMine();
+            }
+            
          
         }
 
@@ -36,48 +61,10 @@ namespace Controllers
                 }
             }
 
-            if (other.CompareTag("BuildArea"))
-            {
-                if (_timer >= 20)
-                {
-                  ScoreSignals.Instance.onBuyArea?.Invoke();
-                }
-                else
-                {
-                    _timer++;
-                }
-            }
+        
         }
 
-        #region Self Variables
-
-        #region Serialized Variables
-
-        [SerializeField] private PlayerManager playerManager;
-
-        #endregion
-
-        #region Private Variables
-
-        private int _timer;
-
-        #endregion
-
-        #endregion
-
-        //     private void OnTriggerExit(Collider other)
-        //     {
-        //         if (other.CompareTag("BuildArea"))
-        //         {
-        //             _timer = 0;
-        //             playerManager.OnStageChanged();
-        //             
-        //         }
-        //
-        //         if (other.CompareTag("Finish"))
-        //         {
-        //             other.GetComponent<Collider>().isTrigger = false;
-        //         }
-        //     }
+      
+      
     }
 }

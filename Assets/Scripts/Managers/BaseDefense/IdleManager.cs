@@ -7,7 +7,7 @@ using Signals;
 using UnityEngine;
 using ValueObject;
 
-namespace Managers
+namespace Manager
 {
     public class IdleManager : MonoBehaviour, ISavable
     {

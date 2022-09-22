@@ -2636,7 +2636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9057454815245317076}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.8380008}
+  m_LocalPosition: {x: 0, y: 0.0827, z: -0.0439}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 6469457357565311958}
@@ -2654,8 +2654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f873a119cae49818f6e3a8652224ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StackList: []
   stackHolder: {fileID: 9057454815245317076}
+  stackController: {fileID: 7732642437490672765}
 --- !u!1 &9186826089618475263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,18 +2735,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa59aaf78d04110b8e4b3ff74075685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data:
-    MovementData:
-      PlayerJoystickSpeed: 3
-    StackData:
-      StackLimit: 10
-      StackoffsetY: 10
-      StackoffsetZ: 10
-      AnimationDurition: 1
-  Rbody: {fileID: 1944392521816120396}
   playerAnimationController: {fileID: 7534108531597625620}
   playerMovementController: {fileID: 665190917883407574}
-  playerStackController: {fileID: 7732642437490672765}
+  stackController: {fileID: 0}
 --- !u!114 &665190917883407574
 MonoBehaviour:
   m_ObjectHideFlags: 0

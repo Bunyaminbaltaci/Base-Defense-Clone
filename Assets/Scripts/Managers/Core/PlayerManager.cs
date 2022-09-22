@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Controllers;
 using Data;
+using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.Core
 {
     public class PlayerManager : MonoBehaviour
     {
@@ -20,15 +21,15 @@ namespace Managers
 
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerMovementController playerMovementController;
-        [SerializeField] private PlayerStackController playerStackController;
+        [SerializeField] private StackController stackController;
 
         #endregion
 
         #region Private Variables
 
         private PlayerData _data;
+        private StackData _stackData;
         private List<GameObject> _hostageList;
-        private PlayerAnimationStates _animationState;
 
         #endregion
 
@@ -49,24 +50,14 @@ namespace Managers
 
         private void Subscribe()
         {
-            InputSignals.Instance.onInputTaken += playerMovementController.EnableMovement;
-            InputSignals.Instance.onInputReleased += playerMovementController.DeactiveMovement;
-
             InputSignals.Instance.onInputDragged += OnInputDragged;
-            CoreGameSignals.Instance.onPlay += OnPlay;
-            CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onGetHostageTarget += OnGetHostageTarget;
         }
 
 
         private void Unsubscribe()
         {
-            InputSignals.Instance.onInputTaken -= playerMovementController.EnableMovement;
-            InputSignals.Instance.onInputReleased -= playerMovementController.DeactiveMovement;
             InputSignals.Instance.onInputDragged -= OnInputDragged;
-
-            CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onGetHostageTarget -= OnGetHostageTarget;
         }
 
@@ -81,29 +72,30 @@ namespace Managers
         private void GetReferences()
         {
             _data = GetPlayerData();
+            _stackData = GetStackData();
             _hostageList = new List<GameObject>();
         }
 
-        private PlayerData GetPlayerData()
-        {
-            return Resources.Load<CD_Player>("Data/CD_Player").Data;
-        }
+        private PlayerData GetPlayerData()=>Resources.Load<CD_Player>("Data/CD_Player").Data;
+        private StackData GetStackData()=>Resources.Load<CD_StackData>("Data/CD_StackData").SData;
+      
+
 
         public void AddStack(GameObject obj)
         {
-            playerStackController.AddStack(obj);
+            stackController.AddStack(obj);
         }
 
         private void SendPlayerDataToControllers()
         {
-            playerMovementController.SetMovementData(_data.MovementData);
-            playerStackController.SetStackData(_data.StackData);
+            playerMovementController.SetMovementData(_data);
+            stackController.SetStackData(_stackData);
         }
 
 
-        private void OnInputDragged(InputParams InputParam)
+        private void OnInputDragged(InputParams inputParam)
         {
-            playerMovementController.UpdateInputValue(InputParam);
+            playerMovementController.UpdateInputValue(inputParam);
         }
 
 
@@ -112,6 +104,7 @@ namespace Managers
             playerAnimationController.PlayAnim(playerAnimationStates, isTrue);
         }
 
+        //ToDo:Controllera Ayır Bu managerın görevi değil
         private GameObject OnGetHostageTarget(GameObject hostage)
         {
             if (_hostageList.Count == 0)
@@ -119,40 +112,26 @@ namespace Managers
                 _hostageList.Add(hostage);
                 return transform.gameObject;
             }
+
             _hostageList.Add(hostage);
-                return _hostageList[_hostageList.Count - 2];
-            
+            return _hostageList[_hostageList.Count - 2];
         }
 
         public void HostageAddMine()
         {
-           Debug.Log("Girdik");
-           Debug.Log(IdleSignals.Instance.onGetMinerCapacity());
-            while (IdleSignals.Instance.onGetMinerCapacity()>0 && _hostageList.Count>0 )
+            while (IdleSignals.Instance.onGetMinerCapacity() > 0 && _hostageList.Count > 0)
             {
-                Debug.Log("Whileİçindeyim");
-                Debug.Log(IdleSignals.Instance.onGetMinerCapacity());
-                int lastHostage = _hostageList.Count - 1;
+                var lastHostage = _hostageList.Count - 1;
                 var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Miner);
                 obj.transform.position = _hostageList[lastHostage].transform.position;
                 obj.transform.rotation = _hostageList[lastHostage].transform.rotation;
-                PoolSignals.Instance.onSendPool(_hostageList[lastHostage],PoolType.Hostage);
+                PoolSignals.Instance.onSendPool(_hostageList[lastHostage], PoolType.Hostage);
                 obj.SetActive(true);
                 IdleSignals.Instance.onAddMinerInMine?.Invoke(obj);
                 _hostageList.RemoveAt(lastHostage);
                 _hostageList.TrimExcess();
-                
             }
         }
-
-        private void OnPlay()
-        {
-            playerMovementController.IsReadyToPlay(true);
-        }
-
-        private void OnReset()
-        {
-            playerMovementController.OnReset();
-        }
+        //_____________________________________________________________________________
     }
 }

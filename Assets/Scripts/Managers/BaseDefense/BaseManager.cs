@@ -7,7 +7,7 @@ using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class BaseManager : MonoBehaviour, ISavable
     {
@@ -16,16 +16,18 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private GameObject BaseHolder;
+       
 
         #endregion
 
         #region Private Variables
 
-        [ShowInInspector] private Dictionary<int, AreaData> _areaDictionary = new Dictionary<int, AreaData>();
+        [ShowInInspector] private Dictionary<string, AreaData> _areaDictionary = new Dictionary<string, AreaData>();
         private int _baseLevel;
         private CD_BaseData _cdBaseData;
         private int _completedArea;
-
+        private int _minerCount;
+        private int _soldierCount;
         #endregion
 
         #endregion
@@ -59,13 +61,10 @@ namespace Managers
             BaseSignals.Instance.onSetAreaData += OnSetAreaData;
             BaseSignals.Instance.onGetAreaData += OnGetAreaData;
             BaseSignals.Instance.onBaseComplete += OnCityComplete;
-
+            
             // LevelSignals.Instance.onNextLevel += OnNextLevel;
-
             SaveSignals.Instance.onGetBaseData += OnGetBaseDatas;
-
-            //     ScoreSignals.Instance.onGetIdleScore += OnGetIdleScore;
-            //     ScoreSignals.Instance.onSetIdleScore += OnSetIdleScore;
+            
         }
 
         private void UnSubscribeEvent()
@@ -74,14 +73,12 @@ namespace Managers
             BaseSignals.Instance.onSetAreaData -= OnSetAreaData;
             BaseSignals.Instance.onGetAreaData -= OnGetAreaData;
             BaseSignals.Instance.onBaseComplete -= OnCityComplete;
-
             // LevelSignals.Instance.onNextLevel -= OnNextLevel;
-
             SaveSignals.Instance.onGetBaseData -= OnGetBaseDatas;
-
-            // ScoreSignals.Instance.onGetIdleScore -= OnGetIdleScore;
-            // ScoreSignals.Instance.onSetIdleScore -= OnSetIdleScore;
+            
         }
+
+   
 
         private void OnDisable()
         {
@@ -90,6 +87,7 @@ namespace Managers
 
         #endregion
 
+      
         private void Start()
         {
             LoadData();
@@ -118,14 +116,14 @@ namespace Managers
                 BaseHolder.transform);
         }
 
-        private AreaData OnGetAreaData(int id)
+        private AreaData OnGetAreaData(string id)
         {
             return _areaDictionary.ContainsKey(id)
                 ? _areaDictionary[id]
                 : new AreaData();
         }
 
-        private void OnSetAreaData(int id,
+        private void OnSetAreaData(string id,
             AreaData araeData)
         {
             if (_areaDictionary.ContainsKey(id))
@@ -140,6 +138,8 @@ namespace Managers
         {
             _baseLevel++;
         }
+
+      
 
         private void OnNextLevel()
         {

@@ -1,4 +1,4 @@
-using Managers;
+using Manager;
 using Signals;
 using UnityEngine;
 

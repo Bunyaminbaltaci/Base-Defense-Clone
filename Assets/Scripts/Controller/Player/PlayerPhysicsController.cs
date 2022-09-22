@@ -1,4 +1,6 @@
-using Managers;
+using System;
+using Manager;
+using Managers.Core;
 using Signals;
 using UnityEngine;
 
@@ -22,6 +24,17 @@ namespace Controllers
 
         #endregion
 
+        private void ChangeLayer()
+        {
+            if (  gameObject.layer == LayerMask.NameToLayer("Default"))
+            {
+                gameObject.layer = LayerMask.NameToLayer("BattleArea");
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Money")) playerManager.AddStack(other.gameObject);
@@ -42,7 +55,6 @@ namespace Controllers
                 playerManager.HostageAddMine();
             }
             
-         
         }
 
 
@@ -63,8 +75,14 @@ namespace Controllers
 
         
         }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("BaseLimit"))
+            {
+                ChangeLayer();
+            }
+        }
 
-      
-      
+        
     }
 }

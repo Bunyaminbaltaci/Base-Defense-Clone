@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-namespace Managers
+namespace Manager
 {
     public class AreaManager : MonoBehaviour
     {
@@ -30,7 +30,7 @@ namespace Managers
         [SerializeField] private GameObject buildCostArea;
         [SerializeField] private GameObject fence;
         [SerializeField] private GameObject area;
-        [SerializeField] private int areaId;
+        [SerializeField] private string areaId;
 
         #endregion
 
@@ -93,6 +93,7 @@ namespace Managers
         {
             _buildData = GetData();
             buildCost.text = _buildData.AreaCost.ToString();
+            areaId = gameObject.name;
         }
 
 
@@ -171,7 +172,7 @@ namespace Managers
         IEnumerator Buy()
         {
            int money= ScoreSignals.Instance.onGetMoney();
-           WaitForSeconds timer = new WaitForSeconds(0.1f);
+           WaitForSeconds timer = new WaitForSeconds(0.05f);
             while (money>_buildData.AreaCost)
             {
                 AreaCostDown();

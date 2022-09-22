@@ -6,7 +6,7 @@ using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class MineManager : MonoBehaviour
     {
@@ -73,7 +73,6 @@ namespace Managers
             IdleSignals.Instance.OnStartCollectDiamond -= StartCollectDiamond;
         }
 
-
         private void OnDisable()
         {
             UnSubscribeEvent();
@@ -86,7 +85,6 @@ namespace Managers
             _minerCount = IdleSignals.Instance.onGetMinerCount();
             Init();
         }
-
 
         private GameObject OnGetMineTarget()
         {
@@ -103,14 +101,12 @@ namespace Managers
             return _data.MinerCapacity - _minerCount;
         }
 
-
         private void Init()
         {
             int count = _minerCount;
             for (var i = 0; i < count; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Miner);
-
                 if (obj != null)
                 {
                     obj.transform.position = diamondHolder.transform.position + Vector3.right;

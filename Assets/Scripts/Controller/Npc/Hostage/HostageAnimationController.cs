@@ -1,7 +1,7 @@
 using Enums.Npc;
 using UnityEngine;
 
-namespace Managers.Npc.Hostage
+namespace Manager.Npc.Hostage
 {
     public class HostageAnimationController : MonoBehaviour
     {

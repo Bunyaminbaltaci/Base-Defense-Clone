@@ -1,9 +1,10 @@
 using Cinemachine;
 using Enums;
+using Managers.Core;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class CameraManager : MonoBehaviour
     {

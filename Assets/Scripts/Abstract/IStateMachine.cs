@@ -6,8 +6,11 @@ namespace Abstract
     {
         void EnterState();
         void UpdateState();
-        void OnCollisionDetectionState(Collider other);
-        void SwitchState();
+        void OnTriggerEnterState(Collider other);
+        void OnTriggerExitState(Collider other);
+      
 
     }
+
+  
 }

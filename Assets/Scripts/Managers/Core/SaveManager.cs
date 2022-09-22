@@ -4,7 +4,7 @@ using Keys;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class SaveManager : MonoBehaviour
     {
@@ -100,9 +100,9 @@ namespace Managers
                 AreaDictionary =
                     ES3.KeyExists("AreaDatas",
                         "BaseData.json")
-                        ? ES3.Load<Dictionary<int, AreaData>>("AreaDatas",
+                        ? ES3.Load<Dictionary<string, AreaData>>("AreaDatas",
                             "BaseData.json")
-                        : new Dictionary<int, AreaData>(),
+                        : new Dictionary<string, AreaData>(),
                 BaseLevel = ES3.KeyExists("CityLevel",
                     "BaseData.json")
                     ? ES3.Load<int>("CityLevel",

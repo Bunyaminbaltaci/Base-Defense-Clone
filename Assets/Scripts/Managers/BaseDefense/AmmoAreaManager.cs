@@ -2,7 +2,7 @@ using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class AmmoAreaManager : MonoBehaviour
     {

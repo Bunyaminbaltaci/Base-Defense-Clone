@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class SupportManager : MonoBehaviour
     {

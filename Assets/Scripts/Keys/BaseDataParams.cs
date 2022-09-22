@@ -8,6 +8,6 @@ namespace Keys
     public struct BaseDataParams
     {
         public int BaseLevel;
-        public Dictionary<int, AreaData> AreaDictionary;
+        public Dictionary<string, AreaData> AreaDictionary;
     }
 }

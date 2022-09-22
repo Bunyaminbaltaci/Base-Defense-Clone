@@ -1,6 +1,6 @@
 namespace Keys
 {
-    public class ScoreDataParams
+    public struct ScoreDataParams
     {
         public int Money;
         public int Diamond;

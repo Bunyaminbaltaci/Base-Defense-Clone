@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Managers.Npc.Hostage
+namespace Manager.Npc.Hostage
 {
     public class HostagePhysicController : MonoBehaviour
     {
@@ -28,7 +28,7 @@ namespace Managers.Npc.Hostage
 
         private void OnTriggerEnter(Collider other)
         {
-            hostageManager.CurrentState.OnCollisionDetectionState(other);
+            hostageManager.CurrentInpcState.OnTriggerEnterState(other);
         }
     }
 }

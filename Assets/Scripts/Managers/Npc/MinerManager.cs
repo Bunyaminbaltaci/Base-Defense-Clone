@@ -6,13 +6,13 @@ using Data;
 using Datas.ValueObject;
 using Enums;
 using Enums.Npc;
-using Managers.Npc;
+using Manager.Npc;
 using Signals;
 using States.MinerStates;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Managers
+namespace Manager
 {
     public class MinerManager : MonoBehaviour
     {
@@ -24,7 +24,7 @@ namespace Managers
         public MinerStatesType MinerSType;
         public GameObject Target;
         public GameObject Stack;
-        public IStateMachine CurrentState;
+        public IStateMachine CurrentInpcState;
        
 
         #endregion
@@ -41,10 +41,10 @@ namespace Managers
 
         #region Private Variables
 
-        private GoMineState _goMine;
-        private GoStackState _goStack;
-        private DigState _dig;
-        private WaitState _wait;
+        private GoMineInpcState _goMineInpc;
+        private GoStackInpcState _goStackInpc;
+        private DigInpcState _digInpc;
+        private WaitInpcState _waitInpc;
 
         #endregion
 
@@ -61,24 +61,24 @@ namespace Managers
 
         private void GetReferences()
         {
-            _dig = new DigState(this);
-            _goStack = new GoStackState(this, ref agent);
-            _goMine = new GoMineState(this, ref agent);
-            _wait = new WaitState(this, ref agent);
-            CurrentState = _goMine;
+            _digInpc = new DigInpcState(this);
+            _goStackInpc = new GoStackInpcState(this, ref agent);
+            _goMineInpc = new GoMineInpcState(this, ref agent);
+            _waitInpc = new WaitInpcState(this, ref agent);
+            CurrentInpcState = _goMineInpc;
         }
 
         private void OnEnable()
         {
             Target = IdleSignals.Instance.onGetMineTarget();
             Stack = IdleSignals.Instance.onGetMineStackTarget();
-            CurrentState.EnterState();
+            CurrentInpcState.EnterState();
             
         }
 
         private void Update()
         {
-            CurrentState.UpdateState();
+            CurrentInpcState.UpdateState();
         }
 
 
@@ -87,25 +87,25 @@ namespace Managers
             switch (stateType)
             {
                 case MinerStatesType.Dig:
-                    CurrentState = _dig;
+                    CurrentInpcState = _digInpc;
                     diamond.SetActive(false);
                     axe.SetActive(true);
                     break;
                 case MinerStatesType.GoMine:
-                    CurrentState = _goMine;
+                    CurrentInpcState = _goMineInpc;
                     diamond.SetActive(false);
                     break;
                 case MinerStatesType.GoStack:
-                    CurrentState = _goStack;
+                    CurrentInpcState = _goStackInpc;
                     axe.SetActive(false);
                     diamond.SetActive(true);
                     break;
                 case MinerStatesType.Wait:
-                    CurrentState = _wait;
+                    CurrentInpcState = _waitInpc;
                     break;
             }
 
-            CurrentState.EnterState();
+            CurrentInpcState.EnterState();
         }
 
         public void SetTriggerAnim(MinerAnimType animType)

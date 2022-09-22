@@ -1,7 +1,9 @@
+using System;
 using Data;
 using Enums;
 using Keys;
-using Managers;
+using Manager;
+using Managers.Core;
 using UnityEngine;
 
 namespace Controllers
@@ -23,45 +25,38 @@ namespace Controllers
 
         #region Private Variables
 
-        [Header("Data")] private PlayerMovementData _playerMovementData;
-        private bool _isReadyToMove, _isReadyToPlay;
+        private PlayerData _playerMovementData;
         private InputParams _inputParams;
+        private PlayerMovementState _movementState;
+        
 
         #endregion
 
         #endregion
+
+        private void Awake()
+        {
+            _movementState = PlayerMovementState.Normal;
+        }
 
         private void FixedUpdate()
         {
-            JoystickMove();
+            NormalMove();
         }
 
-        public void SetMovementData(PlayerMovementData dataMovementData)
+        public void SetMovementData(PlayerData dataMovementData)
         {
             _playerMovementData = dataMovementData;
         }
 
-        public void EnableMovement()
-        {
-            _isReadyToMove = true;
-        }
-
-        public void DeactiveMovement()
-        {
-            _isReadyToMove = false;
-        }
-
+ 
         public void UpdateInputValue(InputParams inputParam)
         {
             _inputParams = inputParam;
         }
 
-        public void IsReadyToPlay(bool state)
-        {
-            _isReadyToPlay = state;
-        }
-
-        private void JoystickMove()
+      
+        private void NormalMove()
         {
             var _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed, 0,
                 _inputParams.Values.z * _playerMovementData.PlayerJoystickSpeed);
@@ -75,10 +70,29 @@ namespace Controllers
             }
         }
 
-        public void OnReset()
+        private void TurretMove()
         {
-            _isReadyToPlay = false;
-            _isReadyToMove = false;
+            
         }
+
+        private void ChangeMove()
+        {
+
+            switch (_movementState)
+            {
+                case PlayerMovementState.Normal :
+                    NormalMove();
+                    break;
+                case PlayerMovementState.Turret:
+                    TurretMove();
+                    break;
+            }
+        }
+        public void ChangeState(PlayerMovementState state)
+        {
+            _movementState = state;
+        }
+
+        
     }
 }

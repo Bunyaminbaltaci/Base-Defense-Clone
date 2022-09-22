@@ -11,8 +11,9 @@ TagManager:
   - Mine
   - MineWareHouse
   - Hostage
-  - Miner
   - MineDoor
+  - BaseLimit
+  - MainDoor
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - BattleArea
   - 
   - 
   - 

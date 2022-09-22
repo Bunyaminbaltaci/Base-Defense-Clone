@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Managers.Npc
+namespace Manager.Npc
 {
     public class MinerPhysicController : MonoBehaviour
     {
@@ -29,7 +29,12 @@ namespace Managers.Npc
 
         private void OnTriggerEnter(Collider other)
         {
-            minerManager.CurrentState.OnCollisionDetectionState(other);
+            minerManager.CurrentInpcState.OnTriggerEnterState(other);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            minerManager.CurrentInpcState.OnTriggerEnterState(other);
         }
     }
 } 

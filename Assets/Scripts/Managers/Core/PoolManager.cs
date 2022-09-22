@@ -1,10 +1,10 @@
-using Commands.Pool;
+using Commands;
 using Data;
 using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Manager
 {
     public class PoolManager : MonoBehaviour
     {

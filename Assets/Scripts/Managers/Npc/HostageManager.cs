@@ -1,13 +1,13 @@
 using System;
 using Abstract;
 using Enums.Npc;
-using Managers.Npc;
-using Managers.Npc.Hostage;
+using Manager.Npc.Hostage;
+using Manager.Npc;
 using States.MinerStates;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Managers
+namespace Manager
 {
     public class HostageManager : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace Managers
         #region Public Variables
 
         public HostageStateType HostageSType;
-        public IStateMachine CurrentState;
+        public IStateMachine CurrentInpcState;
         public GameObject Target;
 
         #endregion
@@ -31,8 +31,8 @@ namespace Managers
 
         #region Private Variables
 
-        private FollowState _follow;
-        private TerrifiedState _terrified;
+        private FollowInpcState _followInpc;
+        private TerrifiedInpcState _terrifiedInpc;
         
        
 
@@ -48,31 +48,31 @@ namespace Managers
 
         private void OnEnable()
         {
-            CurrentState.EnterState();
+            CurrentInpcState.EnterState();
         }
 
         private void OnDisable()
         {
             Target = null;
-            CurrentState = _terrified;
+            CurrentInpcState = _terrifiedInpc;
         }
 
         private void GetReferences()
         {
             
-            _follow = new FollowState(this, ref agent);
-            _terrified = new TerrifiedState(this, ref agent);
-            CurrentState = _terrified;
+            _followInpc = new FollowInpcState(this, ref agent);
+            _terrifiedInpc = new TerrifiedInpcState(this, ref agent);
+            CurrentInpcState = _terrifiedInpc;
         }
 
         private void Start()
         {
-            CurrentState.EnterState();
+            CurrentInpcState.EnterState();
         }
 
         private void Update()
         {
-            CurrentState.UpdateState();
+            CurrentInpcState.UpdateState();
         }
 
         public void SetTriggerAnim(HostageAnimType animType)
@@ -91,13 +91,13 @@ namespace Managers
             switch (state)
             {
                 case HostageStateType.Terrified :
-                    CurrentState = _terrified;
+                    CurrentInpcState = _terrifiedInpc;
                     break;
                 case HostageStateType.Follow:
-                    CurrentState = _follow;
+                    CurrentInpcState = _followInpc;
                     break;
             }
-            CurrentState.EnterState();
+            CurrentInpcState.EnterState();
         }
     }
 }

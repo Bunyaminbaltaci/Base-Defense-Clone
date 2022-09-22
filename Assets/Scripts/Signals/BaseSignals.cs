@@ -13,7 +13,8 @@ namespace Signals
         public UnityAction onRefreshAreaData = delegate { };
         public UnityAction onPrepareAreaWithSave = delegate { };
         public UnityAction<GameObject> onCheckArea = delegate { };
-        public UnityAction<int, AreaData> onSetAreaData = delegate { };
-        public Func<int, AreaData> onGetAreaData = delegate { return default; };
+        public UnityAction<string, AreaData> onSetAreaData = delegate { };
+        public Func<string, AreaData> onGetAreaData = delegate { return default; };
+        public Func<GameObject> onGetTarget= delegate { return default;};
     }
 }

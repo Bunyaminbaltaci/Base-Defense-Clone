@@ -2,7 +2,7 @@ using Enums;
 using Enums.Npc;
 using UnityEngine;
 
-namespace Managers.Npc
+namespace Manager.Npc
 {
     public class MinerAnimationController : MonoBehaviour
     {

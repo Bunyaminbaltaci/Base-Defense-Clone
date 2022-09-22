@@ -1,7 +1,7 @@
 using Data;
 using UnityEngine;
 
-namespace Commands.Pool
+namespace Commands
 {
     public class PoolGenerateCommand
     {

@@ -1,3 +1,4 @@
+using Datas.ValueObject;
 using UnityEngine;
 
 namespace Data

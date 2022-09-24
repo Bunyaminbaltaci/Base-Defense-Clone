@@ -1,4 +1,5 @@
 using System;
+using Enums;
 using Manager;
 using Managers.Core;
 using Signals;
@@ -26,18 +27,26 @@ namespace Controllers
 
         private void ChangeLayer()
         {
+            playerManager.StartCollectStack();
             if (  gameObject.layer == LayerMask.NameToLayer("Default"))
             {
                 gameObject.layer = LayerMask.NameToLayer("BattleArea");
+                playerManager.ChageStackState(StackType.Money);
             }
             else
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
+                playerManager.ChageStackState(StackType.Ammo);
+
             }
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Money")) playerManager.AddStack(other.gameObject);
+            if (other.CompareTag("Money"))
+            {
+                other.gameObject.layer = LayerMask.NameToLayer("Default");
+                playerManager.AddStack(other.gameObject);
+            }
 
 
             if (other.CompareTag("BuildArea"))
@@ -55,6 +64,7 @@ namespace Controllers
                 playerManager.HostageAddMine();
             }
             
+            
         }
 
 
@@ -64,7 +74,7 @@ namespace Controllers
             {
                 if (_timer >= 20)
                 {
-                    playerManager.AddStack(CoreGameSignals.Instance.onGetammo());
+                    playerManager.AddStack(CoreGameSignals.Instance.onGetBulletBox());
                     _timer = _timer * 70 / 100;
                 }
                 else

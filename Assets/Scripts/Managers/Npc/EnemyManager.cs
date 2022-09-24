@@ -33,10 +33,10 @@ namespace Manager
 
         #region Private Variables
 
-        private AttackTargetInpcState _attackTargetInpcState;
-        private DeadInpcState _deadInpcState;
-        private RushTargetInpcState _rushTargetInpcState;
-        private WalkTargetInpcState _walkTargetInpcState;
+        private AttackTargetNPCState _attackTargetNpcState;
+        private DeadNPCState _deadNpcState;
+        private RushTargetNPCState _rushTargetNpcState;
+        private WalkTargetNPCState _walkTargetNpcState;
         
        
 
@@ -59,34 +59,21 @@ namespace Manager
             
         }
 
-        // private void SubscribeEvent()
-        // {
-        //     
-        //   
-        // }
-        //
-        // private void UnSubscribeEvent()
-        // {
-        //
-        // }
-        //
-        //
-
         private void OnDisable()
         {
-            // UnSubscribeEvent();
+            
             Target = null;
-            CurrentInpcState =_walkTargetInpcState ;
+            CurrentInpcState =_walkTargetNpcState ;
         }
 
         private void GetReferences()
         {
-            _attackTargetInpcState = new AttackTargetInpcState(ref enemyManager, ref agent);
-            _deadInpcState = new DeadInpcState(ref enemyManager, ref agent);
-            _rushTargetInpcState = new RushTargetInpcState(ref enemyManager, ref agent);
-            _walkTargetInpcState = new WalkTargetInpcState(ref enemyManager, ref agent);
+            _attackTargetNpcState = new AttackTargetNPCState(ref enemyManager, ref agent);
+            _deadNpcState = new DeadNPCState(ref enemyManager, ref agent);
+            _rushTargetNpcState = new RushTargetNPCState(ref enemyManager, ref agent);
+            _walkTargetNpcState = new WalkTargetNPCState(ref enemyManager, ref agent);
          
-            CurrentInpcState =_walkTargetInpcState ;
+            CurrentInpcState =_walkTargetNpcState ;
         }
 
         private void Start()
@@ -117,16 +104,16 @@ namespace Manager
             switch (state)
             {
                 case EnemyStateType.WalkTarget :
-                    CurrentInpcState =_walkTargetInpcState ;
+                    CurrentInpcState =_walkTargetNpcState ;
                     break;
                 case EnemyStateType.RushTarget:
-                    CurrentInpcState =_rushTargetInpcState ;
+                    CurrentInpcState =_rushTargetNpcState ;
                     break;
                 case EnemyStateType.AttackTarget:
-                    CurrentInpcState =_attackTargetInpcState ;
+                    CurrentInpcState =_attackTargetNpcState ;
                     break;    
                 case EnemyStateType.Dead:
-                    CurrentInpcState =_deadInpcState ;
+                    CurrentInpcState =_deadNpcState ;
                     break;
             }
             CurrentInpcState.EnterState();

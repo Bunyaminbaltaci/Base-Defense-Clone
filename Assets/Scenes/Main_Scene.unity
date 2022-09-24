@@ -966,6 +966,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7732642437490672765, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
+      propertyPath: stackType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732642437490672765, guid: b5d3fc16d17748a4daa076897932d572, type: 3}
       propertyPath: stackHolder
       value: 
       objectReference: {fileID: 978714509}

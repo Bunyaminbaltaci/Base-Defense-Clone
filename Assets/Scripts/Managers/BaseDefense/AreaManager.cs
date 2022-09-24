@@ -15,17 +15,14 @@ namespace Manager
     {
         #region Self Variables
 
-
-
         #region Public Variables
 
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField]
-        private BuildType buildType;
-
+        [SerializeField] private BuildType buildType;
+        [SerializeField] private PaymentType paymentType;
         [SerializeField] private TextMeshPro buildCost;
         [SerializeField] private GameObject buildCostArea;
         [SerializeField] private GameObject fence;
@@ -48,10 +45,12 @@ namespace Manager
             GetReferences();
             Init();
         }
+
         private void Init()
         {
             CostAreaVisible();
         }
+
         #region Event Subscription
 
         private void OnEnable()
@@ -61,14 +60,12 @@ namespace Manager
 
         private void SubscribeEvents()
         {
-           
             BaseSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
             BaseSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
         }
 
         private void UnSubscribeEvents()
         {
-           
             BaseSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
             BaseSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
         }
@@ -79,9 +76,6 @@ namespace Manager
         }
 
         #endregion
-
-
-     
 
 
         private void Start()
@@ -102,7 +96,7 @@ namespace Manager
             return Resources.Load<CD_BuildData>("Data/CD_BuildData").BuildData[(int)buildType];
         }
 
-    
+
         private void OnRefreshAreaData()
         {
             _areaData = (AreaData)BaseSignals.Instance.onGetAreaData?.Invoke(areaId);
@@ -162,30 +156,52 @@ namespace Manager
 
         public void StartBuy()
         {
-            StartCoroutine(Buy());
-        } 
-        public void StopBuy()
-        {
-           StopAllCoroutines();
+            switch (paymentType)
+            {
+                case PaymentType.Money:
+                    StartCoroutine(BuyWithMoney());
+                    break;
+                case PaymentType.Diamond:
+                    StartCoroutine(BuyWithDiamond());
+                    break;
+            }
         }
 
-        IEnumerator Buy()
+        public void StopBuy()
         {
-           int money= ScoreSignals.Instance.onGetMoney();
-           WaitForSeconds timer = new WaitForSeconds(0.05f);
-            while (money>_buildData.AreaCost)
+            StopAllCoroutines();
+        }
+
+        IEnumerator BuyWithMoney()
+        {
+            int money = ScoreSignals.Instance.onGetMoney();
+            WaitForSeconds timer = new WaitForSeconds(0.05f);
+            while (money > _buildData.AreaCost)
             {
                 AreaCostDown();
                 ScoreSignals.Instance.onMoneyDown?.Invoke(1);
                 yield return timer;
-                
             }
 
             OnPrepareAreaWithSave();
             yield return null;
-
         }
- 
+
+        IEnumerator BuyWithDiamond()
+        {
+            int diamond = ScoreSignals.Instance.onGetDiamond();
+            WaitForSeconds timer = new WaitForSeconds(0.05f);
+            while (diamond > _buildData.AreaCost)
+            {
+                AreaCostDown();
+                ScoreSignals.Instance.onDiamondDown?.Invoke(1);
+                yield return timer;
+            }
+
+            OnPrepareAreaWithSave();
+            yield return null;
+        }
+
 
         private void OnPrepareAreaWithSave()
         {

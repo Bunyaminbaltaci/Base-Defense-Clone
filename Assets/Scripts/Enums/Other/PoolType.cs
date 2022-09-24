@@ -4,6 +4,7 @@ namespace Enums
     {
         Enemy,
         Bullet,
+        BulletBox,
         Money,
         Diamond,
         Miner,

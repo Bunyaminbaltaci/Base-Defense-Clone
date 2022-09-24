@@ -13,10 +13,23 @@ MonoBehaviour:
   m_Name: CD_Player
   m_EditorClassIdentifier: 
   Data:
-    MovementData:
-      PlayerJoystickSpeed: 4
-    StackData:
-      StackLimit: 3
-      StackoffsetY: 0.5
-      StackoffsetZ: 0.17
+    PlayerJoystickSpeed: 3
+    StackLevel: 1
+    BulletBoxStackData:
+      OffsetX: 0.05
+      OffsetY: 0.05
+      OffsetZ: 0.05
+      LimitX: 0
+      LimitY: 10
+      LimitZ: 3
+      StackLimit: 10
+      AnimationDurition: 1
+    MoneyBoxStackData:
+      OffsetX: 0.025
+      OffsetY: 0.025
+      OffsetZ: 0.025
+      LimitX: 0
+      LimitY: 10
+      LimitZ: 5
+      StackLimit: 10
       AnimationDurition: 1

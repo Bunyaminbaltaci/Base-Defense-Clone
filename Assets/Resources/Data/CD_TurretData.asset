@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642943acd2864a9d99f7324efa14098a, type: 3}
+  m_Name: CD_TurretData
+  m_EditorClassIdentifier: 
+  Data:
+    BulletBoxStackData:
+      OffsetX: 0.5
+      OffsetY: 0.6
+      OffsetZ: 0.6
+      LimitX: 2
+      LimitY: 2
+      LimitZ: 2
+      StackLimit: 11
+      AnimationDurition: 0.3
+    FireRate: 1
+    Damage: 1

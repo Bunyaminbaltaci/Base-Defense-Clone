@@ -35,9 +35,6 @@ namespace Manager.Npc
         {
             animator.SetLayerWeight((int)type,weight);
         }   
-        public void SetBoolAnim(MinerAnimType animType,bool check )
-        {
-            animator.SetBool(animType.ToString(),check);
-        }
+    
     }
 }

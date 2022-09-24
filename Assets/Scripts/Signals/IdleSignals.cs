@@ -30,8 +30,13 @@ namespace Signals
         
 
         #endregion
-        
-        
-        
+
+        #region Turret
+
+        public Func<GameObject,GameObject> onGetAmmoInStack= delegate { return default;};
+
+        #endregion
+
+
     }
 }

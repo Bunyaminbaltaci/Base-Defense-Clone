@@ -10,7 +10,8 @@ namespace Signals
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
 
-        public Func<GameObject> onGetammo = delegate { return default; };
+        public Func<GameObject> onGetBulletBox = delegate { return default; };
+        public Func<GameObject> onGetAmmoArea = delegate { return default; };
         public UnityAction<GameStates> onGetGameState = delegate { };
         public UnityAction onPlay = delegate { };
         public UnityAction onReset = delegate { };

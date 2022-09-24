@@ -8,6 +8,49 @@ namespace Manager
 {
     public class PoolManager : MonoBehaviour
     {
+        #region Self Variables
+
+        #region Serialized Variables
+
+        [SerializeField] private Transform poolManagerG;
+
+        #endregion
+
+        #region Private Variables
+
+        private CD_PoolGenerator _cdPoolGenerator;
+        private GameObject _emptyGameObject;
+        private PoolGenerateCommand _poolGenerateCommand;
+
+        #endregion
+
+        #endregion
+
+        #region EventSubscription
+
+        private void OnEnable()
+        {
+            SubscribeEvent();
+        }
+
+        private void SubscribeEvent()
+        {
+            PoolSignals.Instance.onGetPoolObject += OnGetPoolObject;
+            PoolSignals.Instance.onSendPool += OnSendPool;
+        }
+
+        private void UnSubscribeEvent()
+        {
+            PoolSignals.Instance.onGetPoolObject -= OnGetPoolObject;
+            PoolSignals.Instance.onSendPool -= OnSendPool;
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvent();
+        }
+
+        #endregion
         private void Awake()
         {
             GetReferences();
@@ -53,48 +96,6 @@ namespace Manager
             poolObject.transform.parent = transform.GetChild((int)poolType);
         }
 
-        #region Self Variables
-
-        #region Serialized Variables
-
-        [SerializeField] private Transform poolManagerG;
-
-        #endregion
-
-        #region Private Variables
-
-        private CD_PoolGenerator _cdPoolGenerator;
-        private GameObject _emptyGameObject;
-        private PoolGenerateCommand _poolGenerateCommand;
-
-        #endregion
-
-        #endregion
-
-        #region EventSubscription
-
-        private void OnEnable()
-        {
-            SubscribeEvent();
-        }
-
-        private void SubscribeEvent()
-        {
-            PoolSignals.Instance.onGetPoolObject += OnGetPoolObject;
-            PoolSignals.Instance.onSendPool += OnSendPool;
-        }
-
-        private void UnSubscribeEvent()
-        {
-            PoolSignals.Instance.onGetPoolObject -= OnGetPoolObject;
-            PoolSignals.Instance.onSendPool -= OnSendPool;
-        }
-
-        private void OnDisable()
-        {
-            UnSubscribeEvent();
-        }
-
-        #endregion
+     
     }
 }

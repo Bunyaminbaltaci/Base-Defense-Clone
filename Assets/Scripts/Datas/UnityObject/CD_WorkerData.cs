@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace Data
 {    
-    [CreateAssetMenu(fileName = "CD_HarvesterData", menuName = "BaseDefense/CD_HarvesterData", order = 0)]
+    [CreateAssetMenu(fileName = "CD_WorkerData", menuName = "BaseDefense/CD_WorkerData", order = 0)]
 
     public class CD_WorkerData : ScriptableObject
     {
-        public WorkerData WData;
+        public WorkerData HarvesterData;
+        public WorkerData SupportData;
 
     }
 }

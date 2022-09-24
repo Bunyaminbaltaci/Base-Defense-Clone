@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Controllers;
 using Data;
@@ -28,7 +29,7 @@ namespace Managers.Core
         #region Private Variables
 
         private PlayerData _data;
-        private StackData _stackData;
+    
         private List<GameObject> _hostageList;
 
         #endregion
@@ -52,13 +53,17 @@ namespace Managers.Core
         {
             InputSignals.Instance.onInputDragged += OnInputDragged;
             CoreGameSignals.Instance.onGetHostageTarget += OnGetHostageTarget;
+            IdleSignals.Instance.onGetAmmoInStack += OnGetAmmoInStack;
         }
+
+       
 
 
         private void Unsubscribe()
         {
             InputSignals.Instance.onInputDragged -= OnInputDragged;
             CoreGameSignals.Instance.onGetHostageTarget -= OnGetHostageTarget;
+            IdleSignals.Instance.onGetAmmoInStack -= OnGetAmmoInStack;
         }
 
 
@@ -72,12 +77,12 @@ namespace Managers.Core
         private void GetReferences()
         {
             _data = GetPlayerData();
-            _stackData = GetStackData();
+          
             _hostageList = new List<GameObject>();
         }
 
         private PlayerData GetPlayerData()=>Resources.Load<CD_Player>("Data/CD_Player").Data;
-        private StackData GetStackData()=>Resources.Load<CD_StackData>("Data/CD_StackData").SData;
+     
       
 
 
@@ -89,7 +94,7 @@ namespace Managers.Core
         private void SendPlayerDataToControllers()
         {
             playerMovementController.SetMovementData(_data);
-            stackController.SetStackData(_stackData);
+            stackController.SetStackData(_data.BulletBoxStackData,_data.MoneyBoxStackData);
         }
 
 
@@ -102,6 +107,11 @@ namespace Managers.Core
         public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
         {
             playerAnimationController.PlayAnim(playerAnimationStates, isTrue);
+        }
+
+        public void ChageStackState(StackType type)
+        {
+            stackController.SetStackType(type);
         }
 
         //ToDo:Controllera Ayır Bu managerın görevi değil
@@ -133,5 +143,20 @@ namespace Managers.Core
             }
         }
         //_____________________________________________________________________________
+
+
+
+        public void StartCollectStack()
+        {
+          stackController.StartCollect();
+            
+        }
+        private GameObject OnGetAmmoInStack(GameObject arg)
+        {
+            if (arg == transform.GetChild(1).gameObject)
+                return stackController.SendBulletBox();
+            return null;
+        }
+       
     }
 }

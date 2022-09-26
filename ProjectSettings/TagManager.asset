@@ -16,6 +16,7 @@ TagManager:
   - MainDoor
   - Miner
   - TurretStack
+  - Support
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -6,7 +8,15 @@ namespace Manager
 {
     public class AmmoAreaManager : MonoBehaviour
     {
-    
+        #region Self Variables
+
+        #region Private Variables
+
+        
+
+        #endregion
+
+        #endregion
 
         #region EventSubscription
 
@@ -17,17 +27,14 @@ namespace Manager
 
         private void SubscribeEvent()
         {
-            CoreGameSignals.Instance.onGetBulletBox += OnGetAmmo;
-            CoreGameSignals.Instance.onGetAmmoArea += OnGetAmmoArea;
+          
         }
 
         private void UnSubscribeEvent()
         {
-            CoreGameSignals.Instance.onGetBulletBox -= OnGetAmmo;
-            CoreGameSignals.Instance.onGetAmmoArea -= OnGetAmmoArea;
+       
         }
 
-        private GameObject OnGetAmmoArea() => gameObject;
         
 
         private void OnDisable()
@@ -36,15 +43,33 @@ namespace Manager
         }
 
         #endregion
-        
-        private GameObject OnGetAmmo()
+
+
+        public void StartCor(Collider col)
         {
-            var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
-            if (obj == null)
-                return null;
-            obj.transform.position = transform.position;
-            obj.SetActive(true);
-            return obj;
+            StartCoroutine(SendBulletBox(col));
+        }
+
+        public void StopCor()
+        {
+            StopAllCoroutines();
+        }
+        IEnumerator SendBulletBox(Collider col)
+        {
+            WaitForSeconds waiter = new WaitForSeconds(0.2f);
+            while (true)
+            {
+                yield return waiter;
+                var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
+                if (obj == null)
+                    break;
+                obj.transform.position = transform.position;
+                obj.SetActive(true);
+                var limit=BaseSignals.Instance.OnSendBulletBox?.Invoke(col,obj);
+                if (limit==0)
+                    break;
+            }
+            
         }
     }
 }

@@ -60,14 +60,14 @@ namespace Manager
 
         private void SubscribeEvents()
         {
-            BaseSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
-            BaseSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
+            IdleSignals.Instance.onRefreshAreaData += OnRefreshAreaData;
+            IdleSignals.Instance.onPrepareAreaWithSave += OnPrepareAreaWithSave;
         }
 
         private void UnSubscribeEvents()
         {
-            BaseSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
-            BaseSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
+            IdleSignals.Instance.onRefreshAreaData -= OnRefreshAreaData;
+            IdleSignals.Instance.onPrepareAreaWithSave -= OnPrepareAreaWithSave;
         }
 
         private void OnDisable()
@@ -80,7 +80,7 @@ namespace Manager
 
         private void Start()
         {
-            BaseSignals.Instance.onRefreshAreaData?.Invoke();
+            IdleSignals.Instance.onRefreshAreaData?.Invoke();
         }
 
         private void GetReferences()
@@ -99,7 +99,7 @@ namespace Manager
 
         private void OnRefreshAreaData()
         {
-            _areaData = (AreaData)BaseSignals.Instance.onGetAreaData?.Invoke(areaId);
+            _areaData = (AreaData)IdleSignals.Instance.onGetAreaData?.Invoke(areaId);
             CostAreaVisible();
             SetAreaTexts();
         }
@@ -127,7 +127,7 @@ namespace Manager
             if (_areaData.Type == AreaStageType.Build)
             {
                 _areaData.Type = AreaStageType.Complete;
-                BaseSignals.Instance.onAreaComplete?.Invoke();
+                IdleSignals.Instance.onAreaComplete?.Invoke();
                 StopBuy();
                 CostAreaVisible();
             }
@@ -205,7 +205,7 @@ namespace Manager
 
         private void OnPrepareAreaWithSave()
         {
-            BaseSignals.Instance.onSetAreaData?.Invoke(areaId, _areaData);
+            IdleSignals.Instance.onSetAreaData?.Invoke(areaId, _areaData);
         }
     }
 }

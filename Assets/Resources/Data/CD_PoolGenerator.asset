@@ -15,7 +15,7 @@ MonoBehaviour:
   PoolDataList:
   - Type: 0
     Pref: {fileID: 5080905476774938243, guid: 79f3b6ef57daf7a48a3faa99eec19f0d, type: 3}
-    ObjectCount: 1
+    ObjectCount: 20
   - Type: 1
     Pref: {fileID: 1432083113632981368, guid: 01352ef61bb2e8647926e18af498d9fb, type: 3}
     ObjectCount: 20
@@ -33,4 +33,4 @@ MonoBehaviour:
     ObjectCount: 4
   - Type: 6
     Pref: {fileID: 5080905476774938243, guid: 16a1fa760bc5a504d8c94fb3b371eca2, type: 3}
-    ObjectCount: 0
+    ObjectCount: 10

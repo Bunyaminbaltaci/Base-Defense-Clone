@@ -43,7 +43,7 @@ namespace Commands
                 _stackList.TrimExcess();
                 obj.transform.DOLocalMove(
                     new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0, 0.5f), Random.Range(-0.5f, 0.5f)), 1f);
-                obj.transform.parent = CoreGameSignals.Instance.onGetAmmoArea?.Invoke().transform;
+                obj.transform.parent = BaseSignals.Instance.onGetAmmoArea?.Invoke().transform;
                 obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 1f).SetDelay(1f).OnComplete(() =>
                 {
                     PoolSignals.Instance.onSendPool?.Invoke(obj, PoolType.BulletBox);

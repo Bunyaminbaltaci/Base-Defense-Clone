@@ -70,8 +70,8 @@ namespace Manager
 
         private void OnEnable()
         {
-            Target = IdleSignals.Instance.onGetMineTarget();
-            Stack = IdleSignals.Instance.onGetMineStackTarget();
+            Target = BaseSignals.Instance.onGetMineTarget();
+            Stack = BaseSignals.Instance.onGetMineStackTarget();
             CurrentInpcState.EnterState();
             
         }

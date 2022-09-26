@@ -62,7 +62,7 @@ namespace States.MinerStates
 
         private void PushDiamondOnStack()
         {
-            IdleSignals.Instance.onAddDiamondStack?.Invoke(_manager.transform.gameObject);
+            BaseSignals.Instance.onAddDiamondStack?.Invoke(_manager.transform.gameObject);
             SwitchState();
         }
 

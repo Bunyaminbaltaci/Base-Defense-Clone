@@ -44,19 +44,19 @@ namespace Controllers
         {
             if (other.CompareTag("Money"))
             {
-                other.gameObject.layer = LayerMask.NameToLayer("Default");
+                other.GetComponent<Collider>().enabled = false;
                 playerManager.AddStack(other.gameObject);
             }
 
 
             if (other.CompareTag("BuildArea"))
             {
-                BaseSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
+                IdleSignals.Instance.onCheckArea?.Invoke(other.transform.parent.gameObject);
             }
 
             if (other.CompareTag("MineWareHouse"))
             {
-                IdleSignals.Instance.OnStartCollectDiamond?.Invoke(gameObject);
+                BaseSignals.Instance.OnStartCollectDiamond?.Invoke(gameObject);
             }
 
             if (other.CompareTag("MineDoor"))
@@ -66,25 +66,7 @@ namespace Controllers
             
             
         }
-
-
-        private void OnTriggerStay(Collider other)
-        {
-            if (other.CompareTag("Ammo"))
-            {
-                if (_timer >= 20)
-                {
-                    playerManager.AddStack(CoreGameSignals.Instance.onGetBulletBox());
-                    _timer = _timer * 70 / 100;
-                }
-                else
-                {
-                    _timer++;
-                }
-            }
-
         
-        }
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("BaseLimit"))

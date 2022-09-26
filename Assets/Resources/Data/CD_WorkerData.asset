@@ -12,8 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47d88ab50cb4dc4ba2b295979112db7, type: 3}
   m_Name: CD_WorkerData
   m_EditorClassIdentifier: 
-  WData:
+  HarvesterData:
+    SData:
+      OffsetX: 0
+      OffsetY: 0
+      OffsetZ: 0
+      LimitX: 0
+      LimitY: 0
+      LimitZ: 0
+      StackLimit: 10
+      AnimationDurition: 1
     Speed: 0
     SpeedLevel: 0
-    Capacity: 0
+    CapacityLevel: 0
+  SupportData:
+    SData:
+      OffsetX: 0.05
+      OffsetY: 0.05
+      OffsetZ: 0.05
+      LimitX: 0
+      LimitY: 4
+      LimitZ: 2
+      StackLimit: 7
+      AnimationDurition: 0.3
+    Speed: 0
+    SpeedLevel: 0
     CapacityLevel: 0

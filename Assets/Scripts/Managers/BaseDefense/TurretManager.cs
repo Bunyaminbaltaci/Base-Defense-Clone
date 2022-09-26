@@ -59,7 +59,7 @@ namespace Manager
           
             while (_bulletBoxList.Count <= _data.BulletBoxStackData.StackLimit)
             {
-                var obj = IdleSignals.Instance.onGetAmmoInStack(target);
+                var obj = BaseSignals.Instance.onGetAmmoInStack(target);
               
                 if (obj == null)
                     yield break;

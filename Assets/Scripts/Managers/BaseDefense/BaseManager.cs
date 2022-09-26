@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using Abstract;
-using Data;
-using ValueObject;
 using Keys;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Manager
 {
@@ -13,41 +11,29 @@ namespace Manager
     {
         #region Self Variables
 
+        #region Public Variables
+
+        #endregion
+
         #region Serialized Variables
 
-        [SerializeField] private GameObject BaseHolder;
-       
-
+        [SerializeField] private List<GameObject> turretStackList;
+        [FormerlySerializedAs("TargetList")] [SerializeField] private List<GameObject> targetList;
+        [SerializeField] private GameObject ammoArea;
+        [SerializeField] private GameObject baseExitPoint;
         #endregion
 
         #region Private Variables
 
-        [ShowInInspector] private Dictionary<string, AreaData> _areaDictionary = new Dictionary<string, AreaData>();
-        private int _baseLevel;
-        private CD_BaseData _cdBaseData;
-        private int _completedArea;
         private int _minerCount;
         private int _soldierCount;
-        #endregion
 
         #endregion
 
-        private void Awake()
-        {
-            GetReferences();
-        }
+        #endregion
 
 
-        private void GetReferences()
-        {
-            _cdBaseData = GetBaseData();
-        }
-
-        private CD_BaseData GetBaseData()
-        {
-            return Resources.Load<CD_BaseData>("Data/CD_BaseData");
-        }
-
+        
         #region EventSubscription
 
         private void OnEnable()
@@ -57,28 +43,34 @@ namespace Manager
 
         private void SubscribeEvent()
         {
-            BaseSignals.Instance.onAreaComplete += OnAreaComplete;
-            BaseSignals.Instance.onSetAreaData += OnSetAreaData;
-            BaseSignals.Instance.onGetAreaData += OnGetAreaData;
-            BaseSignals.Instance.onBaseComplete += OnCityComplete;
-            
-            // LevelSignals.Instance.onNextLevel += OnNextLevel;
-            SaveSignals.Instance.onGetBaseData += OnGetBaseDatas;
-            
+            BaseSignals.Instance.onGetMinerCount += OnGetMinerCount;
+            BaseSignals.Instance.onGetSoldierCount += OnGetSoldierCount;
+            BaseSignals.Instance.onAddMinerInMine += OnAddMinerInMine;
+            BaseSignals.Instance.onGetTurretStack += OnGetTurretStack;
+            BaseSignals.Instance.onGetAmmoArea += OnGetAmmoArea;
+            BaseSignals.Instance.onGetTarget += OnGetTarget;
+
+
+            SaveSignals.Instance.onGetSaveIdleData += OnGetSaveIdleData;
         }
+
+       
 
         private void UnSubscribeEvent()
         {
-            BaseSignals.Instance.onAreaComplete -= OnAreaComplete;
-            BaseSignals.Instance.onSetAreaData -= OnSetAreaData;
-            BaseSignals.Instance.onGetAreaData -= OnGetAreaData;
-            BaseSignals.Instance.onBaseComplete -= OnCityComplete;
-            // LevelSignals.Instance.onNextLevel -= OnNextLevel;
-            SaveSignals.Instance.onGetBaseData -= OnGetBaseDatas;
-            
+            BaseSignals.Instance.onGetMinerCount -= OnGetMinerCount;
+            BaseSignals.Instance.onGetSoldierCount -= OnGetSoldierCount;
+            BaseSignals.Instance.onAddMinerInMine -= OnAddMinerInMine;
+            BaseSignals.Instance.onGetTurretStack -= OnGetTurretStack;
+            BaseSignals.Instance.onGetAmmoArea -= OnGetAmmoArea;
+            BaseSignals.Instance.onGetTarget -= OnGetTarget;
+
+
+
+            SaveSignals.Instance.onGetSaveIdleData -= OnGetSaveIdleData;
         }
 
-   
+      
 
         private void OnDisable()
         {
@@ -87,82 +79,40 @@ namespace Manager
 
         #endregion
 
-      
         private void Start()
         {
             LoadData();
-            OnInitializeLevel();
         }
 
-        private BaseDataParams OnGetBaseDatas()
+        private void OnAddMinerInMine(GameObject obj)
         {
-            return new BaseDataParams
-            {
-                AreaDictionary = _areaDictionary,
-                BaseLevel = _baseLevel,
-            };
-        }
-
-
-        private void OnAreaComplete()
-        {
-            BaseSignals.Instance.onPrepareAreaWithSave?.Invoke();
-        }
-
-        private void OnInitializeLevel()
-        {
-            Instantiate(
-                Resources.Load<GameObject>($"Prefabs/BasePrefabs/Base {_baseLevel % _cdBaseData.DataList.Count}"),
-                BaseHolder.transform);
-        }
-
-        private AreaData OnGetAreaData(string id)
-        {
-            return _areaDictionary.ContainsKey(id)
-                ? _areaDictionary[id]
-                : new AreaData();
-        }
-
-        private void OnSetAreaData(string id,
-            AreaData araeData)
-        {
-            if (_areaDictionary.ContainsKey(id))
-                _areaDictionary[id] = araeData;
-            else
-                _areaDictionary.Add(id,
-                    araeData);
+            _minerCount++;
             SaveData();
         }
 
-        private void OnCityComplete()
+        private GameObject OnGetTurretStack() => turretStackList[Random.Range(0,turretStackList.Count)];
+        private int OnGetSoldierCount() => _soldierCount;
+        private int OnGetMinerCount() => _minerCount;
+        private IdleDataParams OnGetSaveIdleData()=>new IdleDataParams
         {
-            _baseLevel++;
-        }
-
-      
-
-        private void OnNextLevel()
+            MinerCount = _minerCount,
+            SoldierCount = _soldierCount
+        };
+        private GameObject OnGetAmmoArea() => ammoArea;
+       
+        private GameObject OnGetTarget() => targetList[Random.Range(0, targetList.Count)];
+       
+        
+        public void LoadData()  
         {
-            _areaDictionary.Clear();
-            Destroy(BaseHolder.transform.GetChild(0)
-                .gameObject);
-            OnInitializeLevel();
-            BaseSignals.Instance.onBaseComplete?.Invoke();
-        }
-
-
-        public void LoadData()
-        {
-            BaseDataParams _data = SaveSignals.Instance.onLoadBaseData();
-
-            _areaDictionary = _data.AreaDictionary;
-            _baseLevel = _data.BaseLevel;
+            var value = SaveSignals.Instance.onLoadIdleData();
+            _minerCount = value.MinerCount;
+            _soldierCount = value.SoldierCount;
         }
 
         public void SaveData()
         {
-            SaveSignals.Instance.onSaveBaseData?.Invoke();
-            SaveSignals.Instance.onSaveScoreData?.Invoke();
+            SaveSignals.Instance.onSaveIdleData?.Invoke();
         }
     }
 }

@@ -20,12 +20,12 @@ MonoBehaviour:
       OffsetY: 0.05
       OffsetZ: 0.05
       LimitX: 0
-      LimitY: 10
-      LimitZ: 3
-      StackLimit: 10
+      LimitY: 8
+      LimitZ: 5
+      StackLimit: 32
       AnimationDurition: 1
     MoneyBoxStackData:
-      OffsetX: 0.025
+      OffsetX: 0
       OffsetY: 0.025
       OffsetZ: 0.025
       LimitX: 0

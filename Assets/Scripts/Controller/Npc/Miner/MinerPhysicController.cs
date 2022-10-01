@@ -29,12 +29,12 @@ namespace Manager.Npc
 
         private void OnTriggerEnter(Collider other)
         {
-            minerManager.CurrentInpcState.OnTriggerEnterState(other);
+            minerManager.CurrentState.OnTriggerEnterState(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            minerManager.CurrentInpcState.OnTriggerEnterState(other);
+            minerManager.CurrentState.OnTriggerEnterState(other);
         }
     }
 } 

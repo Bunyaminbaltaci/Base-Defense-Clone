@@ -1,8 +1,7 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using Controllers;
 using Data;
-using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
@@ -29,20 +28,19 @@ namespace Managers.Core
         #region Private Variables
 
         private PlayerData _data;
-    
         private List<GameObject> _hostageList;
 
         #endregion
 
         #endregion
 
-        #region Event Subscription
-
         private void Awake()
         {
             GetReferences();
             SendPlayerDataToControllers();
         }
+
+        #region Event Subscription
 
         private void OnEnable()
         {
@@ -53,19 +51,13 @@ namespace Managers.Core
         {
             InputSignals.Instance.onInputDragged += OnInputDragged;
             CoreGameSignals.Instance.onGetHostageTarget += OnGetHostageTarget;
-            IdleSignals.Instance.onGetAmmoInStack += OnGetAmmoInStack;
         }
-
-       
-
 
         private void Unsubscribe()
         {
             InputSignals.Instance.onInputDragged -= OnInputDragged;
             CoreGameSignals.Instance.onGetHostageTarget -= OnGetHostageTarget;
-            IdleSignals.Instance.onGetAmmoInStack -= OnGetAmmoInStack;
         }
-
 
         private void OnDisable()
         {
@@ -77,14 +69,13 @@ namespace Managers.Core
         private void GetReferences()
         {
             _data = GetPlayerData();
-          
             _hostageList = new List<GameObject>();
         }
 
-        private PlayerData GetPlayerData()=>Resources.Load<CD_Player>("Data/CD_Player").Data;
-     
-      
-
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").Data;
+        }
 
         public void AddStack(GameObject obj)
         {
@@ -94,15 +85,13 @@ namespace Managers.Core
         private void SendPlayerDataToControllers()
         {
             playerMovementController.SetMovementData(_data);
-            stackController.SetStackData(_data.BulletBoxStackData,_data.MoneyBoxStackData);
+            stackController.SetStackData(_data.BulletBoxStackData, _data.MoneyBoxStackData);
         }
-
 
         private void OnInputDragged(InputParams inputParam)
         {
             playerMovementController.UpdateInputValue(inputParam);
         }
-
 
         public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
         {
@@ -129,7 +118,7 @@ namespace Managers.Core
 
         public void HostageAddMine()
         {
-            while (IdleSignals.Instance.onGetMinerCapacity() > 0 && _hostageList.Count > 0)
+            while (BaseSignals.Instance.onGetMinerCapacity() > 0 && _hostageList.Count > 0)
             {
                 var lastHostage = _hostageList.Count - 1;
                 var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Miner);
@@ -137,26 +126,41 @@ namespace Managers.Core
                 obj.transform.rotation = _hostageList[lastHostage].transform.rotation;
                 PoolSignals.Instance.onSendPool(_hostageList[lastHostage], PoolType.Hostage);
                 obj.SetActive(true);
-                IdleSignals.Instance.onAddMinerInMine?.Invoke(obj);
+                BaseSignals.Instance.onAddMinerInMine?.Invoke(obj);
                 _hostageList.RemoveAt(lastHostage);
                 _hostageList.TrimExcess();
             }
         }
         //_____________________________________________________________________________
 
-
-
         public void StartCollectStack()
         {
-          stackController.StartCollect();
-            
+            stackController.StartCollect();
         }
-        private GameObject OnGetAmmoInStack(GameObject arg)
+
+        public IEnumerator StartBulletBoxSend(GameObject target)
         {
-            if (arg == transform.GetChild(1).gameObject)
-                return stackController.SendBulletBox();
-            return null;
+            var waiter = new WaitForSeconds(0.2f);
+            while (stackController.StackList.Count > 0)
+            {
+                if (BaseSignals.Instance.onGetTurretLimit(target) > 0)
+                    BaseSignals.Instance.onSendAmmoInStack?.Invoke(target, stackController.SendBulletBox());
+
+                yield return waiter;
+            }
         }
-       
+
+        public IEnumerator TakeBulletBox()
+        {
+            var waiter = new WaitForSeconds(0.2f);
+            while (stackController.StackList.Count < _data.BulletBoxStackData.StackLimit)
+            {
+                var obj = BaseSignals.Instance.onGetBulletBox?.Invoke();
+                if (obj == null)
+                    break;
+                stackController.AddStack(obj);
+                yield return waiter;
+            }
+        }
     }
 }

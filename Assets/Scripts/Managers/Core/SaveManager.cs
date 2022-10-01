@@ -57,15 +57,15 @@ namespace Manager
             SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
         }
 
-        private void SaveBaseData(BaseDataParams baseDataParams)
+        private void SaveBaseData(IdleDataParams ıdleDataParams)
         {
-            if (baseDataParams.BaseLevel != null)
+            if (ıdleDataParams.BaseLevel != null)
                 ES3.Save("CityLevel",
-                    baseDataParams.BaseLevel,
+                    ıdleDataParams.BaseLevel,
                     "BaseData.json");
-            if (baseDataParams.AreaDictionary != null)
+            if (ıdleDataParams.AreaDictionary != null)
                 ES3.Save("AreaDatas",
-                    baseDataParams.AreaDictionary,
+                    ıdleDataParams.AreaDictionary,
                     "BaseData.json");
         }
 
@@ -81,21 +81,21 @@ namespace Manager
                     "ScoreData.json");
         }
 
-        private void SaveIdleData(IdleDataParams idleDataparams)
+        private void SaveIdleData(BaseDataParams baseDataparams)
         {
-            if (idleDataparams.MinerCount != null)
+            if (baseDataparams.MinerCount != null)
                 ES3.Save("MinerCount",
-                    idleDataparams.MinerCount,
+                    baseDataparams.MinerCount,
                     "IdleData.json");
-            if (idleDataparams.SoldierCount != null)
+            if (baseDataparams.SoldierCount != null)
                 ES3.Save("SoldierCount",
-                    idleDataparams.SoldierCount,
+                    baseDataparams.SoldierCount,
                     "IdleData.json");
         }
 
-        private BaseDataParams OnLoadBaseData()
+        private IdleDataParams OnLoadBaseData()
         {
-            return new BaseDataParams
+            return new IdleDataParams
             {
                 AreaDictionary =
                     ES3.KeyExists("AreaDatas",
@@ -128,9 +128,9 @@ namespace Manager
             };
         }
 
-        private IdleDataParams OnLoadIdleData()
+        private BaseDataParams OnLoadIdleData()
         {
-            return new IdleDataParams()
+            return new BaseDataParams()
             {
                 MinerCount =
                     ES3.KeyExists("MinerCount",

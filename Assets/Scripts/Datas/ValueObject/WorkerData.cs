@@ -6,9 +6,9 @@ namespace Datas.ValueObject
 
     public class WorkerData
     {
+        public StackData SData;
         public int Speed;
         public int SpeedLevel;
-        public int Capacity;
         public int CapacityLevel;
         
     }

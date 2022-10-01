@@ -18,7 +18,7 @@ namespace Manager
         #endregion
 
         #region Serialized Variables
-        [SerializeField] private List<GameObject> TargetList;
+      
         [SerializeField] private List<GameObject> SpawnPoints;
 
         #endregion
@@ -58,7 +58,6 @@ namespace Manager
         private void SubscribeEvent()
         {
           
-            BaseSignals.Instance.onGetTarget += OnGetTarget;
          
             
         }
@@ -66,7 +65,6 @@ namespace Manager
         private void UnSubscribeEvent()
         {
     
-            BaseSignals.Instance.onGetTarget -= OnGetTarget;
             
         }
 
@@ -103,6 +101,6 @@ namespace Manager
         }
 
 
-        private GameObject OnGetTarget() => TargetList[Random.Range(0, TargetList.Count)];
+   
     }
 }

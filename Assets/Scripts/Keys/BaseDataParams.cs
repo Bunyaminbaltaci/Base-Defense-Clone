@@ -1,13 +1,14 @@
 using System;
-using System.Collections.Generic;
-using ValueObject;
 
 namespace Keys
 {
     [Serializable]
     public struct BaseDataParams
     {
-        public int BaseLevel;
-        public Dictionary<string, AreaData> AreaDictionary;
+        public int MinerCount;
+        public int SoldierCount;
+        
+        
+
     }
 }

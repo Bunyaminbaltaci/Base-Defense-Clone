@@ -17,8 +17,8 @@ namespace Signals
         #endregion
         #region Base
         
-        public Func<BaseDataParams> onGetBaseData = delegate { return default;};
-        public Func<BaseDataParams> onLoadBaseData = delegate { return default;};
+        public Func<IdleDataParams> onGetBaseData = delegate { return default;};
+        public Func<IdleDataParams> onLoadBaseData = delegate { return default;};
         
         #endregion
         
@@ -31,8 +31,8 @@ namespace Signals
 
         #region Idle
 
-        public Func<IdleDataParams> onGetSaveIdleData = delegate { return default; };
-        public Func<IdleDataParams> onLoadIdleData = delegate { return default;};
+        public Func<BaseDataParams> onGetSaveIdleData = delegate { return default; };
+        public Func<BaseDataParams> onLoadIdleData = delegate { return default;};
 
         #endregion
         

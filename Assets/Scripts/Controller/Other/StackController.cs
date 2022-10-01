@@ -17,6 +17,7 @@ namespace Controllers
         #region Self Variables
 
         #region Public Variables
+        public List<GameObject> StackList = new List<GameObject>();
 
         #endregion
 
@@ -37,7 +38,6 @@ namespace Controllers
         private MoneyStackCommand _moneyStackCommand;
         private MoneyDepositCommand _moneyDepositCommand;
         private BulletBoxDepositCommand _bulletBoxDepositCommand;
-        private List<GameObject> _stackList = new List<GameObject>();
 
         #endregion
 
@@ -45,16 +45,16 @@ namespace Controllers
 
         private void Start()
         {
-            _stackList = new List<GameObject>();
-            _moneyStackCommand = new MoneyStackCommand(ref stackController, ref _stackList, ref stackHolder,
+            StackList = new List<GameObject>();
+            _moneyStackCommand = new MoneyStackCommand(ref stackController, ref StackList, ref stackHolder,
                 ref _moneyStackData);
-            _bulletBoxStackCommand = new BulletBoxStackCommand(ref stackController, ref _stackList, ref stackHolder,
+            _bulletBoxStackCommand = new BulletBoxStackCommand(ref stackController, ref StackList,
                 ref _bulletBoxStackData);
-            _moneyDepositCommand = new MoneyDepositCommand(ref _stackList);
-            _bulletBoxDepositCommand = new BulletBoxDepositCommand(ref _stackList);
+            _moneyDepositCommand = new MoneyDepositCommand(ref StackList);
+            _bulletBoxDepositCommand = new BulletBoxDepositCommand(ref StackList);
         }
 
-        public void SetStackData(StackData ammoStackData,StackData moneyStackData)
+        public void SetStackData(StackData ammoStackData, StackData moneyStackData)
         {
             _bulletBoxStackData = ammoStackData;
             _moneyStackData = moneyStackData;
@@ -71,23 +71,23 @@ namespace Controllers
             if (obj == null) return;
             obj.transform.SetParent(stackHolder.transform);
             SetObjPosition(obj);
-            _stackList.Add(obj);
+            StackList.Add(obj);
         }
 
         public GameObject SendBulletBox()
         {
-            if (_stackList.Count>0)
+            if (StackList.Count > 0)
             {
-                var obj = _stackList[_stackList.Count-1];
-                _stackList.Remove(obj);
-                _stackList.TrimExcess();
+                var obj = StackList[StackList.Count - 1];
+                StackList.Remove(obj);
+                StackList.TrimExcess();
                 return obj;
             }
 
             return null;
         }
 
-   
+
         private void SetObjPosition(GameObject obj)
         {
             switch (stackType)

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -6,7 +8,13 @@ namespace Manager
 {
     public class AmmoAreaManager : MonoBehaviour
     {
-    
+        #region Self Variables
+
+        #region Private Variables
+
+        #endregion
+
+        #endregion
 
         #region EventSubscription
 
@@ -17,18 +25,14 @@ namespace Manager
 
         private void SubscribeEvent()
         {
-            CoreGameSignals.Instance.onGetBulletBox += OnGetAmmo;
-            CoreGameSignals.Instance.onGetAmmoArea += OnGetAmmoArea;
+            BaseSignals.Instance.onGetBulletBox += OnGetBulletBox;
         }
 
         private void UnSubscribeEvent()
         {
-            CoreGameSignals.Instance.onGetBulletBox -= OnGetAmmo;
-            CoreGameSignals.Instance.onGetAmmoArea -= OnGetAmmoArea;
+            BaseSignals.Instance.onGetBulletBox -= OnGetBulletBox;
         }
 
-        private GameObject OnGetAmmoArea() => gameObject;
-        
 
         private void OnDisable()
         {
@@ -36,9 +40,12 @@ namespace Manager
         }
 
         #endregion
-        
-        private GameObject OnGetAmmo()
+
+
+        private GameObject OnGetBulletBox()
         {
+            WaitForSeconds waiter = new WaitForSeconds(0.2f);
+            
             var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
             if (obj == null)
                 return null;

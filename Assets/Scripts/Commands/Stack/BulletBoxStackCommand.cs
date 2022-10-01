@@ -15,7 +15,6 @@ namespace Commands
 
         private StackController _stackController;
         private List<GameObject> _stack;
-        private Transform _stackHolder;
         private StackData _data;
         private float _directY;
         private float _directX;
@@ -26,11 +25,11 @@ namespace Commands
 
         #endregion
 
-        public BulletBoxStackCommand(ref StackController stackController,ref List<GameObject> stack,ref Transform stackHolder,ref StackData data)
+        public BulletBoxStackCommand(ref StackController stackController,ref List<GameObject> stack,ref StackData data)
         {
             _stackController = stackController;
             _stack = stack;
-            _stackHolder=stackHolder;
+           
             _data = data;
         }
         
@@ -42,7 +41,8 @@ namespace Commands
             _directZ = -(_stack.Count % (_data.LimitY * _data.LimitZ) / _data.LimitY * _data.OffsetZ);
             obj.transform.DOLocalRotate(Vector3.zero, _data.AnimationDurition);
             obj.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
-           
+            
+
         }
     }
-}
+}   

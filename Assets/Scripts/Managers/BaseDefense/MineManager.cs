@@ -55,22 +55,22 @@ namespace Manager
 
         private void SubscribeEvent()
         {
-            IdleSignals.Instance.onGetMineTarget += OnGetMineTarget;
-            IdleSignals.Instance.onGetMineStackTarget += OnGetMineStackTarget;
-            IdleSignals.Instance.onAddDiamondStack += OnAddDiamondStack;
-            IdleSignals.Instance.onGetMinerCapacity += OnGetMinerCapacity;
-            IdleSignals.Instance.onAddMinerInMine += OnAddMinerInMine;
-            IdleSignals.Instance.OnStartCollectDiamond += StartCollectDiamond;
+            BaseSignals.Instance.onGetMineTarget += OnGetMineTarget;
+            BaseSignals.Instance.onGetMineStackTarget += OnGetMineStackTarget;
+            BaseSignals.Instance.onAddDiamondStack += OnAddDiamondStack;
+            BaseSignals.Instance.onGetMinerCapacity += OnGetMinerCapacity;
+            BaseSignals.Instance.onAddMinerInMine += OnAddMinerInMine;
+            BaseSignals.Instance.OnStartCollectDiamond += StartCollectDiamond;
         }
 
         private void UnSubscribeEvent()
         {
-            IdleSignals.Instance.onGetMineTarget -= OnGetMineTarget;
-            IdleSignals.Instance.onGetMineStackTarget -= OnGetMineStackTarget;
-            IdleSignals.Instance.onAddDiamondStack -= OnAddDiamondStack;
-            IdleSignals.Instance.onGetMinerCapacity -= OnGetMinerCapacity;
-            IdleSignals.Instance.onAddMinerInMine -= OnAddMinerInMine;
-            IdleSignals.Instance.OnStartCollectDiamond -= StartCollectDiamond;
+            BaseSignals.Instance.onGetMineTarget -= OnGetMineTarget;
+            BaseSignals.Instance.onGetMineStackTarget -= OnGetMineStackTarget;
+            BaseSignals.Instance.onAddDiamondStack -= OnAddDiamondStack;
+            BaseSignals.Instance.onGetMinerCapacity -= OnGetMinerCapacity;
+            BaseSignals.Instance.onAddMinerInMine -= OnAddMinerInMine;
+            BaseSignals.Instance.OnStartCollectDiamond -= StartCollectDiamond;
         }
 
         private void OnDisable()
@@ -82,7 +82,7 @@ namespace Manager
 
         private void Start()
         {
-            _minerCount = IdleSignals.Instance.onGetMinerCount();
+            _minerCount = BaseSignals.Instance.onGetMinerCount();
             Init();
         }
 

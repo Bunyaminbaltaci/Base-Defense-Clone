@@ -20,7 +20,7 @@ MonoBehaviour:
       LimitX: 2
       LimitY: 2
       LimitZ: 2
-      StackLimit: 11
+      StackLimit: 12
       AnimationDurition: 0.3
     FireRate: 1
     Damage: 1

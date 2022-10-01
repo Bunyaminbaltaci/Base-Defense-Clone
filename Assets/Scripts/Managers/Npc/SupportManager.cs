@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using Abstract;
-using Controller.Npc.Support;
+using Controller.Npc;
 using Controllers;
 using Data;
 using Datas.ValueObject;
+using Enums;
 using Enums.Npc;
 using Signals;
 using States.Npc.SupportStates;
@@ -27,7 +28,6 @@ namespace Manager
         #region Serialzed Variables
 
         [SerializeField] private SupportAnimationController animationController;
-        [SerializeField] private SupportManager supportManager;
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private StackController stackController;
 
@@ -40,7 +40,6 @@ namespace Manager
         private WaitForFullStack _waitForFullStack;
         private WaitForDischargeState _waitForDischarge;
         private WorkerData _data;
-        
 
         #endregion
 
@@ -53,47 +52,18 @@ namespace Manager
             _data = GetWorkerData();
             SendPlayerDataToControllers();
         }
+        
 
-     
+      
 
-        #region Event Subscription
-
-  
-        private void OnEnable()
-        {
-            Subscribe();
-            CurrentState.EnterState();
-        }
-
-        private void Subscribe()
-        {
-           
-            BaseSignals.Instance.OnSendBulletBox += OnSendBullerBox;
-        }
-
-       
-        private void Unsubscribe()
-        {
-       
-            BaseSignals.Instance.OnSendBulletBox -= OnSendBullerBox;
-        }
-
-
-        private void OnDisable()
-        {
-            Unsubscribe();
-        }
-
-        #endregion
-
-     
 
         private void GetReferences()
         {
-            _goAmmoAreaState = new GoAmmoAreaState(ref supportManager, ref agent);
-            _goTurretStackState = new GoTurretStackState(ref supportManager, ref agent);
-            _waitForFullStack = new WaitForFullStack(ref supportManager, ref agent);
-            _waitForDischarge = new WaitForDischargeState(ref supportManager, ref agent);
+            var manager = this;
+            _goAmmoAreaState = new GoAmmoAreaState(ref manager, ref agent);
+            _goTurretStackState = new GoTurretStackState(ref manager, ref agent);
+            _waitForFullStack = new WaitForFullStack(ref manager, ref agent);
+            _waitForDischarge = new WaitForDischargeState(ref manager, ref agent);
             CurrentState = _goAmmoAreaState;
         }
 
@@ -109,6 +79,7 @@ namespace Manager
         }
 
         private WorkerData GetWorkerData() => Resources.Load<CD_WorkerData>("Data/CD_WorkerData").SupportData;
+
         public void SwitchState(SupportStatesType stateType)
         {
             switch (stateType)
@@ -139,29 +110,46 @@ namespace Manager
         {
             StartCoroutine(name);
         }
-
-        public void StopCort()
-        {
-            StopAllCoroutines();
-        }
-
+        
 
         public bool StackCheck()
         {
-          
             return stackController.StackList.Count > 0;
         }
-        
+
         private void SendPlayerDataToControllers()
         {
-            stackController.SetStackData(_data.SData,_data.SData);
+            stackController.SetStackData(_data.SData, _data.SData);
         }
-        private int OnSendBullerBox(Collider arg1, GameObject arg2)
+
+        
+    
+        public IEnumerator TakeBulletBox()
         {
-            if (arg1.gameObject != transform.GetChild(1).gameObject)
-                return default;
-            stackController.AddStack(arg2);
-            return _data.SData.StackLimit;
+            var waiter = new WaitForSeconds(0.2f);
+            while (stackController.StackList.Count < _data.SData.StackLimit)
+            {
+                var obj =BaseSignals.Instance.onGetBulletBox?.Invoke();
+                if (obj==null)
+                    break;
+                stackController.AddStack(obj);
+                yield return waiter;
+            }
+        }
+
+      
+
+        public IEnumerator StartBulletBoxSend(GameObject target)
+        {
+            WaitForSeconds waiter = new WaitForSeconds(0.2f);
+            while (stackController.StackList.Count > 0)
+            {
+                if (BaseSignals.Instance.onGetTurretLimit(target) <= 0 )
+                    yield break;
+                
+                BaseSignals.Instance.onSendAmmoInStack?.Invoke(target, stackController.SendBulletBox());
+                yield return waiter;
+            }
         }
     }
 }

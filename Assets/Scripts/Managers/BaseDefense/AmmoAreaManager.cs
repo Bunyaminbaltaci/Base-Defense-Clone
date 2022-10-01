@@ -12,8 +12,6 @@ namespace Manager
 
         #region Private Variables
 
-        
-
         #endregion
 
         #endregion
@@ -27,15 +25,14 @@ namespace Manager
 
         private void SubscribeEvent()
         {
-          
+            BaseSignals.Instance.onGetBulletBox += OnGetBulletBox;
         }
 
         private void UnSubscribeEvent()
         {
-       
+            BaseSignals.Instance.onGetBulletBox -= OnGetBulletBox;
         }
 
-        
 
         private void OnDisable()
         {
@@ -45,31 +42,16 @@ namespace Manager
         #endregion
 
 
-        public void StartCor(Collider col)
-        {
-            StartCoroutine(SendBulletBox(col));
-        }
-
-        public void StopCor()
-        {
-            StopAllCoroutines();
-        }
-        IEnumerator SendBulletBox(Collider col)
+        private GameObject OnGetBulletBox()
         {
             WaitForSeconds waiter = new WaitForSeconds(0.2f);
-            while (true)
-            {
-                yield return waiter;
-                var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
-                if (obj == null)
-                    break;
-                obj.transform.position = transform.position;
-                obj.SetActive(true);
-                var limit=BaseSignals.Instance.OnSendBulletBox?.Invoke(col,obj);
-                if (limit==0)
-                    break;
-            }
             
+            var obj = PoolSignals.Instance.onGetPoolObject(PoolType.BulletBox);
+            if (obj == null)
+                return null;
+            obj.transform.position = transform.position;
+            obj.SetActive(true);
+            return obj;
         }
     }
 }

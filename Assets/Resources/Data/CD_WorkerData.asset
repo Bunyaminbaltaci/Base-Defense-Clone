@@ -27,13 +27,13 @@ MonoBehaviour:
     CapacityLevel: 0
   SupportData:
     SData:
-      OffsetX: 0.05
+      OffsetX: 0
       OffsetY: 0.05
       OffsetZ: 0.05
       LimitX: 0
       LimitY: 4
-      LimitZ: 2
-      StackLimit: 7
+      LimitZ: 10
+      StackLimit: 8
       AnimationDurition: 0.3
     Speed: 0
     SpeedLevel: 0

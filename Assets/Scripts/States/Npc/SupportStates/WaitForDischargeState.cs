@@ -30,6 +30,7 @@ namespace States.Npc.SupportStates
         {
             _manager.SetTriggerAnim(WorkerAnimType.Idle);
             _manager.StartCort(WaitForDischarge());
+           
         }
 
         public void UpdateState()
@@ -44,7 +45,7 @@ namespace States.Npc.SupportStates
         public void OnTriggerExitState(Collider other)
         {
         }
-
+        
         IEnumerator WaitForDischarge()
         {
             yield return new WaitForSeconds(4);

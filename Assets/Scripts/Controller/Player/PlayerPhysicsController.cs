@@ -45,7 +45,9 @@ namespace Controllers
             if (other.CompareTag("Money"))
             {
                 other.GetComponent<Collider>().enabled = false;
+                other.GetComponent<Rigidbody>().isKinematic = true;
                 playerManager.AddStack(other.gameObject);
+                BaseSignals.Instance.onRemoveHaversterTargetList?.Invoke(other.gameObject);
             }
 
 
@@ -63,6 +65,16 @@ namespace Controllers
             {
                 playerManager.HostageAddMine();
             }
+
+            if (other.CompareTag("TurretStack"))
+            {
+                playerManager.StartCoroutine(playerManager.StartBulletBoxSend(other.gameObject));
+            }
+
+            if (other.CompareTag("Ammo"))
+            {
+                playerManager.StartCoroutine(playerManager.TakeBulletBox());
+            }
             
             
         }
@@ -73,6 +85,16 @@ namespace Controllers
             {
                 ChangeLayer();
             }
+            if (other.CompareTag("TurretStack"))
+            {
+                playerManager.StopAllCoroutines();
+            }
+
+            if (other.CompareTag("Ammo"))
+            {
+                playerManager.StopAllCoroutines();
+            }
+
         }
 
         

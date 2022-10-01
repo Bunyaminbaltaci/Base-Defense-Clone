@@ -1,6 +1,7 @@
 using System.Collections;
 using Abstract;
 using Controller.Npc.Enemy;
+using Enums;
 using Enums.Npc;
 using Signals;
 using States.Npc.Enemy;
@@ -33,10 +34,10 @@ namespace Manager
 
         #region Private Variables
 
-        private AttackTargetNPCState _attackTargetNpcState;
-        private DeadNPCState _deadNpcState;
-        private RushTargetNPCState _rushTargetNpcState;
-        private WalkTargetNPCState _walkTargetNpcState;
+        private AttackTargetState _attackTargetState;
+        private DeadState _deadState;
+        private RushTargetState _rushTargetState;
+        private WalkTargetState _walkTargetState;
         
        
 
@@ -54,26 +55,26 @@ namespace Manager
         private void OnEnable()
         {
             // SubscribeEvent();
-            Target = BaseSignals.Instance.onGetTarget?.Invoke();
+            Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
             CurrentInpcState.EnterState();
             
         }
 
         private void OnDisable()
         {
-            
+            PushMoney();
             Target = null;
-            CurrentInpcState =_walkTargetNpcState ;
+            CurrentInpcState =_walkTargetState ;
         }
 
         private void GetReferences()
         {
-            _attackTargetNpcState = new AttackTargetNPCState(ref enemyManager, ref agent);
-            _deadNpcState = new DeadNPCState(ref enemyManager, ref agent);
-            _rushTargetNpcState = new RushTargetNPCState(ref enemyManager, ref agent);
-            _walkTargetNpcState = new WalkTargetNPCState(ref enemyManager, ref agent);
+            _attackTargetState = new AttackTargetState(ref enemyManager, ref agent);
+            _deadState = new DeadState(ref enemyManager, ref agent);
+            _rushTargetState = new RushTargetState(ref enemyManager, ref agent);
+            _walkTargetState = new WalkTargetState(ref enemyManager, ref agent);
          
-            CurrentInpcState =_walkTargetNpcState ;
+            CurrentInpcState =_walkTargetState ;
         }
 
         private void Start()
@@ -104,19 +105,40 @@ namespace Manager
             switch (state)
             {
                 case EnemyStateType.WalkTarget :
-                    CurrentInpcState =_walkTargetNpcState ;
+                    CurrentInpcState =_walkTargetState ;
                     break;
                 case EnemyStateType.RushTarget:
-                    CurrentInpcState =_rushTargetNpcState ;
+                    CurrentInpcState =_rushTargetState ;
                     break;
                 case EnemyStateType.AttackTarget:
-                    CurrentInpcState =_attackTargetNpcState ;
+                    CurrentInpcState =_attackTargetState ;
                     break;    
                 case EnemyStateType.Dead:
-                    CurrentInpcState =_deadNpcState ;
+                    CurrentInpcState =_deadState ;
                     break;
             }
             CurrentInpcState.EnterState();
+        }
+
+        private void PushMoney()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Money);
+
+                if (obj ==null)
+                {
+                    break;
+                }
+
+                obj.transform.SetParent(transform.parent);
+                obj.SetActive(true);
+                obj.transform.position = transform.position;
+                obj.GetComponent<Rigidbody>().AddForce(Vector3.up+Vector3.right,ForceMode.Force);
+                BaseSignals.Instance.onAddHaversterTargetList?.Invoke(obj);
+                PoolSignals.Instance.onSendPool?.Invoke(gameObject,PoolType.Enemy);
+                
+            }
         }
     }
 }

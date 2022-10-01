@@ -17,11 +17,11 @@ MonoBehaviour:
     Pref: {fileID: 5080905476774938243, guid: 79f3b6ef57daf7a48a3faa99eec19f0d, type: 3}
     ObjectCount: 20
   - Type: 1
-    Pref: {fileID: 1432083113632981368, guid: 01352ef61bb2e8647926e18af498d9fb, type: 3}
+    Pref: {fileID: 4048595076606031853, guid: d556f77ace486c5419185e225d80df85, type: 3}
     ObjectCount: 20
   - Type: 2
     Pref: {fileID: 5495938375531215040, guid: 45775c9401a6a2244aa8711639ad2dd9, type: 3}
-    ObjectCount: 20
+    ObjectCount: 100
   - Type: 3
     Pref: {fileID: 6418770167869038347, guid: 13aa61ad0a0a7784d878292044266fda, type: 3}
     ObjectCount: 100

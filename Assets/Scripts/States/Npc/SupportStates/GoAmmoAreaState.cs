@@ -32,6 +32,10 @@ namespace States.Npc.SupportStates
         public void EnterState()
         {
             _manager.Target = BaseSignals.Instance.onGetAmmoArea?.Invoke();
+            if (_manager.Target==null)
+            {
+                _manager.SwitchState(SupportStatesType.WaitForFullStack);
+            }
             _manager.SetTriggerAnim(WorkerAnimType.Walk);
             _agent.SetDestination(_manager.Target.transform.position);
 
@@ -46,6 +50,7 @@ namespace States.Npc.SupportStates
         {
             if (other.CompareTag("Ammo"))
             {
+                _manager.StartCoroutine(_manager.TakeBulletBox());
                 _manager.SwitchState(SupportStatesType.WaitForFullStack);   
             }
         
@@ -55,6 +60,8 @@ namespace States.Npc.SupportStates
         {
      
         }
+        
+        
         
     }
 }

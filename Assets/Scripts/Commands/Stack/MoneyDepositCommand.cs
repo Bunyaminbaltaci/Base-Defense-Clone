@@ -48,6 +48,7 @@ namespace Commands
                     PoolSignals.Instance.onSendPool?.Invoke(obj, PoolType.Money);
                     
                     obj.GetComponent<Collider>().enabled = true;
+                    obj.GetComponent<Rigidbody>().isKinematic = false;
                 });
                 _stackList.RemoveAt(0); 
                 _stackList.TrimExcess();

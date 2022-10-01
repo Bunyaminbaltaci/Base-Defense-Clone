@@ -24,7 +24,7 @@ namespace Manager
         public MinerStatesType MinerSType;
         public GameObject Target;
         public GameObject Stack;
-        public IStateMachine CurrentInpcState;
+        public IStateMachine CurrentState;
        
 
         #endregion
@@ -41,10 +41,10 @@ namespace Manager
 
         #region Private Variables
 
-        private GoMineInpcState _goMineInpc;
-        private GoStackInpcState _goStackInpc;
-        private DigInpcState _digInpc;
-        private WaitInpcState _waitInpc;
+        private GoMineState _goMine;
+        private GoStackState _goStack;
+        private DigState _dig;
+        private WaitState _wait;
 
         #endregion
 
@@ -61,24 +61,24 @@ namespace Manager
 
         private void GetReferences()
         {
-            _digInpc = new DigInpcState(this);
-            _goStackInpc = new GoStackInpcState(this, ref agent);
-            _goMineInpc = new GoMineInpcState(this, ref agent);
-            _waitInpc = new WaitInpcState(this, ref agent);
-            CurrentInpcState = _goMineInpc;
+            _dig = new DigState(this);
+            _goStack = new GoStackState(this, ref agent);
+            _goMine = new GoMineState(this, ref agent);
+            _wait = new WaitState(this, ref agent);
+            CurrentState = _goMine;
         }
 
         private void OnEnable()
         {
             Target = BaseSignals.Instance.onGetMineTarget();
             Stack = BaseSignals.Instance.onGetMineStackTarget();
-            CurrentInpcState.EnterState();
+            CurrentState.EnterState();
             
         }
 
         private void Update()
         {
-            CurrentInpcState.UpdateState();
+            CurrentState.UpdateState();
         }
 
 
@@ -87,25 +87,25 @@ namespace Manager
             switch (stateType)
             {
                 case MinerStatesType.Dig:
-                    CurrentInpcState = _digInpc;
+                    CurrentState = _dig;
                     diamond.SetActive(false);
                     axe.SetActive(true);
                     break;
                 case MinerStatesType.GoMine:
-                    CurrentInpcState = _goMineInpc;
+                    CurrentState = _goMine;
                     diamond.SetActive(false);
                     break;
                 case MinerStatesType.GoStack:
-                    CurrentInpcState = _goStackInpc;
+                    CurrentState = _goStack;
                     axe.SetActive(false);
                     diamond.SetActive(true);
                     break;
                 case MinerStatesType.Wait:
-                    CurrentInpcState = _waitInpc;
+                    CurrentState = _wait;
                     break;
             }
 
-            CurrentInpcState.EnterState();
+            CurrentState.EnterState();
         }
 
         public void SetTriggerAnim(MinerAnimType animType)

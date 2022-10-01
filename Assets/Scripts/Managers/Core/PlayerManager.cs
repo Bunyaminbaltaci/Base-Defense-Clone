@@ -1,8 +1,7 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using Controllers;
 using Data;
-using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
@@ -29,7 +28,6 @@ namespace Managers.Core
         #region Private Variables
 
         private PlayerData _data;
-
         private List<GameObject> _hostageList;
 
         #endregion
@@ -53,19 +51,13 @@ namespace Managers.Core
         {
             InputSignals.Instance.onInputDragged += OnInputDragged;
             CoreGameSignals.Instance.onGetHostageTarget += OnGetHostageTarget;
-            BaseSignals.Instance.onGetAmmoInStack += OnGetAmmoInStack;
-            BaseSignals.Instance.OnSendBulletBox += OnSendBullerBox;
         }
-
 
         private void Unsubscribe()
         {
             InputSignals.Instance.onInputDragged -= OnInputDragged;
             CoreGameSignals.Instance.onGetHostageTarget -= OnGetHostageTarget;
-            BaseSignals.Instance.onGetAmmoInStack -= OnGetAmmoInStack;
-            BaseSignals.Instance.OnSendBulletBox -= OnSendBullerBox;
         }
-
 
         private void OnDisable()
         {
@@ -77,12 +69,13 @@ namespace Managers.Core
         private void GetReferences()
         {
             _data = GetPlayerData();
-
             _hostageList = new List<GameObject>();
         }
 
-        private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
-
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").Data;
+        }
 
         public void AddStack(GameObject obj)
         {
@@ -95,12 +88,10 @@ namespace Managers.Core
             stackController.SetStackData(_data.BulletBoxStackData, _data.MoneyBoxStackData);
         }
 
-
         private void OnInputDragged(InputParams inputParam)
         {
             playerMovementController.UpdateInputValue(inputParam);
         }
-
 
         public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
         {
@@ -142,25 +133,34 @@ namespace Managers.Core
         }
         //_____________________________________________________________________________
 
-
         public void StartCollectStack()
         {
             stackController.StartCollect();
         }
 
-        private GameObject OnGetAmmoInStack(GameObject arg)
+        public IEnumerator StartBulletBoxSend(GameObject target)
         {
-            if (arg == transform.GetChild(1).gameObject)
-                return stackController.SendBulletBox();
-            return null;
+            var waiter = new WaitForSeconds(0.2f);
+            while (stackController.StackList.Count > 0)
+            {
+                if (BaseSignals.Instance.onGetTurretLimit(target) > 0)
+                    BaseSignals.Instance.onSendAmmoInStack?.Invoke(target, stackController.SendBulletBox());
+
+                yield return waiter;
+            }
         }
 
-        private int OnSendBullerBox(Collider arg1, GameObject arg2)
+        public IEnumerator TakeBulletBox()
         {
-            if (arg1.gameObject != transform.gameObject)
-                return default;
-            stackController.AddStack(arg2);
-            return _data.BulletBoxStackData.StackLimit;
+            var waiter = new WaitForSeconds(0.2f);
+            while (stackController.StackList.Count < _data.BulletBoxStackData.StackLimit)
+            {
+                var obj = BaseSignals.Instance.onGetBulletBox?.Invoke();
+                if (obj == null)
+                    break;
+                stackController.AddStack(obj);
+                yield return waiter;
+            }
         }
     }
 }

@@ -30,19 +30,19 @@ namespace States.Npc.SupportStates
         }
         public void EnterState()
         {
-            while (true)
-            {
-                var Target = BaseSignals.Instance.onGetTurretStack?.Invoke();
-                if (Target!=_manager.Target)
-                {
-                    _manager.Target = Target;
-                    break;
-                }
-            }
+            
+            _manager.Target = BaseSignals.Instance.onGetTurretStack?.Invoke();
 
-           
-            _agent.SetDestination(_manager.Target.transform.position);
-            _manager.SetTriggerAnim(WorkerAnimType.Walk);
+            if (_manager.Target==null)
+            {
+                _manager.SwitchState(SupportStatesType.WaitForDischarge);
+            }
+            else
+            {
+                _agent.SetDestination(_manager.Target.transform.position);
+                _manager.SetTriggerAnim(WorkerAnimType.Walk);
+            }
+          
         }
 
         public void UpdateState()
@@ -52,8 +52,9 @@ namespace States.Npc.SupportStates
 
         public void OnTriggerEnterState(Collider other)
         {
-            if (other.CompareTag("TurretStack"))
+            if (other.CompareTag("TurretStack") || _manager.Target==other.gameObject)
             {
+                _manager.StartCoroutine(_manager.StartBulletBoxSend(other.gameObject));
                 _manager.SwitchState(SupportStatesType.WaitForDischarge);
             }
         }

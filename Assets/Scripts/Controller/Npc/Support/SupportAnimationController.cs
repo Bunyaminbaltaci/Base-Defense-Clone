@@ -2,7 +2,7 @@ using Enums.Npc;
 using Manager;
 using UnityEngine;
 
-namespace Controller.Npc.Support
+namespace Controller.Npc
 {
     public class SupportAnimationController : MonoBehaviour
     {

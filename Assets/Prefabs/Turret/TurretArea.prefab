@@ -241,7 +241,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6729319388626319883}
   - component: {fileID: 9205557333660393669}
-  - component: {fileID: 3039218480654375542}
   m_Layer: 0
   m_Name: TurretStack
   m_TagString: TurretStack
@@ -278,19 +277,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1870582, y: 1.5579891, z: 2.2594938}
   m_Center: {x: 0.037270427, y: 0.27899456, z: 0.3901527}
---- !u!114 &3039218480654375542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4775444326498894798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d92d877841474289aa1adbc2c2806638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretManager: {fileID: 4785938465955255075}
 --- !u!1 &5476099527289290346
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,5 +843,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d956931b314d0e94d0fc70068fc9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackController: {fileID: 3039218480654375542}
   stackHolder: {fileID: 8404555154703678459}

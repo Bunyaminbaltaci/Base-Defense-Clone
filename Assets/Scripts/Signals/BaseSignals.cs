@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Datas.ValueObject;
 using Extentions;
+using Keys;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,7 +34,9 @@ namespace Signals
 
         #region Turret
 
-        public Func<GameObject,GameObject> onGetAmmoInStack= delegate { return default;};
+        public Func<GameObject,int> onGetTurretLimit= delegate { return default; };
+        public UnityAction<GameObject, GameObject> onSendAmmoInStack=delegate{};
+        public UnityAction<GameObject,TurretParams> onHoldTurretData=delegate {  };
 
         #endregion
 
@@ -43,7 +46,9 @@ namespace Signals
 
         public Func<GameObject> onGetTurretStack= delegate { return default;};
         public Func<GameObject> onGetAmmoArea= delegate { return default;};
-        public Func<Collider,GameObject,int> OnSendBulletBox ;
+        public Func<GameObject> onGetExit= delegate { return default;};
+        public Func<GameObject> onGetEnter= delegate { return default;};
+        public Func<GameObject> onGetHarvesterTarget= delegate { return default;};
 
 
         #endregion
@@ -51,8 +56,21 @@ namespace Signals
 
         #region Enemy
 
-        public Func<GameObject> onGetTarget= delegate { return default;};
+        public Func<GameObject> onGetEnemyTarget= delegate { return default;};
 
+
+        #endregion
+
+        #region Ammo Area
+
+        public Func<GameObject> onGetBulletBox= delegate { return default;};
+
+        #endregion
+
+        #region Money 
+        
+        public UnityAction<GameObject> onAddHaversterTargetList=delegate{  };
+        public UnityAction<GameObject> onRemoveHaversterTargetList=delegate{  };
 
         #endregion
 

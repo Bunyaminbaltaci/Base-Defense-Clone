@@ -1,9 +1,10 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Controller.Turret;
+using Controllers;
 using Data;
 using Datas.ValueObject;
 using DG.Tweening;
+using Keys;
 using Signals;
 using UnityEngine;
 
@@ -15,7 +16,6 @@ namespace Manager
 
         #region Serialized Variables
 
-        [SerializeField] private TurretStackController stackController;
         [SerializeField] private GameObject stackHolder;
 
         #endregion
@@ -35,41 +35,70 @@ namespace Manager
         private void Awake()
         {
             _bulletBoxList = new List<GameObject>();
+            
             _data = GetTurretData();
+            
         }
 
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            Subscribe();
+            BaseSignals.Instance.onHoldTurretData?.Invoke(stackHolder.transform.parent.gameObject,new TurretParams
+            {
+                StackLimit = _data.BulletBoxStackData.StackLimit,
+                StackZone = stackHolder
+            });
+        }
+
+        private void Subscribe()
+        {
+            BaseSignals.Instance.onSendAmmoInStack += OnSendAmmoInStack;
+        }
+
+
+        private void Unsubscribe()
+        {
+            BaseSignals.Instance.onSendAmmoInStack -= OnSendAmmoInStack;
+        }
+
+
+        private void OnDisable()
+        {
+            Unsubscribe();
+        }
+
+        #endregion
+
+        private void Start()
+        {
+            BaseSignals.Instance.onHoldTurretData?.Invoke(stackHolder.transform.parent.gameObject,new TurretParams
+            {
+                StackLimit = _data.BulletBoxStackData.StackLimit,
+                StackZone = stackHolder
+            });
+        }
+
+      
 
         private TurretData GetTurretData() => Resources.Load<CD_TurretData>("Data/CD_TurretData").Data;
 
 
-        public void StartTake(GameObject target)
+        private void OnSendAmmoInStack(GameObject target, GameObject bulletBox)
         {
-            StartCoroutine(TakeAmmo(target));
-        }
-
-        public void StopTake()
-        {
-            StopAllCoroutines();
-        }
-
-        IEnumerator TakeAmmo(GameObject target)
-        {
-            WaitForSeconds waiter = new WaitForSeconds(0.3f);
-
-          
-            while (_bulletBoxList.Count <= _data.BulletBoxStackData.StackLimit)
+            if (target == stackHolder.transform.parent.gameObject)
             {
-                var obj = BaseSignals.Instance.onGetAmmoInStack(target);
-              
-                if (obj == null)
-                    yield break;
-                yield return waiter;
-                obj.transform.parent = stackHolder.transform;
-                SetObjPosition(obj);
-                _bulletBoxList.Add(obj);
-                
-              
+                bulletBox.transform.parent = stackHolder.transform;
+                SetObjPosition(bulletBox);
+                _bulletBoxList.Add(bulletBox);
+                BaseSignals.Instance.onHoldTurretData?.Invoke(stackHolder.transform.parent.gameObject,new TurretParams
+                {
+                    StackLimit = _data.BulletBoxStackData.StackLimit-_bulletBoxList.Count,
+                    StackZone = stackHolder
+                });
             }
+            
         }
 
         private void SetObjPosition(GameObject obj)

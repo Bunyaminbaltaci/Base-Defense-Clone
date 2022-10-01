@@ -94,9 +94,9 @@ namespace Manager
             OnInitializeLevel();
         }
 
-        private BaseDataParams OnGetBaseDatas()
+        private IdleDataParams OnGetBaseDatas()
         {
-            return new BaseDataParams
+            return new IdleDataParams
             {
                 AreaDictionary = _areaDictionary,
                 BaseLevel = _baseLevel,
@@ -153,7 +153,7 @@ namespace Manager
 
         public void LoadData()
         {
-            BaseDataParams _data = SaveSignals.Instance.onLoadBaseData();
+            IdleDataParams _data = SaveSignals.Instance.onLoadBaseData();
 
             _areaDictionary = _data.AreaDictionary;
             _baseLevel = _data.BaseLevel;

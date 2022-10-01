@@ -31,8 +31,8 @@ namespace Manager
 
         #region Private Variables
 
-        private FollowInpcState _followInpc;
-        private TerrifiedInpcState _terrifiedInpc;
+        private FollowState _follow;
+        private TerrifiedState _terrified;
         
        
 
@@ -54,15 +54,15 @@ namespace Manager
         private void OnDisable()
         {
             Target = null;
-            CurrentInpcState = _terrifiedInpc;
+            CurrentInpcState = _terrified;
         }
 
         private void GetReferences()
         {
             
-            _followInpc = new FollowInpcState(this, ref agent);
-            _terrifiedInpc = new TerrifiedInpcState(this, ref agent);
-            CurrentInpcState = _terrifiedInpc;
+            _follow = new FollowState(this, ref agent);
+            _terrified = new TerrifiedState(this, ref agent);
+            CurrentInpcState = _terrified;
         }
 
         private void Start()
@@ -91,10 +91,10 @@ namespace Manager
             switch (state)
             {
                 case HostageStateType.Terrified :
-                    CurrentInpcState = _terrifiedInpc;
+                    CurrentInpcState = _terrified;
                     break;
                 case HostageStateType.Follow:
-                    CurrentInpcState = _followInpc;
+                    CurrentInpcState = _follow;
                     break;
             }
             CurrentInpcState.EnterState();

@@ -233,8 +233,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6614473820656716898}
   m_Layer: 0
-  m_Name: AmmoArea
-  m_TagString: Ammo
+  m_Name: BulletArea
+  m_TagString: BulletArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 6614473821776809388}
   m_Layer: 0
   m_Name: PhysicArea
-  m_TagString: Ammo
+  m_TagString: BulletArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

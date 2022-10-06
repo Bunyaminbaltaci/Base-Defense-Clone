@@ -31,13 +31,16 @@ namespace States.HarvesterStates
         {
             _manager.Target = BaseSignals.Instance.onGetEnter?.Invoke();
             _agent.SetDestination(_manager.Target.transform.position);
+            _manager.SetTriggerAnim(WorkerAnimType.Walk);
+
         }
 
         public void UpdateState()
         {
             if (_agent.remainingDistance<=_agent.stoppingDistance)
             {
-                _manager.SwitchState(HarvesterStateType.GoExitBase);
+                _manager.Target = null;
+                _manager.SwitchState(HarvesterStateType.WaitMoney);
             }
         }
 

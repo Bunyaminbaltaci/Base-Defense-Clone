@@ -1,8 +1,10 @@
 using System;
+using DG.Tweening;
 using Enums;
 using Manager;
 using Managers.Core;
 using Signals;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Controllers
@@ -28,7 +30,7 @@ namespace Controllers
         private void ChangeLayer()
         {
             playerManager.StartCollectStack();
-            if (  gameObject.layer == LayerMask.NameToLayer("Default"))
+            if (gameObject.layer == LayerMask.NameToLayer("Default"))
             {
                 gameObject.layer = LayerMask.NameToLayer("BattleArea");
                 playerManager.ChageStackState(StackType.Money);
@@ -37,15 +39,13 @@ namespace Controllers
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 playerManager.ChageStackState(StackType.Ammo);
-
             }
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Money"))
             {
-                other.GetComponent<Collider>().enabled = false;
-                other.GetComponent<Rigidbody>().isKinematic = true;
                 playerManager.AddStack(other.gameObject);
                 BaseSignals.Instance.onRemoveHaversterTargetList?.Invoke(other.gameObject);
             }
@@ -71,32 +71,48 @@ namespace Controllers
                 playerManager.StartCoroutine(playerManager.StartBulletBoxSend(other.gameObject));
             }
 
-            if (other.CompareTag("Ammo"))
+            if (other.CompareTag("BulletArea"))
             {
                 playerManager.StartCoroutine(playerManager.TakeBulletBox());
             }
-            
-            
+
+            if (other.CompareTag("Turret"))
+            {
+                var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
+                playerManager.transform.parent = newparent;
+                playerManager.transform.DOLocalMove(new Vector3(0, playerManager.transform.localPosition.y, 0), .5f);
+                playerManager.transform.DOLocalRotate(Vector3.zero, 0.5f) ;
+                playerManager.ChangeMovement(PlayerMovementState.Turret);
+                BaseSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
+                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
+                CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
+            }
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("BaseLimit"))
             {
                 ChangeLayer();
             }
+
             if (other.CompareTag("TurretStack"))
             {
                 playerManager.StopAllCoroutines();
             }
 
-            if (other.CompareTag("Ammo"))
+            if (other.CompareTag("BulletArea"))
             {
                 playerManager.StopAllCoroutines();
             }
 
+            if (other.CompareTag("Turret"))
+            {
+                BaseSignals.Instance.onPlayerOutTurret?.Invoke(other.gameObject);
+                playerManager.transform.parent = playerManager.CurrentParent.transform;
+                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
+                CoreGameSignals.Instance.onSetCameraTarget?.Invoke(playerManager.transform);
+            }
         }
-
-        
     }
 }

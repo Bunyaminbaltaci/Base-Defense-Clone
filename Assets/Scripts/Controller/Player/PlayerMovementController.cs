@@ -4,6 +4,7 @@ using Enums;
 using Keys;
 using Manager;
 using Managers.Core;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -41,7 +42,7 @@ namespace Controllers
 
         private void FixedUpdate()
         {
-            NormalMove();
+          ChangeMove();
         }
 
         public void SetMovementData(PlayerData dataMovementData)
@@ -72,7 +73,13 @@ namespace Controllers
 
         private void TurretMove()
         {
-            
+           
+            if (_inputParams.Values.z<-0.6f)
+            {
+              
+                playerManager.ChangeMovement(PlayerMovementState.Normal);
+                BaseSignals.Instance.onPlayerOutTurret?.Invoke(transform.parent.transform.parent.gameObject);
+            }
         }
 
         private void ChangeMove()
@@ -90,6 +97,9 @@ namespace Controllers
         }
         public void ChangeState(PlayerMovementState state)
         {
+            playerManager.PlayAnim(PlayerAnimationStates.Run,
+                0);
+            rigidbody.velocity=Vector3.zero;
             _movementState = state;
         }
 

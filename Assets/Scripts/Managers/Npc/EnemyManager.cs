@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Abstract;
 using Controller.Npc.Enemy;
@@ -125,7 +126,7 @@ namespace Manager
             for (int i = 0; i < 3; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Money);
-
+            
                 if (obj ==null)
                 {
                     break;
@@ -133,12 +134,13 @@ namespace Manager
 
                 obj.transform.SetParent(transform.parent);
                 obj.SetActive(true);
-                obj.transform.position = transform.position;
+                obj.transform.localPosition = transform.localPosition;
                 obj.GetComponent<Rigidbody>().AddForce(Vector3.up+Vector3.right,ForceMode.Force);
                 BaseSignals.Instance.onAddHaversterTargetList?.Invoke(obj);
-                PoolSignals.Instance.onSendPool?.Invoke(gameObject,PoolType.Enemy);
-                
             }
+            PoolSignals.Instance.onSendPool?.Invoke(gameObject,PoolType.Enemy);
         }
+
+      
     }
 }

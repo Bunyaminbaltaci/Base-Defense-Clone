@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Controllers;
@@ -6,6 +7,7 @@ using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Managers.Core
 {
@@ -14,6 +16,9 @@ namespace Managers.Core
         #region Self Variables
 
         #region Public Variables
+
+        public GameObject CurrentParent;
+      
 
         #endregion
 
@@ -77,6 +82,12 @@ namespace Managers.Core
             return Resources.Load<CD_Player>("Data/CD_Player").Data;
         }
 
+        private void Start()
+        {
+            CurrentParent = transform.parent.gameObject;
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
+        }
+
         public void AddStack(GameObject obj)
         {
             stackController.AddStack(obj);
@@ -136,6 +147,12 @@ namespace Managers.Core
         public void StartCollectStack()
         {
             stackController.StartCollect();
+        }
+
+        public void ChangeMovement(PlayerMovementState state)
+        {
+            
+            playerMovementController.ChangeState(state);
         }
 
         public IEnumerator StartBulletBoxSend(GameObject target)

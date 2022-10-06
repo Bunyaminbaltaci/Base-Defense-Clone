@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Abstract;
-using Datas.ValueObject;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 namespace Manager
 {
@@ -31,7 +26,7 @@ namespace Manager
 
         #region Private Variables
 
-        private Dictionary<GameObject, TurretParams> _turretDatas = new Dictionary<GameObject, TurretParams>();
+        private readonly Dictionary<GameObject, TurretParams> _turretDatas = new Dictionary<GameObject, TurretParams>();
         [ShowInInspector] private List<GameObject> _moneyTransformList = new List<GameObject>();
         private int _minerCount;
         private int _soldierCount;
@@ -39,7 +34,6 @@ namespace Manager
         #endregion
 
         #endregion
-
 
         #region EventSubscription
 
@@ -59,15 +53,12 @@ namespace Manager
             BaseSignals.Instance.onHoldTurretData += OnHoldTurretData;
             BaseSignals.Instance.onGetTurretLimit += OnGetTurretLimit;
             BaseSignals.Instance.onGetEnter += OnGetEnter;
-            BaseSignals.Instance.onGetExit += OnGetExit;
             BaseSignals.Instance.onGetHarvesterTarget += OnGetHarvesterTarget;
             BaseSignals.Instance.onAddHaversterTargetList += OnAddHaversterTargetList;
             BaseSignals.Instance.onRemoveHaversterTargetList += OnRemoveHaversterTargetList;
-
-
+            
             SaveSignals.Instance.onGetSaveIdleData += OnGetSaveIdleData;
         }
-
 
         private void UnSubscribeEvent()
         {
@@ -80,26 +71,12 @@ namespace Manager
             BaseSignals.Instance.onHoldTurretData -= OnHoldTurretData;
             BaseSignals.Instance.onGetTurretLimit -= OnGetTurretLimit;
             BaseSignals.Instance.onGetEnter -= OnGetEnter;
-            BaseSignals.Instance.onGetExit -= OnGetExit;
             BaseSignals.Instance.onGetHarvesterTarget -= OnGetHarvesterTarget;
             BaseSignals.Instance.onAddHaversterTargetList -= OnAddHaversterTargetList;
             BaseSignals.Instance.onRemoveHaversterTargetList -= OnRemoveHaversterTargetList;
-
-
+            
             SaveSignals.Instance.onGetSaveIdleData -= OnGetSaveIdleData;
         }
-
-        private void OnAddHaversterTargetList(GameObject money)
-        {
-            _moneyTransformList.Add(money);
-        }
-
-        private void OnRemoveHaversterTargetList(GameObject money)
-        {
-            _moneyTransformList.Remove(money);
-            _moneyTransformList.TrimExcess();
-        }
-
 
         private void OnDisable()
         {
@@ -119,71 +96,64 @@ namespace Manager
             SaveData();
         }
 
-
         private GameObject OnGetTurretStack()
         {
-            int limit = 0;
+            var limit = 0;
             GameObject obj = null;
             foreach (var Key in _turretDatas)
-            {
                 if (limit < _turretDatas[Key.Key].StackLimit)
                 {
                     limit = _turretDatas[Key.Key].StackLimit;
                     obj = _turretDatas[Key.Key].StackZone;
                 }
-            }
 
             return obj;
         }
 
+        private void OnAddHaversterTargetList(GameObject money)
+        {
+            _moneyTransformList.Add(money);
+        }
+
+        private void OnRemoveHaversterTargetList(GameObject money)
+        {
+            _moneyTransformList.Remove(money);
+            _moneyTransformList.TrimExcess();
+        }
+
         private GameObject OnGetHarvesterTarget()
         {
-            if (_moneyTransformList.Count > 0)
-            {
-                return _moneyTransformList[Random.Range(0, _moneyTransformList.Count)];
-            }
+            if (_moneyTransformList.Count > 0) return _moneyTransformList[Random.Range(0, _moneyTransformList.Count)];
 
             return null;
         }
-
-        private GameObject OnGetEnter() => baseEnterPoint;
-        private GameObject OnGetExit() => baseExitPoint;
-        private int OnGetSoldierCount() => _soldierCount;
-        private int OnGetMinerCount() => _minerCount;
-
-        private BaseDataParams OnGetSaveIdleData() => new BaseDataParams
-        {
-            MinerCount = _minerCount,
-            SoldierCount = _soldierCount
-        };
-
-        private GameObject OnGetAmmoArea() => ammoArea;
-
-        private GameObject OnGetEnemyTarget() => targetList[Random.Range(0, targetList.Count)];
-
-        private int OnGetTurretLimit(GameObject obj) => _turretDatas[obj].StackLimit;
-
         private void OnHoldTurretData(GameObject obj, TurretParams turretParams)
         {
             if (_turretDatas.ContainsKey(obj))
-            {
                 _turretDatas[obj] = new TurretParams
                 {
-                    StackLimit = turretParams.StackLimit,
-                    StackZone = turretParams.StackZone
+                    StackLimit = turretParams.StackLimit, StackZone = turretParams.StackZone
                 };
-            }
             else
-            {
-                _turretDatas.Add(obj, new TurretParams
-                {
-                    StackLimit = turretParams.StackLimit,
-                    StackZone = turretParams.StackZone
-                });
-            }
+                _turretDatas.Add(obj,
+                    new TurretParams { StackLimit = turretParams.StackLimit, StackZone = turretParams.StackZone });
         }
 
-
+        private BaseDataParams OnGetSaveIdleData()=>new BaseDataParams
+        {
+            MinerCount = _minerCount, 
+            SoldierCount = _soldierCount
+        };
+        
+        private GameObject OnGetAmmoArea()=>ammoArea;
+        private GameObject OnGetEnemyTarget()=>targetList[Random.Range(0, targetList.Count)];
+        private GameObject OnGetEnter()=>baseEnterPoint;
+        private int OnGetSoldierCount()=> _soldierCount;
+        private int OnGetMinerCount()=>_minerCount;
+        private int OnGetTurretLimit(GameObject obj)=>_turretDatas[obj].StackLimit;
+     
+        
+       
         public void LoadData()
         {
             var value = SaveSignals.Instance.onLoadIdleData();

@@ -15,16 +15,6 @@ namespace Manager
 
         #endregion
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player")) OpenDoor();
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Player")) CloseDoor();
-        }
-
         private void OpenDoor()
         {
             door.transform.DOLocalRotate(new Vector3(0, 0, 90f), 1f);
@@ -34,5 +24,18 @@ namespace Manager
         {
             door.transform.DOLocalRotate(Vector3.zero, 1f);
         }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player")) OpenDoor();
+            if (other.CompareTag("Harvester")) OpenDoor();
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player")) CloseDoor();
+            if (other.CompareTag("Harvester")) CloseDoor();
+        }
+
+       
     }
 }

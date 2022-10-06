@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Manager
 {
-    public class AmmoAreaManager : MonoBehaviour
+    public class BulletAreaManager : MonoBehaviour
     {
         #region Self Variables
 

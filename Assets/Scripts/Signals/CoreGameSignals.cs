@@ -10,12 +10,12 @@ namespace Signals
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
 
-        public UnityAction<GameStates> onGetGameState = delegate { };
+        public UnityAction<GameStates> onSetGameState = delegate { };
         public UnityAction onPlay = delegate { };
         public UnityAction onReset = delegate { };
 
         public UnityAction<Transform> onSetCameraTarget = delegate { };
-        public UnityAction<GameStates> onSetGameState = delegate { };
+        public UnityAction<GameStates> onChangeGameState = delegate { };
         
        
         public Func<GameObject,GameObject> onGetHostageTarget;

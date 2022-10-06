@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using Datas.ValueObject;
+using Enums;
 using ValueObject;
 using Keys;
 using Signals;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Manager
 {
@@ -23,6 +26,8 @@ namespace Manager
             SaveSignals.Instance.onLoadScoreData += OnLoadScoreData;
             SaveSignals.Instance.onSaveIdleData += OnSaveIdleData;
             SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
+            SaveSignals.Instance.onSaveGunShopData += OnSaveGunShopData;
+            SaveSignals.Instance.onLoadGunShopData += OnLoadGunShopData;
         }
 
         private void Unsubscribe()
@@ -33,7 +38,11 @@ namespace Manager
             SaveSignals.Instance.onLoadScoreData -= OnLoadScoreData;
             SaveSignals.Instance.onSaveIdleData -= OnSaveIdleData;
             SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
+            SaveSignals.Instance.onSaveGunShopData -= OnSaveGunShopData;
+            SaveSignals.Instance.onLoadGunShopData -= OnLoadGunShopData;
         }
+
+    
 
         private void OnDisable()
         {
@@ -56,7 +65,27 @@ namespace Manager
         {
             SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
         }
+        private void OnSaveGunShopData()
+        {
+           SaveGunShopData(SaveSignals.Instance.onGetGunShopData());
+        }
 
+   
+
+
+        private void SaveGunShopData(GunsDataParams gunsDataParams)
+        {
+            if (gunsDataParams.GData != null)
+                ES3.Save("GData",
+                    gunsDataParams.GData,
+                    "GunShopData.json");
+            if (gunsDataParams.type != null)
+                ES3.Save("Type",
+                    gunsDataParams.type,
+                    "GunShopData.json");
+        }
+        
+        
         private void SaveBaseData(IdleDataParams ıdleDataParams)
         {
             if (ıdleDataParams.BaseLevel != null)
@@ -144,6 +173,28 @@ namespace Manager
                         "IdleData.json")
                     : 0,
             };
+            
         }
+
+        private GunsDataParams OnLoadGunShopData()
+        {
+            return new GunsDataParams
+            {
+                type = 
+                    ES3.KeyExists("Type",
+                        "GunShopData.json")
+                        ? ES3.Load<GunType>("Type",
+                            "GunShopData.json")
+                        : 0,
+                GData = ES3.KeyExists("GData",
+                    "GunShopData.json")
+                    ? ES3.Load<Dictionary<GunType,GunData>>("GData",
+                        "GunShopData.json")
+                    : null,
+
+            };
+
+        }
+        
     }
 }

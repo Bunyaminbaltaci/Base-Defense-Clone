@@ -1,4 +1,6 @@
 using System;
+using Enums;
+using Signals;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,12 +10,36 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate=60;
     }
 
-    private void Start()
+    #region Event Subscriptions
+
+    private void OnEnable()
     {
+        SubscribeEvents();
     }
 
-    // Update is called once per frame
-    private void Update()
+    private void SubscribeEvents()
     {
+        CoreGameSignals.Instance.onChangeGameState += OnChangeGameState;
     }
+
+    private void UnsubscribeEvents()
+    {
+        CoreGameSignals.Instance.onChangeGameState -= OnChangeGameState;
+      
+    }
+
+   
+
+    private void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    #endregion
+    
+    private void OnChangeGameState(GameStates states)
+    {
+     CoreGameSignals.Instance.onSetGameState?.Invoke(states);
+    }
+
 }

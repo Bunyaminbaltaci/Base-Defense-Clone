@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Enums;
 using Managers.Core;
@@ -21,7 +22,7 @@ namespace Manager
 
         private Vector3 _initialPosition;
         private Animator _animator;
-        private CameraStatesType _cameraStatesType = CameraStatesType.Runner;
+        private CameraStatesType _cameraStatesType = CameraStatesType.Idle;
         private Transform _playerManager;
 
         #endregion
@@ -37,7 +38,7 @@ namespace Manager
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
+            CoreGameSignals.Instance.onSetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onReset += OnReset;
@@ -45,7 +46,7 @@ namespace Manager
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
+            CoreGameSignals.Instance.onSetGameState += OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onReset -= OnReset;
@@ -69,10 +70,10 @@ namespace Manager
             _animator = GetComponent<Animator>();
         }
 
+       
         private void GetInitialPosition()
         {
-            _initialPosition = transform.GetChild(0)
-                .localPosition;
+            _initialPosition = transform.GetChild(0).localPosition;
         }
 
         private void MoveToInitialPosition()
@@ -81,16 +82,17 @@ namespace Manager
                 .localPosition = _initialPosition;
         }
 
-        private void SetPlayerFollow()
-        {
-            _playerManager = FindObjectOfType<PlayerManager>()
-                .transform;
-            OnSetCameraTarget(_playerManager);
-        }
+        // private void SetPlayerFollow()
+        // {
+        //     _playerManager = FindObjectOfType<PlayerManager>()
+        //         .transform;
+        //     OnSetCameraTarget(_playerManager);
+        // }
 
         private void OnSetCameraTarget(Transform _target)
         {
             stateDrivenCamera.Follow = _target;
+            GetInitialPosition();
         }
 
         private void SetCameraState(CameraStatesType cameraState)
@@ -105,12 +107,15 @@ namespace Manager
                 case GameStates.Idle:
                     SetCameraState(CameraStatesType.Idle);
                     break;
+                case GameStates.Turret :
+                    SetCameraState(CameraStatesType.Turret);
+                    break;
             }
         }
 
         private void OnPlay()
         {
-            SetPlayerFollow();
+           
             GetInitialPosition();
         }
 

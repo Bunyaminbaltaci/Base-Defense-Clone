@@ -2704,7 +2704,7 @@ GameObject:
   - component: {fileID: 4256232788645637966}
   m_Layer: 0
   m_Name: PlayerManager
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2737,6 +2737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa59aaf78d04110b8e4b3ff74075685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentParent: {fileID: 0}
   playerAnimationController: {fileID: 7534108531597625620}
   playerMovementController: {fileID: 665190917883407574}
   stackController: {fileID: 7732642437490672765}

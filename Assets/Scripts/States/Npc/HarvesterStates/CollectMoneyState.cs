@@ -37,19 +37,9 @@ namespace States.HarvesterStates
 
         public void EnterState()
         {
-
-            _manager.Target = BaseSignals.Instance.onGetHarvesterTarget?.Invoke();
-            if (_manager.Target!=null)
-            {
+            
                 _agent.SetDestination(_manager.Target.transform.position);
                 _manager.SetTriggerAnim(WorkerAnimType.Walk);
-            }
-            else
-            {
-                _manager.SwitchState(HarvesterStateType.WaitMoney);
-            }
-            
-            
 
         }
 
@@ -65,7 +55,7 @@ namespace States.HarvesterStates
         {
             if (other.CompareTag("Money"))
             {
-                other.GetComponent<Collider>().enabled = false;
+             
                 _manager.AddStack(other.gameObject);
                 BaseSignals.Instance.onRemoveHaversterTargetList?.Invoke(other.gameObject);
 

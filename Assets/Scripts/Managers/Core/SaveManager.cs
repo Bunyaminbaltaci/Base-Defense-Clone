@@ -28,6 +28,8 @@ namespace Manager
             SaveSignals.Instance.onLoadIdleData += OnLoadIdleData;
             SaveSignals.Instance.onSaveGunShopData += OnSaveGunShopData;
             SaveSignals.Instance.onLoadGunShopData += OnLoadGunShopData;
+            SaveSignals.Instance.onSaveWorkerAreaData += OnSaveWorkerAreaData;
+            SaveSignals.Instance.onLoadWorkerAreaData += onLoadWorkerAreaData;
         }
 
         private void Unsubscribe()
@@ -40,9 +42,10 @@ namespace Manager
             SaveSignals.Instance.onLoadIdleData -= OnLoadIdleData;
             SaveSignals.Instance.onSaveGunShopData -= OnSaveGunShopData;
             SaveSignals.Instance.onLoadGunShopData -= OnLoadGunShopData;
+            SaveSignals.Instance.onSaveWorkerAreaData -= OnSaveWorkerAreaData;
+            SaveSignals.Instance.onLoadWorkerAreaData -= onLoadWorkerAreaData;
         }
 
-    
 
         private void OnDisable()
         {
@@ -51,27 +54,48 @@ namespace Manager
 
         #endregion
 
+        private void OnSaveWorkerAreaData()
+        {
+            SaveWorkerData(SaveSignals.Instance.onGetWorkerAreapData());
+        }
+
         private void OnSaveIdleData()
         {
-            SaveIdleData(SaveSignals.Instance.onGetSaveIdleData());
+            SaveBaseData(SaveSignals.Instance.onGetSaveIdleData());
         }
 
         private void OnSaveBaseData()
         {
-            SaveBaseData(SaveSignals.Instance.onGetBaseData());
+            SaveIdleData(SaveSignals.Instance.onGetBaseData());
         }
 
         private void OnSaveScoreData()
         {
             SaveScoreData(SaveSignals.Instance.onGetSaveScoreData());
         }
+
         private void OnSaveGunShopData()
         {
-           SaveGunShopData(SaveSignals.Instance.onGetGunShopData());
+            SaveGunShopData(SaveSignals.Instance.onGetGunShopData());
         }
 
-   
+        #region Save Data
 
+        private void SaveWorkerData(WorkerDataParams workerAreaData)
+        {
+            if (workerAreaData.WorkerList != null)
+                ES3.Save("WorkerList",
+                    workerAreaData.WorkerList,
+                    "WorkerAreaData.json");
+            if (workerAreaData.CapacityLevel != null)
+                ES3.Save("CapacityLevel",
+                    workerAreaData.CapacityLevel,
+                    "WorkerAreaData.json");
+            if (workerAreaData.SpeedLevel != null)
+                ES3.Save("SpeedLevel",
+                    workerAreaData.SpeedLevel,
+                    "WorkerAreaData.json");
+        }
 
         private void SaveGunShopData(GunsDataParams gunsDataParams)
         {
@@ -84,18 +108,18 @@ namespace Manager
                     gunsDataParams.type,
                     "GunShopData.json");
         }
-        
-        
-        private void SaveBaseData(IdleDataParams ıdleDataParams)
+
+
+        private void SaveIdleData(IdleDataParams ıdleDataParams)
         {
             if (ıdleDataParams.BaseLevel != null)
                 ES3.Save("CityLevel",
                     ıdleDataParams.BaseLevel,
-                    "BaseData.json");
+                    "IdleData.json");
             if (ıdleDataParams.AreaDictionary != null)
                 ES3.Save("AreaDatas",
                     ıdleDataParams.AreaDictionary,
-                    "BaseData.json");
+                    "IdleData.json");
         }
 
         private void SaveScoreData(ScoreDataParams scoreDataParams)
@@ -110,17 +134,27 @@ namespace Manager
                     "ScoreData.json");
         }
 
-        private void SaveIdleData(BaseDataParams baseDataparams)
+        private void SaveBaseData(BaseDataParams baseDataparams)
         {
             if (baseDataparams.MinerCount != null)
                 ES3.Save("MinerCount",
                     baseDataparams.MinerCount,
-                    "IdleData.json");
+                    "BaseData.json");
             if (baseDataparams.SoldierCount != null)
                 ES3.Save("SoldierCount",
                     baseDataparams.SoldierCount,
-                    "IdleData.json");
+                    "BaseData.json");
+            if (baseDataparams.TurretIsAuto != null)
+            {
+                ES3.Save("AutoTurret",
+                    baseDataparams.TurretIsAuto,
+                    "BaseData.json");
+            }
         }
+
+        #endregion
+
+        #region Load Data
 
         private IdleDataParams OnLoadBaseData()
         {
@@ -128,14 +162,14 @@ namespace Manager
             {
                 AreaDictionary =
                     ES3.KeyExists("AreaDatas",
-                        "BaseData.json")
+                        "IdleData.json")
                         ? ES3.Load<Dictionary<string, AreaData>>("AreaDatas",
-                            "BaseData.json")
+                            "IdleData.json")
                         : new Dictionary<string, AreaData>(),
                 BaseLevel = ES3.KeyExists("CityLevel",
-                    "BaseData.json")
+                    "IdleData.json")
                     ? ES3.Load<int>("CityLevel",
-                        "BaseData.json")
+                        "IdleData.json")
                     : 0
             };
         }
@@ -163,24 +197,28 @@ namespace Manager
             {
                 MinerCount =
                     ES3.KeyExists("MinerCount",
-                        "IdleData.json")
+                        "BaseData.json")
                         ? ES3.Load<int>("MinerCount",
-                            "IdleData.json")
+                            "BaseData.json")
                         : 0,
                 SoldierCount = ES3.KeyExists("SoldierCount",
-                    "IdleData.json")
+                    "BaseData.json")
                     ? ES3.Load<int>("SoldierCount",
-                        "IdleData.json")
+                        "BaseData.json")
                     : 0,
+                TurretIsAuto = ES3.KeyExists("AutoTurret",
+                    "BaseData.json")
+                    ? ES3.Load<Dictionary<string, bool>>("AutoTurret",
+                        "BaseData.json")
+                    : new Dictionary<string, bool>(),
             };
-            
         }
 
         private GunsDataParams OnLoadGunShopData()
         {
             return new GunsDataParams
             {
-                type = 
+                type =
                     ES3.KeyExists("Type",
                         "GunShopData.json")
                         ? ES3.Load<GunType>("Type",
@@ -188,13 +226,33 @@ namespace Manager
                         : 0,
                 GData = ES3.KeyExists("GData",
                     "GunShopData.json")
-                    ? ES3.Load<Dictionary<GunType,GunData>>("GData",
+                    ? ES3.Load<Dictionary<GunType, GunData>>("GData",
                         "GunShopData.json")
                     : null,
-
             };
-
         }
-        
+
+        private WorkerDataParams onLoadWorkerAreaData()
+        {
+            return new WorkerDataParams
+            {
+                WorkerList = ES3.KeyExists("WorkerList", "WorkerAreaData.json")
+                    ? ES3.Load<Dictionary<WorkerType, bool>>("WorkerList",
+                        "WorkerAreaData.json")
+                    : new Dictionary<WorkerType, bool>(),
+                CapacityLevel = ES3.KeyExists("CapacityLevel",
+                    "WorkerAreaData.json")
+                    ? ES3.Load<int>("CapacityLevel",
+                        "WorkerAreaData.json")
+                    : 0,
+                SpeedLevel = ES3.KeyExists("SpeedLevel",
+                    "WorkerAreaData.json")
+                    ? ES3.Load<int>("SpeedLevel",
+                        "WorkerAreaData.json")
+                    : 0,
+            };
+        }
+
+        #endregion
     }
 }

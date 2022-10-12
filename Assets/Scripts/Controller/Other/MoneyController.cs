@@ -16,7 +16,7 @@ namespace Controller.Other
         #endregion
 
         #endregion
-        private void isTaked()
+        public void isTaked()
         {
             rb.isKinematic = true;
             col.enabled = false;
@@ -31,17 +31,17 @@ namespace Controller.Other
         }
 
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                isTaked();
-            }
-
-            if (other.CompareTag("Harvester"))
-            {
-                isTaked();
-            }
-        }
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     if (other.CompareTag("Player"))
+        //     {
+        //         isTaked();
+        //     }
+        //
+        //     if (other.CompareTag("Harvester"))
+        //     {
+        //         isTaked();
+        //     }
+        // }
     }
 }

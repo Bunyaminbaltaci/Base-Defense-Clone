@@ -105,13 +105,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445138320611585250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.3, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 35.1, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3029711791116690090}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1469394511534979145
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,9 +176,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHandle: {fileID: 2959643659478988243}
   TurretType: 2
+  Target: {fileID: 0}
   stackHolder: {fileID: 0}
   turretMovementController: {fileID: 3602500330668032328}
-  turretAttackController: {fileID: 0}
+  turretAttackController: {fileID: 8061699468946937914}
 --- !u!114 &3602500330668032328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,9 +205,9 @@ GameObject:
   - component: {fileID: 8061699468946937914}
   - component: {fileID: 6032813634154567002}
   - component: {fileID: 1415666968940079005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackController
-  m_TagString: Untagged
+  m_TagString: AttackArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,6 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damageables: []
   barrel: {fileID: 1445138320611585250}
+  turretManager: {fileID: 4785938465955255075}
 --- !u!54 &6032813634154567002
 Rigidbody:
   m_ObjectHideFlags: 0

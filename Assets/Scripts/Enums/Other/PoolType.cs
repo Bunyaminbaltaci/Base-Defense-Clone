@@ -9,7 +9,9 @@ namespace Enums
         Diamond,
         Miner,
         Hostage,
-        Soldier,
-        
+        Support,
+        Harvester,
+
+
     }
 }

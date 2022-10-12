@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Abstract;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Manager
 {
@@ -17,17 +20,16 @@ namespace Manager
 
         #region Serialized Variables
 
-        [SerializeField] private List<GameObject> targetList;
+        [SerializeField] private List<GameObject> enemyTargetList;
         [SerializeField] private GameObject ammoArea;
-        [SerializeField] private GameObject baseExitPoint;
         [SerializeField] private GameObject baseEnterPoint;
 
         #endregion
 
         #region Private Variables
 
-        private readonly Dictionary<GameObject, TurretParams> _turretDatas = new Dictionary<GameObject, TurretParams>();
-        [ShowInInspector] private List<GameObject> _moneyTransformList = new List<GameObject>();
+        private List<GameObject> _moneyTransformList;
+        private Dictionary<string, bool> _turretIsAuto;
         private int _minerCount;
         private int _soldierCount;
 
@@ -37,6 +39,17 @@ namespace Manager
 
         #region EventSubscription
 
+        private void Awake()
+        {
+            GetReferences();
+        }
+
+        private void GetReferences()
+        {
+            _moneyTransformList = new List<GameObject>();
+            _turretIsAuto = new Dictionary<string, bool>();
+        }
+
         private void OnEnable()
         {
             SubscribeEvent();
@@ -44,39 +57,69 @@ namespace Manager
 
         private void SubscribeEvent()
         {
+            BaseSignals.Instance.onTurretIsAuto += OnTurretIsAuto;
+            BaseSignals.Instance.onTurretIsAutoSub += OnTurretIsAutoSub;
+
             BaseSignals.Instance.onGetMinerCount += OnGetMinerCount;
-            BaseSignals.Instance.onGetSoldierCount += OnGetSoldierCount;
             BaseSignals.Instance.onAddMinerInMine += OnAddMinerInMine;
-            BaseSignals.Instance.onGetTurretStack += OnGetTurretStack;
+
             BaseSignals.Instance.onGetAmmoArea += OnGetAmmoArea;
-            BaseSignals.Instance.onGetEnemyTarget += OnGetEnemyTarget;
-            BaseSignals.Instance.onHoldTurretData += OnHoldTurretData;
-            BaseSignals.Instance.onGetTurretLimit += OnGetTurretLimit;
+
             BaseSignals.Instance.onGetEnter += OnGetEnter;
+            BaseSignals.Instance.onGetBase += OnGetBase;
+
+            BaseSignals.Instance.onGetSoldierCount += OnGetSoldierCount;
+
+            BaseSignals.Instance.onGetEnemyTarget += OnGetEnemyTarget;
+
             BaseSignals.Instance.onGetHarvesterTarget += OnGetHarvesterTarget;
             BaseSignals.Instance.onAddHaversterTargetList += OnAddHaversterTargetList;
             BaseSignals.Instance.onRemoveHaversterTargetList += OnRemoveHaversterTargetList;
-            
+
             SaveSignals.Instance.onGetSaveIdleData += OnGetSaveIdleData;
         }
 
         private void UnSubscribeEvent()
         {
+            BaseSignals.Instance.onTurretIsAuto -= OnTurretIsAuto;
+            BaseSignals.Instance.onTurretIsAutoSub -= OnTurretIsAutoSub;
+
             BaseSignals.Instance.onGetMinerCount -= OnGetMinerCount;
-            BaseSignals.Instance.onGetSoldierCount -= OnGetSoldierCount;
             BaseSignals.Instance.onAddMinerInMine -= OnAddMinerInMine;
-            BaseSignals.Instance.onGetTurretStack -= OnGetTurretStack;
+
             BaseSignals.Instance.onGetAmmoArea -= OnGetAmmoArea;
+
+            BaseSignals.Instance.onGetSoldierCount -= OnGetSoldierCount;
+
             BaseSignals.Instance.onGetEnemyTarget -= OnGetEnemyTarget;
-            BaseSignals.Instance.onHoldTurretData -= OnHoldTurretData;
-            BaseSignals.Instance.onGetTurretLimit -= OnGetTurretLimit;
+
             BaseSignals.Instance.onGetEnter -= OnGetEnter;
+            BaseSignals.Instance.onGetBase -= OnGetBase;
+
             BaseSignals.Instance.onGetHarvesterTarget -= OnGetHarvesterTarget;
             BaseSignals.Instance.onAddHaversterTargetList -= OnAddHaversterTargetList;
             BaseSignals.Instance.onRemoveHaversterTargetList -= OnRemoveHaversterTargetList;
-            
+
+
             SaveSignals.Instance.onGetSaveIdleData -= OnGetSaveIdleData;
         }
+
+        private void OnTurretIsAutoSub(string name, bool isAuto)
+        {
+            if (!_turretIsAuto.ContainsKey(name))
+            {
+                _turretIsAuto.Add(name,isAuto);
+            
+            }
+            else if (_turretIsAuto.ContainsKey(name) && isAuto)
+            {
+                _turretIsAuto[name] = isAuto;
+            }
+         
+            SaveData();
+          
+        }
+
 
         private void OnDisable()
         {
@@ -90,25 +133,27 @@ namespace Manager
             LoadData();
         }
 
+        private bool OnTurretIsAuto(string turret)
+        {
+            
+            if (_turretIsAuto.ContainsKey(turret))
+            {
+                return _turretIsAuto[turret];
+            }
+
+            _turretIsAuto.Add(name, false);
+
+            return false;
+        }
+
         private void OnAddMinerInMine(GameObject obj)
         {
             _minerCount++;
             SaveData();
         }
 
-        private GameObject OnGetTurretStack()
-        {
-            var limit = 0;
-            GameObject obj = null;
-            foreach (var Key in _turretDatas)
-                if (limit < _turretDatas[Key.Key].StackLimit)
-                {
-                    limit = _turretDatas[Key.Key].StackLimit;
-                    obj = _turretDatas[Key.Key].StackZone;
-                }
+        private GameObject OnGetBase() => gameObject;
 
-            return obj;
-        }
 
         private void OnAddHaversterTargetList(GameObject money)
         {
@@ -127,38 +172,28 @@ namespace Manager
 
             return null;
         }
-        private void OnHoldTurretData(GameObject obj, TurretParams turretParams)
-        {
-            if (_turretDatas.ContainsKey(obj))
-                _turretDatas[obj] = new TurretParams
-                {
-                    StackLimit = turretParams.StackLimit, StackZone = turretParams.StackZone
-                };
-            else
-                _turretDatas.Add(obj,
-                    new TurretParams { StackLimit = turretParams.StackLimit, StackZone = turretParams.StackZone });
-        }
 
-        private BaseDataParams OnGetSaveIdleData()=>new BaseDataParams
+
+        private BaseDataParams OnGetSaveIdleData() => new BaseDataParams
         {
-            MinerCount = _minerCount, 
-            SoldierCount = _soldierCount
+            MinerCount = _minerCount,
+            SoldierCount = _soldierCount,
+            TurretIsAuto = _turretIsAuto
         };
-        
-        private GameObject OnGetAmmoArea()=>ammoArea;
-        private GameObject OnGetEnemyTarget()=>targetList[Random.Range(0, targetList.Count)];
-        private GameObject OnGetEnter()=>baseEnterPoint;
-        private int OnGetSoldierCount()=> _soldierCount;
-        private int OnGetMinerCount()=>_minerCount;
-        private int OnGetTurretLimit(GameObject obj)=>_turretDatas[obj].StackLimit;
-     
-        
-       
+
+        private GameObject OnGetAmmoArea() => ammoArea;
+        private GameObject OnGetEnemyTarget() => enemyTargetList[Random.Range(0, enemyTargetList.Count)];
+        private GameObject OnGetEnter() => baseEnterPoint;
+        private int OnGetSoldierCount() => _soldierCount;
+        private int OnGetMinerCount() => _minerCount;
+
+
         public void LoadData()
         {
             var value = SaveSignals.Instance.onLoadIdleData();
             _minerCount = value.MinerCount;
             _soldierCount = value.SoldierCount;
+            _turretIsAuto = value.TurretIsAuto;
         }
 
         public void SaveData()

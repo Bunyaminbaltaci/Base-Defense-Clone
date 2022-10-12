@@ -1,6 +1,7 @@
 using System.Collections;
 using Abstract;
 using Controller.Npc;
+using Controller.Other;
 using Controllers;
 using Data;
 using Datas.ValueObject;
@@ -116,8 +117,13 @@ namespace Manager
 
         public void AddStack(GameObject money)
         {
-            stackController.AddStack(money);
-            if (stackController.StackList.Count>=_data.SData.StackLimit)
+         
+            if (stackController.StackList.Count<=_data.SData.StackLimit)
+            {
+                money.GetComponent<MoneyController>().isTaked();
+                stackController.AddStack(money);
+            }
+            else
             {
                 SwitchState(HarvesterStateType.GoEnterBase);
             }

@@ -22,6 +22,7 @@ TagManager:
   - Enemy
   - BulletArea
   - Bullet
+  - AttackArea
   layers:
   - Default
   - TransparentFX

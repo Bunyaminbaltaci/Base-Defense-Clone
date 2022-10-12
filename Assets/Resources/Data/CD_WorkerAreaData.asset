@@ -9,17 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6114577e7cff441780dcfe4b27a108a1, type: 3}
-  m_Name: CD_MineData
+  m_Script: {fileID: 11500000, guid: 37342522025f4fd6a8575a8f37d485a3, type: 3}
+  m_Name: CD_WorkerAreaData
   m_EditorClassIdentifier: 
   Data:
-    SData:
-      OffsetX: 0.5
-      OffsetY: 0.5
-      OffsetZ: 0.5
-      LimitX: 4
-      LimitY: 0
-      LimitZ: 4
-      StackLimit: 10
-      AnimationDurition: 1
-    MinerCapacity: 7
+    WorkerDatas:
+      SpeedLevel: 0
+      CapacityLevel: 0
+    HarvesterCost: 500
+    SupportCost: 500

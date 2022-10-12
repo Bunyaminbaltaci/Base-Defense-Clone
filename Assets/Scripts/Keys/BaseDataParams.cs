@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Keys
 {
@@ -7,8 +8,9 @@ namespace Keys
     {
         public int MinerCount;
         public int SoldierCount;
-        
-        
+        public Dictionary<string, bool> TurretIsAuto;
+
+
 
     }
 }

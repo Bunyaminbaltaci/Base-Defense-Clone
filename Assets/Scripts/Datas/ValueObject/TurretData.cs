@@ -6,8 +6,9 @@ namespace Datas.ValueObject
     public class TurretData
     {
         public StackData BulletBoxStackData;
-        public int FireRate=1;
+        public float FireRate=1;
         public int Damage=1;
+        public int AutoModeCost=500;
 
     }
 }

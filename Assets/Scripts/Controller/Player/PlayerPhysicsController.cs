@@ -46,7 +46,7 @@ namespace Controllers
         {
             if (other.CompareTag("Money"))
             {
-                playerManager.AddStack(other.gameObject);
+                playerManager.AddMoneyOnStack(other.gameObject);
                 BaseSignals.Instance.onRemoveHaversterTargetList?.Invoke(other.gameObject);
             }
 
@@ -78,14 +78,10 @@ namespace Controllers
 
             if (other.CompareTag("Turret"))
             {
-                var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
-                playerManager.transform.parent = newparent;
-                playerManager.transform.DOLocalMove(new Vector3(0, playerManager.transform.localPosition.y, 0), .5f);
-                playerManager.transform.DOLocalRotate(Vector3.zero, 0.5f) ;
-                playerManager.ChangeMovement(PlayerMovementState.Turret);
-                BaseSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
-                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
-                CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
+                if (other.GetComponent<TurretManager>().TurretType == TurretState.None)
+                {
+                    playerManager.InTurret(other.gameObject);
+                }
             }
         }
 
@@ -108,10 +104,10 @@ namespace Controllers
 
             if (other.CompareTag("Turret"))
             {
-                BaseSignals.Instance.onPlayerOutTurret?.Invoke(other.gameObject);
-                playerManager.transform.parent = playerManager.CurrentParent.transform;
-                CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
-                CoreGameSignals.Instance.onSetCameraTarget?.Invoke(playerManager.transform);
+                if (other.GetComponent<TurretManager>().TurretType == TurretState.None)
+                {
+                    playerManager.OutTurret(other.gameObject);
+                }
             }
         }
     }

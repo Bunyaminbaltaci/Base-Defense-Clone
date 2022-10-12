@@ -1,24 +1,23 @@
+using System.Collections;
 using Abstract;
+using Enums;
 using Enums.Npc;
 using Manager;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace States.Npc.Enemy
 {
-    public class DeadState:IStateMachine
+    public class DeadState : IStateMachine
     {
         #region Self Variables
 
         #region Public Variables
 
-        
-
         #endregion
 
         #region Serialized Variables
-
-        
 
         #endregion
 
@@ -33,34 +32,66 @@ namespace States.Npc.Enemy
 
         public DeadState(ref EnemyManager manager, ref NavMeshAgent agent)
         {
-
             _manager = manager;
             _agent = agent;
-
         }
+
         public void EnterState()
         {
-            throw new System.NotImplementedException();
+            _agent.SetDestination(_manager.transform.position);
+            IsDead();
         }
 
         public void UpdateState()
         {
-            throw new System.NotImplementedException();
         }
 
         public void OnTriggerEnterState(Collider other)
         {
-            throw new System.NotImplementedException();
         }
 
         public void OnTriggerExitState(Collider other)
         {
-            throw new System.NotImplementedException();
         }
 
         public void SwitchState(EnemyStateType type)
         {
-            throw new System.NotImplementedException();
+        }
+
+
+        private void IsDead()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Money);
+
+                if (obj == null)
+                {
+                    break;
+                }
+
+                obj.transform.SetParent(_manager.transform.parent);
+                obj.SetActive(true);
+                obj.transform.localPosition = _manager.transform.localPosition;
+                obj.GetComponent<Rigidbody>().AddForce(new Vector3(
+                    Random.Range(1f, 3f),
+                    Random.Range(1f, 3f),
+                    Random.Range(1f, 3f)
+                ), ForceMode.Force);
+                BaseSignals.Instance.onAddHaversterTargetList?.Invoke(obj);
+            }
+
+            _manager.StartCoroutine(WaitDeadAnim());
+        }
+
+        IEnumerator WaitDeadAnim()
+        {
+            _manager.SetTriggerAnim(EnemyAnimType.Dead);
+
+            BaseSignals.Instance.onRemoveInDamageableStack?.Invoke(_manager.gameObject);
+            yield return new WaitForSeconds(1f);
+            PoolSignals.Instance.onSendPool?.Invoke(_manager.gameObject, PoolType.Enemy);
+
         }
     }
 }

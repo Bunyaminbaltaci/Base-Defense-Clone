@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controller.Other;
 using Controllers;
 using Data;
+using DG.Tweening;
 using Enums;
 using Keys;
+using Manager;
 using Signals;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,7 +21,6 @@ namespace Managers.Core
         #region Public Variables
 
         public GameObject CurrentParent;
-      
 
         #endregion
 
@@ -88,9 +90,13 @@ namespace Managers.Core
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
         }
 
-        public void AddStack(GameObject obj)
+        public void AddMoneyOnStack(GameObject obj)
         {
-            stackController.AddStack(obj);
+            if (stackController.StackList.Count < _data.MoneyBoxStackData.StackLimit)
+            {
+                obj.GetComponent<MoneyController>().isTaked();
+                stackController.AddStack(obj);
+            }
         }
 
         private void SendPlayerDataToControllers()
@@ -151,7 +157,6 @@ namespace Managers.Core
 
         public void ChangeMovement(PlayerMovementState state)
         {
-            
             playerMovementController.ChangeState(state);
         }
 
@@ -165,6 +170,26 @@ namespace Managers.Core
 
                 yield return waiter;
             }
+        }
+
+        public void InTurret(GameObject other)
+        {
+            var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
+            transform.parent = newparent;
+            transform.DOLocalMove(new Vector3(0, transform.localPosition.y, 0), .5f);
+            transform.DOLocalRotate(Vector3.zero, 0.5f);
+            ChangeMovement(PlayerMovementState.Turret);
+            BaseSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
+            CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
+        }
+
+        public void OutTurret(GameObject other)
+        {
+            BaseSignals.Instance.onPlayerOutTurret?.Invoke(other.gameObject);
+            transform.parent = CurrentParent.transform;
+            CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
         }
 
         public IEnumerator TakeBulletBox()

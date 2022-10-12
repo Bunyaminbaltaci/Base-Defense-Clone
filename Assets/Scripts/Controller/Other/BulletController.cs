@@ -4,6 +4,7 @@ using Enums;
 using Signals;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Controller.Other
 {
@@ -46,10 +47,20 @@ namespace Controller.Other
         private void OnTriggerEnter(Collider other)
         {
             IDamageable damageable;
-            if (other.TryGetComponent<IDamageable>(out damageable))
+            if (other.CompareTag("Enemy"))
             {
+                damageable = other.GetComponent<IDamageable>();
                 PoolSignals.Instance.onSendPool?.Invoke(gameObject, PoolType.Bullet);
                 damageable.Damage(getDamage());
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("AttackArea"))
+            {
+              
+                PoolSignals.Instance.onSendPool?.Invoke(gameObject, PoolType.Bullet);
             }
         }
     }

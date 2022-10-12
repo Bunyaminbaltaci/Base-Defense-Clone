@@ -36,12 +36,15 @@ namespace Signals
 
         public Func<GameObject,int> onGetTurretLimit= delegate { return default; };
         public UnityAction<GameObject, GameObject> onSendAmmoInStack=delegate{};
-        public UnityAction<GameObject,TurretParams> onHoldTurretData=delegate {  };
+        public UnityAction<GameObject,TurretStackParams> onHoldTurretData=delegate {  };
         public UnityAction<GameObject> onPlayerInTurret = delegate { };
         public UnityAction<GameObject> onPlayerOutTurret = delegate { };
+        public Func<string,bool> onTurretIsAuto= delegate { return default;};
+        public UnityAction<string,bool> onTurretIsAutoSub= delegate { };
         public Func<int> onGetTurretDamage= delegate { return default;};
-        
-        
+        public Func<GameObject> onGetBase= delegate { return default;};
+
+
 
         #endregion
 

@@ -38,10 +38,10 @@ namespace Commands.Turret
             bulletBox.transform.parent = _stackHolder.transform;
             _manager.SetObjPosition(bulletBox);
             _bulletBoxList.Add(bulletBox);
-            BaseSignals.Instance.onHoldTurretData?.Invoke(_stackHolder.transform.parent.gameObject, new TurretParams
+            BaseSignals.Instance.onHoldTurretData?.Invoke(_stackHolder.transform.parent.gameObject, new TurretStackParams
             {
                 StackLimit = _data.BulletBoxStackData.StackLimit - _bulletBoxList.Count,
-                StackZone = _stackHolder
+             
             });
         }
     }

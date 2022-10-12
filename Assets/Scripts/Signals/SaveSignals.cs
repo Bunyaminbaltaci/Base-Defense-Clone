@@ -1,4 +1,5 @@
 using System;
+using Datas.ValueObject;
 using Extentions;
 using Keys;
 using UnityEngine.Events;
@@ -13,6 +14,7 @@ namespace Signals
         public UnityAction onSaveScoreData = delegate { };
         public UnityAction onSaveIdleData = delegate { };
         public UnityAction onSaveGunShopData=delegate {  };
+        public UnityAction onSaveWorkerAreaData=delegate {  };
 
         #endregion
 
@@ -40,8 +42,16 @@ namespace Signals
         #region GunShop
 
         public Func<GunsDataParams>onGetGunShopData= delegate { return default;};
-        public Func<GunsDataParams> onLoadGunShopData = delegate { return default; };
+        public Func<GunsDataParams> onLoadGunShopData = delegate { return default; };  
         
+        #endregion
+
+        #region WorkerArea
+
+        public Func<WorkerDataParams>onGetWorkerAreapData= delegate { return default;};
+        public Func<WorkerDataParams> onLoadWorkerAreaData = delegate { return default; };
+        
+
         #endregion
     }
 }

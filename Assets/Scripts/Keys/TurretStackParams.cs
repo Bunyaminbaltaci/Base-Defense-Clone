@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Keys
 {
     [Serializable]
-    public struct TurretParams
+    public struct TurretStackParams
     {
         public int StackLimit;
         public GameObject StackZone;

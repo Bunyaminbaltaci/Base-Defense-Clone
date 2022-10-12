@@ -1,8 +1,10 @@
 using System;
+using DG.Tweening;
 using Enums;
 using Manager;
 using Managers.Core;
 using Signals;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Controllers
@@ -28,7 +30,7 @@ namespace Controllers
         private void ChangeLayer()
         {
             playerManager.StartCollectStack();
-            if (  gameObject.layer == LayerMask.NameToLayer("Default"))
+            if (gameObject.layer == LayerMask.NameToLayer("Default"))
             {
                 gameObject.layer = LayerMask.NameToLayer("BattleArea");
                 playerManager.ChageStackState(StackType.Money);
@@ -37,16 +39,14 @@ namespace Controllers
             {
                 gameObject.layer = LayerMask.NameToLayer("Default");
                 playerManager.ChageStackState(StackType.Ammo);
-
             }
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Money"))
             {
-                other.GetComponent<Collider>().enabled = false;
-                other.GetComponent<Rigidbody>().isKinematic = true;
-                playerManager.AddStack(other.gameObject);
+                playerManager.AddMoneyOnStack(other.gameObject);
                 BaseSignals.Instance.onRemoveHaversterTargetList?.Invoke(other.gameObject);
             }
 
@@ -71,32 +71,44 @@ namespace Controllers
                 playerManager.StartCoroutine(playerManager.StartBulletBoxSend(other.gameObject));
             }
 
-            if (other.CompareTag("Ammo"))
+            if (other.CompareTag("BulletArea"))
             {
                 playerManager.StartCoroutine(playerManager.TakeBulletBox());
             }
-            
-            
+
+            if (other.CompareTag("Turret"))
+            {
+                if (other.GetComponent<TurretManager>().TurretType == TurretState.None)
+                {
+                    playerManager.InTurret(other.gameObject);
+                }
+            }
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("BaseLimit"))
             {
                 ChangeLayer();
             }
+
             if (other.CompareTag("TurretStack"))
             {
                 playerManager.StopAllCoroutines();
             }
 
-            if (other.CompareTag("Ammo"))
+            if (other.CompareTag("BulletArea"))
             {
                 playerManager.StopAllCoroutines();
             }
 
+            if (other.CompareTag("Turret"))
+            {
+                if (other.GetComponent<TurretManager>().TurretType == TurretState.None)
+                {
+                    playerManager.OutTurret(other.gameObject);
+                }
+            }
         }
-
-        
     }
 }

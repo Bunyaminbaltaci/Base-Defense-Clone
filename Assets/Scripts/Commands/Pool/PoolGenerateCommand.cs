@@ -4,7 +4,18 @@ using UnityEngine;
 namespace Commands
 {
     public class PoolGenerateCommand
-    {
+    { 
+        #region Self Variables
+     
+             #region Private Variables
+     
+             private readonly CD_PoolGenerator _cdPoolGenerator;
+             private GameObject _emptyGameObject;
+             private readonly Transform _managerTranform;
+     
+             #endregion
+     
+             #endregion
         public PoolGenerateCommand(ref CD_PoolGenerator cdPoolGenerator, ref Transform managertransform,
             ref GameObject emptyGameObject)
         {
@@ -30,16 +41,6 @@ namespace Commands
             }
         }
 
-        #region Self Variables
-
-        #region Private Variables
-
-        private readonly CD_PoolGenerator _cdPoolGenerator;
-        private GameObject _emptyGameObject;
-        private readonly Transform _managerTranform;
-
-        #endregion
-
-        #endregion
+       
     }
 }

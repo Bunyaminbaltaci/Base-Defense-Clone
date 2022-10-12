@@ -155,9 +155,9 @@ namespace Manager
 
         private void SetObjPosition(GameObject obj)
         {
-            _directX = _diamondList.Count % _data.LimitX * _data.OffsetX;
-            _directY = _diamondList.Count / (_data.LimitX * _data.LimitZ) * _data.OffsetY;
-            _directZ = _diamondList.Count % (_data.LimitX * _data.LimitZ) / _data.LimitX * _data.OffsetZ;
+            _directX = _diamondList.Count % _data.SData.LimitX * _data.SData.OffsetX;
+            _directY = _diamondList.Count / (_data.SData.LimitX * _data.SData.LimitZ) * _data.SData.OffsetY;
+            _directZ = _diamondList.Count % (_data.SData.LimitX * _data.SData.LimitZ) / _data.SData.LimitX * _data.SData.OffsetZ;
             obj.transform.DOLocalMove(new Vector3(_directX, _directY, _directZ), 0.5f);
         }
 

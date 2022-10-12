@@ -1,3 +1,4 @@
+using System;
 using Manager;
 using UnityEngine;
 
@@ -14,11 +15,16 @@ namespace Controller.Npc.Harvester
         #endregion
 
         #endregion
-        
-        
-        
-        
-        
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            harvesterManager.CurrentState.OnTriggerEnterState(other);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            harvesterManager.CurrentState.OnTriggerExitState(other);
+
+        }
     }
 }

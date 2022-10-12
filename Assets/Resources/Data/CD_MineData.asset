@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: CD_MineData
   m_EditorClassIdentifier: 
   Data:
-    OffsetX: 0.6
-    OffsetY: 0.5
-    OffsetZ: 0.5
-    LimitX: 4
-    LimitY: 0
-    LimitZ: 4
+    SData:
+      OffsetX: 0.5
+      OffsetY: 0.5
+      OffsetZ: 0.5
+      LimitX: 4
+      LimitY: 0
+      LimitZ: 4
+      StackLimit: 10
+      AnimationDurition: 1
     MinerCapacity: 7

@@ -17,6 +17,12 @@ TagManager:
   - Miner
   - TurretStack
   - Support
+  - Turret
+  - Harvester
+  - Enemy
+  - BulletArea
+  - Bullet
+  - AttackArea
   layers:
   - Default
   - TransparentFX
@@ -26,7 +32,7 @@ TagManager:
   - UI
   - 
   - BattleArea
-  - Door
+  - Bridge
   - 
   - 
   - 

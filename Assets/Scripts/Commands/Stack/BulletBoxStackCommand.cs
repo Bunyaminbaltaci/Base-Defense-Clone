@@ -13,7 +13,7 @@ namespace Commands
 
         #region Private Variables
 
-        private StackController _stackController;
+       
         private List<GameObject> _stack;
         private StackData _data;
         private float _directY;
@@ -25,9 +25,9 @@ namespace Commands
 
         #endregion
 
-        public BulletBoxStackCommand(ref StackController stackController,ref List<GameObject> stack,ref StackData data)
+        public BulletBoxStackCommand(ref List<GameObject> stack,ref StackData data)
         {
-            _stackController = stackController;
+           
             _stack = stack;
            
             _data = data;

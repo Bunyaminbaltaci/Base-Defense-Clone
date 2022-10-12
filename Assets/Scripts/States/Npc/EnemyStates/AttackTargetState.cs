@@ -50,6 +50,8 @@ namespace States.Npc.Enemy
                 SwitchState(EnemyStateType.RushTarget);
             }
         }
+        
+    
 
         public void OnTriggerEnterState(Collider other)
         {

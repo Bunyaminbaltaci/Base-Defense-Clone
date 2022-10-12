@@ -46,10 +46,8 @@ namespace Controllers
         private void Start()
         {
             StackList = new List<GameObject>();
-            _moneyStackCommand = new MoneyStackCommand(ref stackController, ref StackList, ref stackHolder,
-                ref _moneyStackData);
-            _bulletBoxStackCommand = new BulletBoxStackCommand(ref stackController, ref StackList,
-                ref _bulletBoxStackData);
+            _moneyStackCommand = new MoneyStackCommand( ref StackList, ref _moneyStackData);
+            _bulletBoxStackCommand = new BulletBoxStackCommand( ref StackList, ref _bulletBoxStackData);
             _moneyDepositCommand = new MoneyDepositCommand(ref StackList);
             _bulletBoxDepositCommand = new BulletBoxDepositCommand(ref StackList);
         }
@@ -100,6 +98,7 @@ namespace Controllers
                     break;
             }
         }
+     
 
         public void StartCollect()
         {

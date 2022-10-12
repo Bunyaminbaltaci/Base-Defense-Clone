@@ -48,7 +48,7 @@ namespace States.Npc.SupportStates
 
         public void OnTriggerEnterState(Collider other)
         {
-            if (other.CompareTag("Ammo"))
+            if (other.CompareTag("BulletArea"))
             {
                 _manager.StartCoroutine(_manager.TakeBulletBox());
                 _manager.SwitchState(SupportStatesType.WaitForFullStack);   

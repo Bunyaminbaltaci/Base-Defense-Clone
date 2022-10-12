@@ -38,7 +38,7 @@ namespace Manager
             UISignals.Instance.onSetMoneyText += onSetMoneyText;
             UISignals.Instance.onSetDiamondText += OnSetDiamondText;
 
-            CoreGameSignals.Instance.onGetGameState += OnGetGameState;
+          
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
@@ -49,7 +49,6 @@ namespace Manager
             UISignals.Instance.onSetMoneyText -= onSetMoneyText;
             UISignals.Instance.onSetDiamondText -= OnSetDiamondText;
             
-            CoreGameSignals.Instance.onGetGameState -= OnGetGameState;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
@@ -116,15 +115,6 @@ namespace Manager
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.WinPanel);
         }
 
-        private void OnGetGameState(GameStates states)
-        {
-            switch (states)
-            {
-                case GameStates.Idle:
-                    UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-                    UISignals.Instance.onOpenPanel?.Invoke(UIPanels.WinPanel);
-                    break;
-            }
-        }
+     
     }
 }

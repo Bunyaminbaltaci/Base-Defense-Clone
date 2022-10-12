@@ -1,5 +1,7 @@
+using System.Collections;
 using Abstract;
 using Controller.Npc;
+using Controller.Other;
 using Controllers;
 using Data;
 using Datas.ValueObject;
@@ -32,7 +34,7 @@ namespace Manager
 
         #region Private Variables
 
-        private GoExitBaseState _goExitBase;
+      
         private GoEnterBaseState _goEnterBase;
         private WaitMoneyState _waitMoney;
         private CollectMoneyState _collectMoneyState;
@@ -69,9 +71,7 @@ namespace Manager
             _waitMoney = new WaitMoneyState(ref manager,ref agent);
             _collectMoneyState = new CollectMoneyState(ref manager,ref agent);
             _goEnterBase = new GoEnterBaseState(ref manager,ref agent);
-            _goExitBase = new GoExitBaseState(ref manager,ref agent);
-        
-            CurrentState = _goExitBase;
+            CurrentState = _goEnterBase;
         }
 
         private void Start()
@@ -96,10 +96,7 @@ namespace Manager
                 case HarvesterStateType.GoEnterBase  :
                     CurrentState = _goEnterBase;
                     break;
-                case HarvesterStateType.GoExitBase :
-                    CurrentState = _goExitBase ;
-                    break; 
-                case HarvesterStateType.CollectMoney :
+              case HarvesterStateType.CollectMoney :
                     CurrentState = _collectMoneyState ;
                     break;
                 case HarvesterStateType.WaitMoney:
@@ -113,10 +110,20 @@ namespace Manager
             stackController.StartCollect();
         }
 
+        public void StartCort(IEnumerator name)
+        {
+            StartCoroutine(name);
+        }
+
         public void AddStack(GameObject money)
         {
-            stackController.AddStack(money);
-            if (stackController.StackList.Count>=_data.SData.StackLimit)
+         
+            if (stackController.StackList.Count<=_data.SData.StackLimit)
+            {
+                money.GetComponent<MoneyController>().isTaked();
+                stackController.AddStack(money);
+            }
+            else
             {
                 SwitchState(HarvesterStateType.GoEnterBase);
             }

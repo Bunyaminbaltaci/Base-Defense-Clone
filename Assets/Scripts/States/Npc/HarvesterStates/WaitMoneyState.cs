@@ -40,6 +40,8 @@ namespace States.HarvesterStates
         public void EnterState()
         {
             _manager.SetTriggerAnim(WorkerAnimType.Idle);
+            
+            _manager.StartCort(WaitForTarget());
         }
 
         public void UpdateState()
@@ -70,9 +72,9 @@ namespace States.HarvesterStates
                     _manager.SwitchState(HarvesterStateType.CollectMoney);
                     break;
                 }
-
-
+                
                 yield return waiter;
+              
             }
 
           

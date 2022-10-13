@@ -21,6 +21,7 @@ namespace Managers.Core
         #region Public Variables
 
         public GameObject CurrentParent;
+        public GameObject Target;
 
         #endregion
 
@@ -110,9 +111,9 @@ namespace Managers.Core
             playerMovementController.UpdateInputValue(inputParam);
         }
 
-        public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
+        public void PlayAnim(PlayerAnimationStates playerAnimationStates, float Value)
         {
-            playerAnimationController.PlayAnim(playerAnimationStates, isTrue);
+            playerAnimationController.PlayAnim(playerAnimationStates, Value);
         }
 
         public void ChageStackState(StackType type)

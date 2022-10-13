@@ -29,6 +29,8 @@ namespace Controllers
         private PlayerData _playerMovementData;
         private InputParams _inputParams;
         private PlayerMovementState _movementState;
+        private Vector3 _root;
+        private Vector3 _movement;
         
 
         #endregion
@@ -59,16 +61,34 @@ namespace Controllers
       
         private void NormalMove()
         {
-            var _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed, 0,
+             _movement = new Vector3(_inputParams.Values.x * _playerMovementData.PlayerJoystickSpeed, 0,
                 _inputParams.Values.z * _playerMovementData.PlayerJoystickSpeed);
             rigidbody.velocity = _movement;
-            playerManager.PlayAnim(PlayerAnimationStates.Run,
-                Mathf.Abs(_inputParams.Values.x) + Mathf.Abs(_inputParams.Values.z));
-            if (_movement != Vector3.zero)
+            SetAnimAndRotation();
+         
+        }
+
+        private void SetAnimAndRotation()
+        {
+         
+            if (playerManager.Target==null)
             {
+             
+                playerManager.PlayAnim(PlayerAnimationStates.RunZ,
+                    Mathf.Abs(_inputParams.Values.x) + Mathf.Abs(_inputParams.Values.z));
                 var _newDirect = Quaternion.LookRotation(_movement);
                 rigidbody.transform.GetChild(0).rotation = _newDirect;
             }
+            else
+            {
+                rigidbody.transform.GetChild(0).LookAt(playerManager.Target.transform);
+                _root =playerManager.Target.transform.position- playerManager.transform.position;
+                playerManager.PlayAnim(PlayerAnimationStates.RunZ,
+                    Mathf.Clamp((_root.z+_root.x) * _inputParams.Values.z,-1f,1f)); 
+                playerManager.PlayAnim(PlayerAnimationStates.RunX,
+                    Mathf.Clamp((_root.z+_root.x)* _inputParams.Values.x,-1f,1f));
+            }
+            
         }
 
         private void TurretMove()
@@ -97,8 +117,11 @@ namespace Controllers
         }
         public void ChangeState(PlayerMovementState state)
         {
-            playerManager.PlayAnim(PlayerAnimationStates.Run,
+            playerManager.PlayAnim(PlayerAnimationStates.RunZ,
+                0);   
+            playerManager.PlayAnim(PlayerAnimationStates.RunX,
                 0);
+            
             rigidbody.velocity=Vector3.zero;
             _movementState = state;
         }

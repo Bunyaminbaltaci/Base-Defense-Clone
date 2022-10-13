@@ -2,8 +2,9 @@ namespace Enums
 {
     public enum PlayerAnimationStates
     {
+        RunX,
+        RunZ,
         Idle,
-        Run,
         CrouchWalk,
         Crouch,
         Dead

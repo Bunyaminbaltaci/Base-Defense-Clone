@@ -21,3 +21,5 @@ MonoBehaviour:
     AreaCost: 10
   - Name: Turret2
     AreaCost: 20
+  - Name: Stage
+    AreaCost: 100

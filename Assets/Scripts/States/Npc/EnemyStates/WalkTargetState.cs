@@ -1,6 +1,6 @@
 using Abstract;
 using Enums.Npc;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -41,6 +41,7 @@ namespace States.Npc.Enemy
         }
         public void EnterState()
         {
+            _manager.Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
             _agent.SetDestination(_manager.Target.transform.position);
             _manager.SetTriggerAnim(EnemyAnimType.Walk);
         }
@@ -60,14 +61,8 @@ namespace States.Npc.Enemy
         }
 
         public void OnTriggerExitState(Collider other)
-        { 
-            if (other.CompareTag("Player"))
-            {
-                _manager.Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
-                SwitchState(EnemyStateType.WalkTarget);
-              
-            }
-         
+        {
+
         }
 
         public void SwitchState(EnemyStateType type)

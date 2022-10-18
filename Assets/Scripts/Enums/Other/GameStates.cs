@@ -4,7 +4,8 @@ namespace Enums
     {
         Idle,
         Drone,
-        Turret
+        Turret,
+        
         
     }
 }

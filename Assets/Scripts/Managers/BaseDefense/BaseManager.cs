@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Manager
+namespace Controller
 {
     public class BaseManager : MonoBehaviour, ISavable
     {
@@ -168,7 +168,10 @@ namespace Manager
 
         private GameObject OnGetHarvesterTarget()
         {
-            if (_moneyTransformList.Count > 0) return _moneyTransformList[Random.Range(0, _moneyTransformList.Count)];
+            if (_moneyTransformList.Count > 0)
+            {
+                return _moneyTransformList[Random.Range(0, _moneyTransformList.Count)];
+            }
 
             return null;
         }

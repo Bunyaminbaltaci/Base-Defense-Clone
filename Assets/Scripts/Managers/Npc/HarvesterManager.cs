@@ -1,8 +1,7 @@
 using System.Collections;
 using Abstract;
 using Controller.Npc;
-using Controller.Other;
-using Controllers;
+using Controller;
 using Data;
 using Datas.ValueObject;
 using Enums.Npc;
@@ -10,7 +9,7 @@ using States.HarvesterStates;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Manager
+namespace Controller
 {
     public class HarvesterManager : MonoBehaviour
     {

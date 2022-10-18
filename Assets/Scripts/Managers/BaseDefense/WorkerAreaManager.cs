@@ -8,7 +8,7 @@ using Signals;
 using TMPro;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class WorkerAreaManager : MonoBehaviour, ISavable
     {
@@ -108,6 +108,7 @@ namespace Manager
 
         public void BuySupport()
         {
+            
             var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Support);
             obj.transform.position = supportBuyArea.transform.position;
             obj.SetActive(true);

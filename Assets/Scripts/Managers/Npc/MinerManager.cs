@@ -2,17 +2,17 @@ using System;
 using System.Collections;
 using System.Net.NetworkInformation;
 using Abstract;
+using Controller.Npc;
 using Data;
 using Datas.ValueObject;
 using Enums;
 using Enums.Npc;
-using Manager.Npc;
 using Signals;
 using States.MinerStates;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Manager
+namespace Controller
 {
     public class MinerManager : MonoBehaviour
     {

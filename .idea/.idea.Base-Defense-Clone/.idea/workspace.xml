@@ -2,14 +2,116 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd9a3ebd-b6b8-47bd-898f-179f3f44ff87" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/AmmoController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/AmmoController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/HostageCollectorController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/HostageCollectorController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerAttackController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerAttackController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerHealthController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerHealthController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/LayerType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/LayerType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/HostageSpawnParams.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/HostageSpawnParams.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Player/Character_18@Pistol Run.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Player/Character_18@Pistol Run.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Animations/Player/Arm.mask" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animations/Player/Arm.mask" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Art/Animators/PlayerController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animators/PlayerController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Bullet.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Bullet.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/BulletHolder.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/BulletHolder.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Packages/GUI PRO Kit - Casual Game/ResourcesData/Sprite/Demo/Demo_Icon_ItemIcons(Original)/Icon_Gem02_Hexagon_Purple.Png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Packages/GUI PRO Kit - Casual Game/ResourcesData/Sprite/Demo/Demo_Icon_ItemIcons(Original)/Icon_Gem02_Hexagon_Purple.Png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ammo/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ammo/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character/PlayerManager.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Character/PlayerManager.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Enemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Harvester.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Harvester.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Hostage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Hostage.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Miner.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Miner.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Support.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Support.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_BuildData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_BuildData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_GunShopData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_GunShopData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_Input.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_Input.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_Player.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_Player.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_PoolGenerator.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_PoolGenerator.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Base 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Base 0.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Input/StartOfDraggingCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Input/StartOfDraggingCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/BulletBoxStackCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/BulletBoxStackCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/MoneyStackCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/MoneyStackCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Turret/TurretBulletBoxAddCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Turret/TurretBulletBoxAddCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Area/AreaPhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Area/AreaPhysicController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Enemy/EnemyPhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Enemy/EnemyPhysicController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Harvester/HarvesterPhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Harvester/HarvesterPhysicController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostageAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostageAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostagePhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Hostage/HostagePhysicController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerPhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Miner/MinerPhysicController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Support/SupportAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Support/SupportAnimationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Support/SupportPhysicController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Support/SupportPhysicController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/BulletController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/BulletController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/DoorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/DoorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/MoneyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/MoneyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/StackController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/StackController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerAnimationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerAnimationController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerMovementController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAttackController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAttackController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAutoModeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAutoModeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretMovementController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/LevelPanelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/LevelPanelController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/UIPanelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/UI/UIPanelController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/WorkerArea/WorkerBuyAreaController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/WorkerArea/WorkerBuyAreaController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/GunData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/GunData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PlayerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/PlayerData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/BuildType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/BuildType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/GameStates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/GameStates.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/PlayerAnimationStates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/PlayerAnimationStates.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/PoolType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/PoolType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/AreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/AreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BaseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BaseManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BulletAreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BulletAreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/GunShopManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/GunShopManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/IdleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/IdleManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/SpawnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/TurretManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/TurretManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/WorkerAreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/WorkerAreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/CameraManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/CameraManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/InputManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PlayerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PoolManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PoolManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/SaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/ScoreManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/ScoreManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/EnemyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HarvesterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HarvesterManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/MinerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/MinerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/SoldierManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/SoldierManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/SupportManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/SupportManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/BaseSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/BaseSignals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/CoreGameSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/CoreGameSignals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/SaveSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/SaveSignals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/AttackTargetState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/AttackTargetState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/DeadState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/DeadState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/RushTargetState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/RushTargetState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/WalkTargetState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/WalkTargetState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/HarvesterStates/CollectMoneyState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/HarvesterStates/CollectMoneyState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/HarvesterStates/GoEnterBaseState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/HarvesterStates/GoEnterBaseState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/HarvesterStates/WaitMoneyState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/HarvesterStates/WaitMoneyState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/FollowState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/FollowState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/TerrifiedState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/Hostage/TerrifiedState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/DigState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/DigState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoMineState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoMineState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoStackState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/GoStackState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/WaitState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/MinerStates/WaitState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SoldierStates/AttackEnemyState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SoldierStates/AttackEnemyState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/GoAmmoAreaState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/GoAmmoAreaState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/GoTurretStackState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/GoTurretStackState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/WaitForDischargeState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/WaitForDischargeState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/WaitForFullStack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/SupportStates/WaitForFullStack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +121,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Commands/Pool/PoolGenerateCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/SpawnManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Npc/MinerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Npc/SoldierManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -143,6 +246,14 @@
       <workItem from="1665514240017" duration="10809000" />
       <workItem from="1665593437114" duration="71000" />
       <workItem from="1665604189483" duration="8084000" />
+      <workItem from="1665621478046" duration="627000" />
+      <workItem from="1665647445982" duration="24377000" />
+      <workItem from="1665763027084" duration="6934000" />
+      <workItem from="1665828756753" duration="8173000" />
+      <workItem from="1665859991741" duration="8216000" />
+      <workItem from="1665932290352" duration="1826000" />
+      <workItem from="1665999277471" duration="11475000" />
+      <workItem from="1666103117382" duration="14930000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Commands.Turret;
-using Controller.Other;
+using Controller;
 using Controller.Turret;
 using Data;
 using Datas.ValueObject;
@@ -9,7 +9,7 @@ using Keys;
 using Signals;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class TurretManager : MonoBehaviour
     {
@@ -225,10 +225,9 @@ namespace Manager
 
         public void GetTarget()
         {
-            while (turretAttackController.Damageables.Count > 0)
+            if (turretAttackController.Damageables.Count > 0)
             {
                 Target = turretAttackController.Damageables[0];
-                if (Target != null) break;
             }
         }
 

@@ -4,7 +4,7 @@ using Keys;
 using Signals;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class ScoreManager : MonoBehaviour, ISavable
     {

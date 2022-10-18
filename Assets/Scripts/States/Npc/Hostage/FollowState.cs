@@ -1,6 +1,7 @@
 using Abstract;
 using Enums.Npc;
-using Manager;
+using Controller;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -35,6 +36,7 @@ namespace States.MinerStates
 
         public void EnterState()
         {
+            BaseSignals.Instance.onRemoveHostageInSpawnPoint?.Invoke(_manager.gameObject);
             _agent.SetDestination(_manager.Target.transform.position);
             _manager.SetTriggerAnim(HostageAnimType.Idle);
         }
@@ -53,10 +55,7 @@ namespace States.MinerStates
         {
             
         }
-
-        public void SwitchState()
-        {
-        }
+        
 
         private void FollowPlayer()
         {

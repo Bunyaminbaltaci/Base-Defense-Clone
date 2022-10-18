@@ -1,7 +1,7 @@
 using Abstract;
 using Enums;
 using Enums.Npc;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -45,6 +45,7 @@ namespace States.MinerStates
 
         public void UpdateState()
         {
+            _agent.destination=_manager.Stack.transform.position;
         }
 
         public void OnTriggerEnterState(Collider other)

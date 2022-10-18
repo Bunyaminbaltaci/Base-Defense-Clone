@@ -1,7 +1,7 @@
 using Abstract;
 using Enums;
 using Enums.Npc;
-using Manager;
+using Controller;
 using UnityEngine;
 using UnityEngine.AI;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using Abstract;
 using Enums;
 using Enums.Npc;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -38,7 +38,7 @@ namespace States.Npc.Enemy
 
         public void EnterState()
         {
-            _agent.SetDestination(_manager.transform.position);
+
             IsDead();
         }
 
@@ -61,6 +61,7 @@ namespace States.Npc.Enemy
 
         private void IsDead()
         {
+            _manager.StopAllCoroutines();
             for (int i = 0; i < 3; i++)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Money);
@@ -81,6 +82,7 @@ namespace States.Npc.Enemy
                 BaseSignals.Instance.onAddHaversterTargetList?.Invoke(obj);
             }
 
+           
             _manager.StartCoroutine(WaitDeadAnim());
         }
 

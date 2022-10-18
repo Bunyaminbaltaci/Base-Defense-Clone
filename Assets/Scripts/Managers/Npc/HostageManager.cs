@@ -1,13 +1,13 @@
 using System;
 using Abstract;
+using Controller.Npc.Hostage;
 using Enums.Npc;
-using Manager.Npc.Hostage;
-using Manager.Npc;
+using Controller.Npc;
 using States.MinerStates;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Manager
+namespace Controller
 {
     public class HostageManager : MonoBehaviour
     {

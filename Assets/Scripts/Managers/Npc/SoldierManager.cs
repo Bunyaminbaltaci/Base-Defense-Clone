@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class SoldierManager : MonoBehaviour
     {

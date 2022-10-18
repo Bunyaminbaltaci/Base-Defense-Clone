@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Manager.Area
+namespace Controller.Area
 {
     public class AreaPhysicController : MonoBehaviour
     {

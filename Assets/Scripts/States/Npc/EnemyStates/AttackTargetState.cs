@@ -1,6 +1,6 @@
 using Abstract;
 using Enums.Npc;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -46,7 +46,6 @@ namespace States.Npc.Enemy
             _agent.destination = _manager.Target.transform.position;
             if (_agent.remainingDistance > _agent.stoppingDistance)
             {
-                _manager.StopAllCoroutines();
                 SwitchState(EnemyStateType.RushTarget);
             }
         }
@@ -61,10 +60,7 @@ namespace States.Npc.Enemy
         {
             if (other.CompareTag("Player"))
             {
-            
-                _manager.Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
                 SwitchState(EnemyStateType.WalkTarget);
-           
             }
         }
 

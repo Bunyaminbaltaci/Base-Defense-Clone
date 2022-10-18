@@ -5,7 +5,7 @@ using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class BulletAreaManager : MonoBehaviour
     {

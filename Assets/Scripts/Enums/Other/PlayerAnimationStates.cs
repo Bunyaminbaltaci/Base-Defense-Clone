@@ -4,9 +4,8 @@ namespace Enums
     {
         RunX,
         RunZ,
-        Idle,
-        CrouchWalk,
-        Crouch,
-        Dead
+        Pistol,
+        Rifle,
+        Shotgun
     }
 }

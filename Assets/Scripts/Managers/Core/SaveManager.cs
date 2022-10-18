@@ -7,7 +7,7 @@ using Signals;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Manager
+namespace Controller
 {
     public class SaveManager : MonoBehaviour
     {
@@ -223,7 +223,7 @@ namespace Manager
                         "GunShopData.json")
                         ? ES3.Load<GunType>("Type",
                             "GunShopData.json")
-                        : 0,
+                        : GunType.Pistol,
                 GData = ES3.KeyExists("GData",
                     "GunShopData.json")
                     ? ES3.Load<Dictionary<GunType, GunData>>("GData",

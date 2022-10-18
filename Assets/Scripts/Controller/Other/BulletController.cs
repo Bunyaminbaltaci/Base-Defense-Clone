@@ -1,12 +1,9 @@
-using System;
 using Abstract;
 using Enums;
 using Signals;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Controller.Other
+namespace Controller
 {
     public class BulletController : MonoBehaviour
     {
@@ -19,7 +16,6 @@ namespace Controller.Other
         #region Serialized Variables
 
         [SerializeField] private Rigidbody rb;
-        [SerializeField] private BulletType bulletType = BulletType.Turret;
 
         #endregion
 
@@ -36,12 +32,7 @@ namespace Controller.Other
 
         private int getDamage()
         {
-            if (bulletType == BulletType.Turret)
-            {
-                return (int)BaseSignals.Instance.onGetTurretDamage?.Invoke();
-            }
-
-            return (int)BaseSignals.Instance.onGetGunDamage?.Invoke();
+            return (int)BaseSignals.Instance.onGetTurretDamage?.Invoke();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -57,11 +48,7 @@ namespace Controller.Other
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("AttackArea"))
-            {
-              
-                PoolSignals.Instance.onSendPool?.Invoke(gameObject, PoolType.Bullet);
-            }
+            if (other.CompareTag("AttackArea")) PoolSignals.Instance.onSendPool?.Invoke(gameObject, PoolType.Bullet);
         }
     }
 }

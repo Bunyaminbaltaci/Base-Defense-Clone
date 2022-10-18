@@ -14,5 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     GData:
-      m_Keys: 
-      m_Values: []
+      m_Keys: 000000000100000002000000
+      m_Values:
+      - Damage: 10
+        FireRate: 0.5
+        GunLevel: 0
+        Price: 0
+      - Damage: 8
+        FireRate: 0.3
+        GunLevel: 0
+        Price: 500
+      - Damage: 12
+        FireRate: 0.7
+        GunLevel: 0
+        Price: 1000

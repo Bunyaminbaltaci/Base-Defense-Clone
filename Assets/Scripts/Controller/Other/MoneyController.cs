@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Controller.Other
+namespace Controller
 {
     public class MoneyController : MonoBehaviour
     {
@@ -23,25 +23,18 @@ namespace Controller.Other
             col2.enabled = false;
         }
 
-        private void OnDisable()
+        public void OnDrop()
         {
             rb.isKinematic = false;
             col.enabled = true;
             col2.enabled = true;
         }
 
+        private void OnDisable()
+        {
+         OnDrop();
+        }
 
-        // private void OnTriggerEnter(Collider other)
-        // {
-        //     if (other.CompareTag("Player"))
-        //     {
-        //         isTaked();
-        //     }
-        //
-        //     if (other.CompareTag("Harvester"))
-        //     {
-        //         isTaked();
-        //     }
-        // }
+        
     }
 }

@@ -98,5 +98,11 @@ namespace Signals
 
         #endregion
 
+        #region Boss
+
+        public UnityAction<Vector3> onSetCrosshair=delegate {  };
+        public UnityAction onBossIsDead=delegate {  };
+
+        #endregion
     }
 }

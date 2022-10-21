@@ -14,14 +14,14 @@ namespace Managers.Core
 
         #region Public Variables
 
-        private int health = 100;
+        private int _health = 100;
 
         public int Health
         {
-            get => health;
+            get => _health;
             set
             {
-                health = value;
+                _health = value;
                 playerHealthController.SetHealthText(value);
                
             }
@@ -167,7 +167,7 @@ namespace Managers.Core
             var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
             transform.parent = newparent;
             transform.DOLocalMove(new Vector3(0, transform.localPosition.y, 0), .5f);
-            transform.DOLocalRotate(Vector3.zero, 0.5f).SetDelay(0.2f);
+            transform.DOLocalRotate(new Vector3(0,180,0), 0.5f).SetDelay(0.2f);
             ChangeMovement(PlayerMovementState.Turret);
             BaseSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
@@ -178,6 +178,7 @@ namespace Managers.Core
         {
             BaseSignals.Instance.onPlayerOutTurret?.Invoke(other.gameObject);
             transform.parent = CurrentParent.transform;
+            transform.DOLocalRotate(Vector3.zero, 0.5f);
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
         }

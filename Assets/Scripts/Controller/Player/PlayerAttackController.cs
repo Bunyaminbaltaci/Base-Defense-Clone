@@ -15,12 +15,15 @@ namespace Controller
         #region Public Variables
 
         public List<GameObject> Damageables = new List<GameObject>();
+
         #endregion
 
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private List<GameObject> barrel;
+        [SerializeField] private GameObject weaponParent;
+
         #endregion
 
         #region Private Variables
@@ -39,19 +42,19 @@ namespace Controller
             {
                 weapons.SetActive(false);
             }
+
             _weaponType = gun;
             barrel[(int)_weaponType].transform.parent.gameObject.SetActive(true);
             SetPlayerHand();
         }
 
 
-
         public void GunDataSet()
         {
             SetFireRate(BaseSignals.Instance.onGetGunFireRate());
             ChangeGunType(BaseSignals.Instance.onGetGunType());
-            
         }
+
         public void ChangeLayer(LayerType type)
         {
             Damageables.Clear();
@@ -62,6 +65,7 @@ namespace Controller
         {
             _fireRate = fireRate;
         }
+
         public void RemoveFromList(GameObject obj)
         {
             if (!Damageables.Contains(obj)) return;
@@ -72,48 +76,48 @@ namespace Controller
             {
                 playerManager.Target = null;
             }
+
             setTarget();
         }
-         IEnumerator Attack()
+
+        IEnumerator Attack()
         {
             WaitForSeconds waiter = new WaitForSeconds(_fireRate);
 
 
-           
-                while (Damageables.Count > 0)
+            while (Damageables.Count > 0)
+            {
+                if (Damageables == null)
                 {
-                    
-
-                        if (Damageables == null)
-                        {
-                            _attackCoroutine = null;
-                            yield break;
-                        }
-                        setTarget();
-
-
-                        Fire();
-
-
-                        yield return waiter;
+                    _attackCoroutine = null;
+                    yield break;
                 }
-                _attackCoroutine = null;
 
-        
+                setTarget();
+
+
+                Fire();
+
+
+                yield return waiter;
+            }
+
+            _attackCoroutine = null;
         }
 
         private void setTarget()
         {
-            if (playerManager.Target==null && Damageables.Count>0)
+            if (playerManager.Target == null && Damageables.Count > 0)
             {
                 playerManager.Target = Damageables[0];
             }
         }
+
         private void SetPlayerHand()
         {
             switch (_weaponType)
             {
-                case GunType.Pistol :
+                case GunType.Pistol:
                     playerManager.PlayTriggerAnim(PlayerAnimationStates.Pistol);
                     break;
                 case GunType.Ak:
@@ -122,7 +126,6 @@ namespace Controller
                 case GunType.Shotgun:
                     playerManager.PlayTriggerAnim(PlayerAnimationStates.Shotgun);
                     break;
-                
             }
         }
 
@@ -132,10 +135,11 @@ namespace Controller
             if (obj != null)
             {
                 SetBullet(obj);
-                obj.GetComponent<Rigidbody>().AddForce(barrel[(int)_weaponType].transform.forward * 5, ForceMode.VelocityChange);
+                obj.GetComponent<Rigidbody>()
+                    .AddForce(barrel[(int)_weaponType].transform.forward * 5, ForceMode.VelocityChange);
             }
         }
-      
+
         private void SetBullet(GameObject obj)
         {
             obj.transform.position = barrel[(int)_weaponType].transform.position;
@@ -144,15 +148,15 @@ namespace Controller
             obj.transform.parent = BaseSignals.Instance.onGetBase?.Invoke().transform;
             obj.SetActive(true);
         }
+
         private void StartToAttack()
         {
             if (_attackCoroutine == null)
             {
                 _attackCoroutine = StartCoroutine(Attack());
             }
-
-         
         }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<IDamageable>() != null && other.CompareTag("Enemy"))
@@ -167,11 +171,8 @@ namespace Controller
         {
             if (other.GetComponent<IDamageable>() != null && other.CompareTag("Enemy"))
             {
-                Damageables.Remove(other.gameObject);
-                Damageables.TrimExcess();
+                RemoveFromList(other.gameObject);
             }
         }
-
-   
     }
 }

@@ -60,6 +60,7 @@ namespace States.Npc.Enemy
         {
             if (other.CompareTag("Player"))
             {
+                _manager.TargetIdamageable = null;
                 SwitchState(EnemyStateType.WalkTarget);
             }
         }

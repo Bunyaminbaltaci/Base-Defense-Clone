@@ -495,7 +495,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -577,7 +577,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -638,7 +638,7 @@ MonoBehaviour:
   buildCostArea: {fileID: 5476099527289290346}
   fence: {fileID: 5476099527289290346}
   area: {fileID: 110084982704605610}
-  areaId: 30
+  _areaId: 
 --- !u!1 &6898527496126711651
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +744,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ae3e138f9bee98c45bf53f49d39fa8e8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

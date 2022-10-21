@@ -55,6 +55,7 @@ namespace States.Npc.Enemy
         {
             if (other.CompareTag("Player"))
             {
+                _manager.TargetIdamageable = other.GetComponentInParent<IDamageable>();
                 _manager.Target = other.gameObject;
                 SwitchState(EnemyStateType.RushTarget);
             }

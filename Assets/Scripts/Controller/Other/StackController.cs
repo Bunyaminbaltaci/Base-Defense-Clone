@@ -77,9 +77,10 @@ namespace Controller
 
         public void DropMoney()
         {
+            var parent=BaseSignals.Instance.onGetBase?.Invoke().transform;
             for (int i = StackList.Count-1; i >=0; i--)
             {
-                StackList[i].transform.parent = BaseSignals.Instance.onGetBase?.Invoke().transform;
+                StackList[i].transform.parent = parent;
                 StackList[i].GetComponent<MoneyController>().OnDrop();
                 StackList.RemoveAt(i);
                 

@@ -1354,6 +1354,7 @@ MonoBehaviour:
   - {fileID: 5659300385823956734}
   - {fileID: 8699101448493485297}
   - {fileID: 7978548400172035161}
+  weaponParent: {fileID: 1543539852408843108}
 --- !u!1 &5128043075718921612
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,11 +3042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1191765798028608339, guid: 71a9090ab37f58b4e81a6d666065105d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.099999994
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1191765798028608339, guid: 71a9090ab37f58b4e81a6d666065105d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.09999999
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1191765798028608339, guid: 71a9090ab37f58b4e81a6d666065105d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3086,6 +3087,10 @@ PrefabInstance:
     - target: {fileID: 1191765798028608339, guid: 71a9090ab37f58b4e81a6d666065105d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7425717368108656525, guid: 71a9090ab37f58b4e81a6d666065105d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71a9090ab37f58b4e81a6d666065105d, type: 3}

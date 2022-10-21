@@ -27,7 +27,7 @@ MonoBehaviour:
     ObjectCount: 100
   - Type: 4
     Pref: {fileID: 6176470352046715422, guid: 3cad464f351c1234ca93b5c3ea1cc623, type: 3}
-    ObjectCount: 16
+    ObjectCount: 64
   - Type: 5
     Pref: {fileID: 5080905476774938243, guid: e2eb55abbd7bc6d48b31759b0d6b9e6e, type: 3}
     ObjectCount: 16
@@ -43,3 +43,6 @@ MonoBehaviour:
   - Type: 9
     Pref: {fileID: 4048595076606031853, guid: c043eb8b3b2264d428ecaedd86491593, type: 3}
     ObjectCount: 25
+  - Type: 10
+    Pref: {fileID: 5463685090363102912, guid: a9924902d9e35aa409046582cf260e12, type: 3}
+    ObjectCount: 10

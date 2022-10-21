@@ -20,6 +20,7 @@ namespace Controller
 
         public IStateMachine CurrentState;
         public GameObject Target;
+        public IDamageable TargetIdamageable;
         public int Health { get; set; } = 100;
 
         #endregion
@@ -90,7 +91,11 @@ namespace Controller
         public IEnumerator Attack()
         {
             yield return new WaitForSeconds(1f);
-            Target.GetComponentInParent<PlayerManager>().Damage(5);
+            if (TargetIdamageable!=null)
+            {
+                TargetIdamageable.Damage(5);
+            }
+           
         }
 
         public void SetTriggerAnim(EnemyAnimType animType)

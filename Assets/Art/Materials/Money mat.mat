@@ -21,9 +21,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Money mat
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 6
+  m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
+  m_ShaderKeywords: _MK_ALBEDO_MAP _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_EMISSION
+    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_LIGHT_CEL _MK_RECEIVE_SHADOWS _MK_WRAPPED_DIFFUSE
+    _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
@@ -159,7 +161,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AdvancedTab: 0
+    - _AdvancedTab: 1
     - _AlphaClip: 0
     - _AlphaClipping: 0
     - _AlphaCutoff: 0.5
@@ -244,7 +246,7 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 0
     - _ThresholdMapScale: 1
     - _UVSec: 0
@@ -260,7 +262,7 @@ Material:
     - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _Color: {r: 0.64000005, g: 0.64000005, b: 0.64000005, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0.17326349, g: 0.31132078, b: 0.11894804, a: 0}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}

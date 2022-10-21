@@ -76,6 +76,7 @@ namespace Controller
             BaseSignals.Instance.onAddHaversterTargetList += OnAddHaversterTargetList;
             BaseSignals.Instance.onRemoveHaversterTargetList += OnRemoveHaversterTargetList;
 
+
             SaveSignals.Instance.onGetSaveIdleData += OnGetSaveIdleData;
         }
 
@@ -103,6 +104,8 @@ namespace Controller
 
             SaveSignals.Instance.onGetSaveIdleData -= OnGetSaveIdleData;
         }
+
+      
 
         private void OnTurretIsAutoSub(string name, bool isAuto)
         {

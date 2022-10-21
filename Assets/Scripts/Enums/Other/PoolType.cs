@@ -11,7 +11,8 @@ namespace Enums
         Hostage,
         Support,
         Harvester,
-        Ammo
+        Ammo,
+        Grenade
 
 
     }

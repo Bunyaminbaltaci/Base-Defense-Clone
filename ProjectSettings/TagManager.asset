@@ -24,6 +24,7 @@ TagManager:
   - Bullet
   - AttackArea
   - GunShop
+  - Ground
   layers:
   - Default
   - TransparentFX

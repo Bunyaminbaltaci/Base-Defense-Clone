@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     WeaponType: 0
-    PlayerJoystickSpeed: 3.1
+    PlayerJoystickSpeed: 4
     StackLevel: 1
     BulletBoxStackData:
       OffsetX: 0.05

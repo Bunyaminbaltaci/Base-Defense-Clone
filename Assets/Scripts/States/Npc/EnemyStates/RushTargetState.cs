@@ -42,8 +42,9 @@ namespace States.Npc.Enemy
         }
         public void EnterState()
         {
+            Debug.Log("Rush");
 
-            _agent.SetDestination(_manager.Target.transform.position);
+          
             _manager.SetTriggerAnim(EnemyAnimType.Run);
 
         }
@@ -51,7 +52,7 @@ namespace States.Npc.Enemy
         public void UpdateState()
         {
             _agent.destination = _manager.Target.transform.position;
-            if (_agent.remainingDistance<=_agent.stoppingDistance)
+            if ((_manager.transform.position-_manager.Target.transform.position).sqrMagnitude <=Mathf.Pow(_agent.stoppingDistance,2))
             {
                 SwitchState(EnemyStateType.AttackTarget);
             }
@@ -65,6 +66,7 @@ namespace States.Npc.Enemy
         {
             if (other.CompareTag("Player"))
             {
+
                 _manager.TargetIdamageable = null;
                 SwitchState(EnemyStateType.WalkTarget);
             }

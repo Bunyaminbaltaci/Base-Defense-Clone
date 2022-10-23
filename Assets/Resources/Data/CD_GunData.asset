@@ -17,14 +17,14 @@ MonoBehaviour:
       m_Keys: 000000000100000002000000
       m_Values:
       - Damage: 25
-        FireRate: 0.5
+        FireRate: 0.35
         GunLevel: 0
         Price: 0
       - Damage: 15
-        FireRate: 0.3
+        FireRate: 0.2
         GunLevel: 0
         Price: 500
       - Damage: 17
-        FireRate: 0.7
+        FireRate: 0.4
         GunLevel: 0
         Price: 1000

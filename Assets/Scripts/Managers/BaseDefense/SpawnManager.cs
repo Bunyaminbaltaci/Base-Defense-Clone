@@ -106,7 +106,7 @@ namespace Managers
 
         private IEnumerator StartEnemySpawn()
         {
-            var waiter = new WaitForSeconds(2.5f);
+            var waiter = new WaitForSeconds(2.25f);
             while (true)
             {
                 var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Enemy);
@@ -126,7 +126,7 @@ namespace Managers
 
         private IEnumerator StartHostageSpawn()
         {
-            var waiter = new WaitForSeconds(5f);
+            var waiter = new WaitForSeconds(4f);
 
             for (int i = 0; i < _hostageSpawnPoints.Count; i++)
             {

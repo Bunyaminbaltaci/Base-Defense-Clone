@@ -20,7 +20,7 @@ namespace Controller.Npc.Boss
 
         [SerializeField] private BossManager bossManager;
         [SerializeField] private GameObject bombHolder;
-        [SerializeField]private float throwTime = 2;
+        [SerializeField]private float throwTime = 1.5f;
 
         #endregion
 

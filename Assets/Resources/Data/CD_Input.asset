@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CD_Input
   m_EditorClassIdentifier: 
   InputData:
-    PlayerInputSpeed: 3
+    PlayerInputSpeed: 4

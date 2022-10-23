@@ -42,7 +42,7 @@ namespace Commands
                 var obj = _stackList[0];
               
                 obj.transform.DOLocalMove(
-                    new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0, 0.5f), Random.Range(-0.5f, 0.5f)), 0.5f);
+                    new Vector3(Random.Range(-0.25f, 0.25f), Random.Range(0, 0.25f), Random.Range(-0.25f, 0.25f)), 0.5f);
                 obj.transform.DOLocalMove(new Vector3(0, 0.1f, 0), 0.5f).SetDelay(0.5f).OnComplete(() =>
                 {
                     PoolSignals.Instance.onSendPool?.Invoke(obj, PoolType.Money);

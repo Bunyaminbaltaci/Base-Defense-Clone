@@ -41,14 +41,21 @@ namespace States.Npc.Enemy
         }
         public void EnterState()
         {
+           
+
             _manager.Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
             _agent.SetDestination(_manager.Target.transform.position);
+         
+          
             _manager.SetTriggerAnim(EnemyAnimType.Walk);
         }
 
         public void UpdateState()
         {
-          
+            if ( (_manager.transform.position-_manager.Target.transform.position).sqrMagnitude <=Mathf.Pow(_agent.stoppingDistance,2))
+            {
+                SwitchState(EnemyStateType.AttackTarget);
+            }
         }
 
         public void OnTriggerEnterState(Collider other)

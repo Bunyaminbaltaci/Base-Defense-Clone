@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Abstract;
 using Controller.Npc.Enemy;
@@ -28,7 +29,6 @@ namespace Controller
         #region Serialized Variables
 
         [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private EnemyAnimationController animationController;
 
         #endregion
@@ -53,7 +53,7 @@ namespace Controller
 
         private void OnEnable()
         {
-            Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
+            CurrentState = _walkTargetState;
             CurrentState.EnterState();
         }
 
@@ -65,23 +65,25 @@ namespace Controller
             IsDead = false;
             Health = 100;
             agent.enabled = true;
-            CurrentState = _walkTargetState;
+     
         }
 
         private void GetReferences()
         {
-            _attackTargetState = new AttackTargetState(ref enemyManager, ref agent);
-            _deadState = new DeadState(ref enemyManager, ref agent);
-            _rushTargetState = new RushTargetState(ref enemyManager, ref agent);
-            _walkTargetState = new WalkTargetState(ref enemyManager, ref agent);
+            var manager = this;
+            _attackTargetState = new AttackTargetState(ref manager, ref agent);
+            _deadState = new DeadState(ref manager, ref agent);
+            _rushTargetState = new RushTargetState(ref manager, ref agent);
+            _walkTargetState = new WalkTargetState(ref manager, ref agent);
 
-            CurrentState = _walkTargetState;
         }
 
         private void Start()
         {
+            CurrentState = _walkTargetState;
             CurrentState.EnterState();
         }
+
 
         private void Update()
         {

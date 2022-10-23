@@ -71,8 +71,9 @@ namespace Controller
         {
             if (_inputParams.Values.z < -0.6f)
             {
+               
+                playerManager.PlayTriggerAnim(PlayerAnimationStates.Run);
                 playerManager.ChangeMovement(PlayerMovementState.Normal);
-                BaseSignals.Instance.onPlayerOutTurret?.Invoke(transform.parent.transform.parent.gameObject);
             }
         }
 

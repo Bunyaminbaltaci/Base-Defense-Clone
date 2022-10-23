@@ -94,7 +94,7 @@ namespace Controller
 
             if (other.CompareTag("Turret"))
             {
-                if (other.GetComponent<TurretManager>().TurretType == TurretState.None)
+                if (other.GetComponent<TurretManager>().TurretType == TurretState.PlayerIn)
                 {
                     playerManager.OutTurret(other.gameObject);
                 }

@@ -1,8 +1,10 @@
+using System.Collections;
 using Abstract;
 using Controller;
 using Data;
 using DG.Tweening;
 using Enums;
+using Keys;
 using Signals;
 using UnityEngine;
 
@@ -49,6 +51,7 @@ namespace Managers.Core
         private HostageCollectorController _hostageCollectorController;
         private PlayerData _data;
         private LayerType _side;
+        private bool _isDead=false;
 
         #endregion
 
@@ -81,15 +84,17 @@ namespace Managers.Core
 
         private void Subscribe()
         {
-            InputSignals.Instance.onInputDragged += playerMovementController.UpdateInputValue;
+            InputSignals.Instance.onInputDragged += OnInputDragged;
             BaseSignals.Instance.onGunDataSet += OnGunDataSet;
             BaseSignals.Instance.onRemoveInDamageableStack += OnRemoveInDamageableStack;
             CoreGameSignals.Instance.onGetHostageTarget += _hostageCollectorController.GetHostageTarget;
         }
 
+      
+
         private void Unsubscribe()
         {
-            InputSignals.Instance.onInputDragged -= playerMovementController.UpdateInputValue;
+            InputSignals.Instance.onInputDragged -= OnInputDragged;
             BaseSignals.Instance.onGunDataSet -= OnGunDataSet;
             BaseSignals.Instance.onRemoveInDamageableStack += OnRemoveInDamageableStack;
             CoreGameSignals.Instance.onGetHostageTarget -= _hostageCollectorController.GetHostageTarget;
@@ -110,6 +115,11 @@ namespace Managers.Core
             OnGunDataSet();
         }
 
+        private void OnInputDragged(InputParams value)
+        {
+            if (_isDead) value=new InputParams();
+            playerMovementController.UpdateInputValue(value);
+        }
         public void ChangeLayer()
         {
             switch (_side)
@@ -166,12 +176,13 @@ namespace Managers.Core
         {
             var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
             transform.parent = newparent;
-            transform.DOLocalMove(new Vector3(0, transform.localPosition.y, 0), .5f);
+            transform.DOLocalMove(new Vector3(0, transform.localPosition.y, 0.30f), .5f);
             transform.DOLocalRotate(new Vector3(0,180,0), 0.5f).SetDelay(0.2f);
             ChangeMovement(PlayerMovementState.Turret);
             BaseSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
+            PlayTriggerAnim(PlayerAnimationStates.Hold);
         }
 
         public void OutTurret(GameObject other)
@@ -211,22 +222,32 @@ namespace Managers.Core
             stackController.SetStackData(_data.BulletBoxStackData, _data.MoneyBoxStackData);
         }
 
-        private void isDead()
+        private IEnumerator isDead()
         {
-            
+            WaitForSeconds waiter = new WaitForSeconds(2f);
             stackController.DropMoney();
-            ChangeLayer();
             _hostageCollectorController.DropFollowers();
+            _isDead = true;
+            PlayTriggerAnim(PlayerAnimationStates.Dead);
+            ChangeLayer();
+            yield return waiter;
+        
+            PlayTriggerAnim(PlayerAnimationStates.Run); 
+            _isDead = false;
             transform.position = BaseSignals.Instance.onGetEnter.Invoke().transform.position;
         }
 
         public void Damage(int damage)
         {
-            Health -= damage;
-            if (Health<=0)
+            if (_isDead==false)
             {
-                isDead();
+                Health -= damage;
+                if (Health<=0)
+                {
+                    Health = 0;
+                    StartCoroutine(isDead());
              
+                }
             }
         }
     }

@@ -42,12 +42,15 @@ namespace Controller.Npc.Boss
 
         public void PrepareBomb()
         {
-            _grenade = PoolSignals.Instance.onGetPoolObject(PoolType.Grenade);
-            _grenade.GetComponent<GrenadeController>().InHand();
-            _grenade.transform.parent = bombHolder.transform;
-            _grenade.transform.localPosition = Vector3.zero;
-            _grenade.transform.DOLocalRotate(Vector3.zero, 0);
-            _grenade.SetActive(true);
+            if (_grenade==null)
+            {
+                _grenade = PoolSignals.Instance.onGetPoolObject(PoolType.Grenade);
+                _grenade.GetComponent<GrenadeController>().InHand();
+                _grenade.transform.parent = bombHolder.transform;
+                _grenade.transform.localPosition = Vector3.zero;
+                _grenade.transform.DOLocalRotate(Vector3.zero, 0);
+                _grenade.SetActive(true);
+            }
         }
 
         private Vector3 VelocityCalculate()
@@ -71,6 +74,7 @@ namespace Controller.Npc.Boss
             _grenade.GetComponent<GrenadeController>().Throw();
             _grenade.GetComponent<Rigidbody>().AddForce(VelocityCalculate(), ForceMode.VelocityChange);
             BaseSignals.Instance.onSetCrosshair?.Invoke(bossManager.Target.transform.position);
+            _grenade = null;
         }
         
     }

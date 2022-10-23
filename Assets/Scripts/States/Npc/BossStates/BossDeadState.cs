@@ -39,6 +39,7 @@ namespace States.Npc.BossStates
         {
             _manager.SetTriggerAnim(BossAnimType.Dead);
             _manager.Target = null;
+         
             BaseSignals.Instance.onBossIsDead?.Invoke();
         }
 

@@ -44,7 +44,7 @@ namespace Controller.Npc.Boss
 
         private void SetHealthBar(int health)
         {
-            healthBar.transform.localScale = new Vector3((health / 2000f), healthBar.transform.localScale.y,
+            healthBar.transform.localScale = new Vector3((health / 1000f), healthBar.transform.localScale.y,
                 healthBar.transform.localScale.z);
         }
     }

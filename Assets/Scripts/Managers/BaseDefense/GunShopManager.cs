@@ -38,7 +38,7 @@ namespace Controller
 
         private SerializedDictionary<GunType, GunData> GetData()
         {
-            return Resources.Load<CD_GunShopData>("Data/CD_GunShopData").Data.GData;
+            return Resources.Load<CD_GunData>("Data/CD_GunData").Data.GData;
         }
 
 

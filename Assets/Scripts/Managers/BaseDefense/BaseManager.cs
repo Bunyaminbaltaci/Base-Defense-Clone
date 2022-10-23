@@ -5,6 +5,7 @@ using Abstract;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,6 +24,7 @@ namespace Controller
         [SerializeField] private List<GameObject> enemyTargetList;
         [SerializeField] private GameObject ammoArea;
         [SerializeField] private GameObject baseEnterPoint;
+        [SerializeField] private TextMeshPro baseText;
 
         #endregion
 
@@ -134,8 +136,13 @@ namespace Controller
         private void Start()
         {
             LoadData();
+            SetBaseText(IdleSignals.Instance.onGetBaseLevel());
         }
 
+        private void SetBaseText(int level)
+        {
+            baseText.text = "Base " + (level+1);
+        }
         private bool OnTurretIsAuto(string turret)
         {
             

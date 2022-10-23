@@ -23,4 +23,5 @@ MonoBehaviour:
       StackLimit: 12
       AnimationDurition: 0.3
     FireRate: 0.35
-    Damage: 10
+    Damage: 30
+    AutoModeCost: 50

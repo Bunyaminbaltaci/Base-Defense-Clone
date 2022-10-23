@@ -6,6 +6,9 @@ namespace Enums
         RunZ,
         Pistol,
         Rifle,
-        Shotgun
+        Shotgun,
+        Dead,
+        Hold,
+        Run
     }
 }

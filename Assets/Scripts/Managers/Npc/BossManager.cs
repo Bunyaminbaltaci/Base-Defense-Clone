@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Abstract;
 using Controller.Npc.Boss;
 using Enums.Npc;
@@ -34,6 +35,7 @@ namespace Controller
         [SerializeField] private BossHealthController bossHealthController;
         [SerializeField] private BossAnimationController animationController;
         [SerializeField] private BossAttackController bossAttackController;
+     
 
         #endregion
 
@@ -120,6 +122,13 @@ namespace Controller
             CurrentState.EnterState();
         }
 
+        IEnumerator DeadWaiter()
+        {
+            WaitForSeconds waiter = new WaitForSeconds(1.5f);
+            SwitchState(BossStateType.Dead);
+            yield return waiter;
+            gameObject.SetActive(false);
+        }
 
         public void Damage(int damage)
         {
@@ -130,7 +139,7 @@ namespace Controller
                 {
                     bossAttackController.enabled = false;
                     IsDead = true;
-                    SwitchState(BossStateType.Dead);
+                    StartCoroutine(DeadWaiter());
                 }
             }
         }

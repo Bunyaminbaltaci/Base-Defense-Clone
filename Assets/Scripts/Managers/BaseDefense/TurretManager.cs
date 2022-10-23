@@ -28,6 +28,7 @@ namespace Controller
         #region Serialized Variables
 
         [SerializeField] private GameObject stackHolder;
+        [SerializeField] private GameObject turretOperator;
         [SerializeField] private TurretMovementController turretMovementController;
         [SerializeField] private TurretAttackController turretAttackController;
         [SerializeField] private TurretAutoModeController turretAutoModeController;
@@ -199,9 +200,8 @@ namespace Controller
                     TurretType = TurretState.PlayerIn;
                     break;
                 case TurretState.AutoMode:
-
+                    turretOperator.SetActive(true);
                     SetAutoMode();
-
                     break;
                 case TurretState.None:
                     TurretType = TurretState.None;

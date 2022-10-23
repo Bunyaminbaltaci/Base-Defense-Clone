@@ -39,8 +39,8 @@ namespace States.HarvesterStates
 
         public void EnterState()
         {
+         
             _manager.SetTriggerAnim(WorkerAnimType.Idle);
-            
             _manager.StartCort(WaitForTarget());
         }
 

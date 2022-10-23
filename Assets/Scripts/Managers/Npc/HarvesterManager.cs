@@ -75,7 +75,7 @@ namespace Controller
 
         private void Start()
         {
-            CurrentState.EnterState();
+          
         }
 
         private void Update()

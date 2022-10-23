@@ -28,7 +28,7 @@ namespace Managers
 
         private int _spawnAreaPointer;
         private Coroutine _hostageSpawnCoroutine;
-       [ShowInInspector] private List<HostageSpawnParams> _hostageSpawnPoints;
+        [ShowInInspector] private List<HostageSpawnParams> _hostageSpawnPoints;
 
         #endregion
 
@@ -99,19 +99,16 @@ namespace Managers
 
             if (_hostageSpawnCoroutine == null)
             {
-               _hostageSpawnCoroutine= StartCoroutine(StartHostageSpawn());
+                _hostageSpawnCoroutine = StartCoroutine(StartHostageSpawn());
             }
         }
 
 
         private IEnumerator StartEnemySpawn()
         {
-            var waiter = new WaitForSeconds(3f);
+            var waiter = new WaitForSeconds(2.5f);
             while (true)
             {
-                yield return waiter;
-
-
                 var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Enemy);
                 if (obj != null)
                 {
@@ -122,6 +119,8 @@ namespace Managers
                     obj.transform.parent = transform.parent;
                     obj.SetActive(true);
                 }
+
+                yield return waiter;
             }
         }
 

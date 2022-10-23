@@ -61,6 +61,7 @@ namespace Controller
             IdleSignals.Instance.onSetAreaData += OnSetAreaData;
             IdleSignals.Instance.onGetAreaData += OnGetAreaData;
             IdleSignals.Instance.onBaseComplete += OnCityComplete;
+            IdleSignals.Instance.onGetBaseLevel += OnGetBaseLevel;
             
             // LevelSignals.Instance.onNextLevel += OnNextLevel;
             SaveSignals.Instance.onGetBaseData += OnGetBaseDatas;
@@ -73,12 +74,14 @@ namespace Controller
             IdleSignals.Instance.onSetAreaData -= OnSetAreaData;
             IdleSignals.Instance.onGetAreaData -= OnGetAreaData;
             IdleSignals.Instance.onBaseComplete -= OnCityComplete;
+            IdleSignals.Instance.onGetBaseLevel -= OnGetBaseLevel;
             // LevelSignals.Instance.onNextLevel -= OnNextLevel;
+            
             SaveSignals.Instance.onGetBaseData -= OnGetBaseDatas;
             
         }
 
-   
+       
 
         private void OnDisable()
         {
@@ -101,6 +104,11 @@ namespace Controller
                 AreaDictionary = _areaDictionary,
                 BaseLevel = _baseLevel,
             };
+        }
+
+        private int OnGetBaseLevel()
+        {
+            return _baseLevel;
         }
 
 

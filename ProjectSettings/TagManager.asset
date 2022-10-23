@@ -25,6 +25,8 @@ TagManager:
   - AttackArea
   - GunShop
   - Ground
+  - MineCart
+  - Portal
   layers:
   - Default
   - TransparentFX

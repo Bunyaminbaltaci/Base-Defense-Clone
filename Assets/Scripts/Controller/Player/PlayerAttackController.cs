@@ -58,6 +58,16 @@ namespace Controller
         public void ChangeLayer(LayerType type)
         {
             Damageables.Clear();
+            switch (type)
+            {
+                case LayerType.Default:
+                    weaponParent.SetActive(false);
+                    break;
+                case LayerType.BattleArea:
+                    weaponParent.SetActive(true);
+                    break;
+                
+            }
             gameObject.layer = LayerMask.NameToLayer(type.ToString());
         }
 
@@ -136,7 +146,7 @@ namespace Controller
             {
                 SetBullet(obj);
                 obj.GetComponent<Rigidbody>()
-                    .AddForce(barrel[(int)_weaponType].transform.forward * 5, ForceMode.VelocityChange);
+                    .AddForce(barrel[(int)_weaponType].transform.forward * 7, ForceMode.VelocityChange);
             }
         }
 

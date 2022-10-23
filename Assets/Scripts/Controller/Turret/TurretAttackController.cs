@@ -84,7 +84,7 @@ namespace Controller
             if (obj != null)
             {
                 SetBullet(obj);
-                obj.GetComponent<Rigidbody>().AddForce(barrel.transform.forward * 5, ForceMode.VelocityChange);
+                obj.GetComponent<Rigidbody>().AddForce(barrel.transform.forward * 7, ForceMode.VelocityChange);
             }
         }
 

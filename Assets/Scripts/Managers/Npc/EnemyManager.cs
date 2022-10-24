@@ -1,15 +1,17 @@
+using System;
 using System.Collections;
 using Abstract;
 using Controller.Npc.Enemy;
 using Enums;
 using Enums.Npc;
+using Managers.Core;
 using Signals;
 using States.Npc.Enemy;
 using UnityEngine;
 using UnityEngine.AI;
 
 
-namespace Manager
+namespace Controller
 {
     public class EnemyManager : MonoBehaviour, IDamageable
     {
@@ -17,9 +19,9 @@ namespace Manager
 
         #region Public Variables
 
-        public EnemyStateType EnemySType;
-        public IStateMachine CurrentInpcState;
+        public IStateMachine CurrentState;
         public GameObject Target;
+        public IDamageable TargetIdamageable;
         public int Health { get; set; } = 100;
 
         #endregion
@@ -27,7 +29,6 @@ namespace Manager
         #region Serialized Variables
 
         [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private EnemyAnimationController animationController;
 
         #endregion
@@ -38,7 +39,7 @@ namespace Manager
         private DeadState _deadState;
         private RushTargetState _rushTargetState;
         private WalkTargetState _walkTargetState;
-        private bool IsDead=false;
+        private bool IsDead = false;
 
         #endregion
 
@@ -52,43 +53,51 @@ namespace Manager
 
         private void OnEnable()
         {
-            // SubscribeEvent();
-            Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
-            CurrentInpcState.EnterState();
+            CurrentState = _walkTargetState;
+            CurrentState.EnterState();
         }
 
         private void OnDisable()
         {
+            StopAllCoroutines();
+            SetTriggerAnim(EnemyAnimType.Idle);
             Target = null;
             IsDead = false;
-            CurrentInpcState = _walkTargetState;
+            Health = 100;
+            agent.enabled = true;
+     
         }
 
         private void GetReferences()
         {
-            _attackTargetState = new AttackTargetState(ref enemyManager, ref agent);
-            _deadState = new DeadState(ref enemyManager, ref agent);
-            _rushTargetState = new RushTargetState(ref enemyManager, ref agent);
-            _walkTargetState = new WalkTargetState(ref enemyManager, ref agent);
+            var manager = this;
+            _attackTargetState = new AttackTargetState(ref manager, ref agent);
+            _deadState = new DeadState(ref manager, ref agent);
+            _rushTargetState = new RushTargetState(ref manager, ref agent);
+            _walkTargetState = new WalkTargetState(ref manager, ref agent);
 
-            CurrentInpcState = _walkTargetState;
         }
 
         private void Start()
         {
-            CurrentInpcState.EnterState();
+            CurrentState = _walkTargetState;
+            CurrentState.EnterState();
         }
+
 
         private void Update()
         {
-            CurrentInpcState.UpdateState();
+            CurrentState.UpdateState();
         }
 
         public IEnumerator Attack()
         {
-            yield return new WaitForSeconds(2f);
-
-            SwitchState(EnemyStateType.RushTarget);
+            yield return new WaitForSeconds(1f);
+            if (TargetIdamageable!=null)
+            {
+                TargetIdamageable.Damage(5);
+            }
+           
         }
 
         public void SetTriggerAnim(EnemyAnimType animType)
@@ -98,39 +107,40 @@ namespace Manager
 
         public void SwitchState(EnemyStateType state)
         {
+            StopAllCoroutines();
             switch (state)
             {
                 case EnemyStateType.WalkTarget:
-                    CurrentInpcState = _walkTargetState;
+                    CurrentState = _walkTargetState;
                     break;
                 case EnemyStateType.RushTarget:
-                    CurrentInpcState = _rushTargetState;
+                    CurrentState = _rushTargetState;
                     break;
                 case EnemyStateType.AttackTarget:
-                    CurrentInpcState = _attackTargetState;
+                    CurrentState = _attackTargetState;
                     break;
                 case EnemyStateType.Dead:
-                    CurrentInpcState = _deadState;
+                    CurrentState = _deadState;
                     break;
             }
 
-            CurrentInpcState.EnterState();
+            CurrentState.EnterState();
         }
 
-        
 
         public void Damage(int damage)
         {
-            if (IsDead==false)
+            if (IsDead == false)
             {
                 Health -= damage;
                 if (Health <= 0)
                 {
+                    agent.enabled = false;
                     IsDead = true;
+                    StopAllCoroutines();
                     SwitchState(EnemyStateType.Dead);
                 }
             }
-          
         }
     }
 }

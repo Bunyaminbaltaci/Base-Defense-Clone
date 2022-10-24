@@ -16,5 +16,5 @@ MonoBehaviour:
     WorkerDatas:
       SpeedLevel: 0
       CapacityLevel: 0
-    HarvesterCost: 500
-    SupportCost: 500
+    HarvesterCost: 50
+    SupportCost: 50

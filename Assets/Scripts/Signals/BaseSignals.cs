@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Datas.ValueObject;
+using Enums;
 using Extentions;
 using Keys;
 using UnityEngine;
@@ -60,6 +61,12 @@ namespace Signals
 
         #endregion
 
+        #region Hostage
+
+        public UnityAction<GameObject> onRemoveHostageInSpawnPoint=delegate {  };
+
+        #endregion
+
 
         #region Enemy
 
@@ -85,8 +92,17 @@ namespace Signals
         #region GunShop
 
         public Func<int> onGetGunDamage= delegate { return default;};
+        public Func<float> onGetGunFireRate= delegate { return default; };
+        public Func<GunType> onGetGunType= delegate { return default;};
+        public UnityAction onGunDataSet=delegate {  };
 
         #endregion
 
+        #region Boss
+
+        public UnityAction<Vector3> onSetCrosshair=delegate {  };
+        public UnityAction onBossIsDead=delegate {  };
+
+        #endregion
     }
 }

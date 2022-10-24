@@ -1,6 +1,6 @@
 using Abstract;
 using Enums.Npc;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -36,6 +36,8 @@ namespace States.Npc.Enemy
 
         public void EnterState()
         {
+            Debug.Log("Attack");
+
             _manager.SetTriggerAnim(EnemyAnimType.Attack);
             _manager.StartCoroutine(_manager.Attack());
 
@@ -44,9 +46,8 @@ namespace States.Npc.Enemy
         public void UpdateState()
         {
             _agent.destination = _manager.Target.transform.position;
-            if (_agent.remainingDistance > _agent.stoppingDistance)
+            if ((_manager.transform.position-_manager.Target.transform.position).sqrMagnitude >Mathf.Pow(_agent.stoppingDistance,2))
             {
-                _manager.StopAllCoroutines();
                 SwitchState(EnemyStateType.RushTarget);
             }
         }
@@ -55,16 +56,21 @@ namespace States.Npc.Enemy
 
         public void OnTriggerEnterState(Collider other)
         {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("Player girdi Attack State");
+                _manager.TargetIdamageable = other.GetComponentInParent<IDamageable>();
+                _manager.Target = other.gameObject;
+                SwitchState(EnemyStateType.RushTarget);
+            }
         }
 
         public void OnTriggerExitState(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-            
-                _manager.Target = BaseSignals.Instance.onGetEnemyTarget?.Invoke();
+                _manager.TargetIdamageable = null;
                 SwitchState(EnemyStateType.WalkTarget);
-           
             }
         }
 

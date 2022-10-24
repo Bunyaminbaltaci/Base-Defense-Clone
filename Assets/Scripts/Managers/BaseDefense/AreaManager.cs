@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-namespace Manager
+namespace Controller
 {
     public class AreaManager : MonoBehaviour
     {
@@ -27,7 +27,7 @@ namespace Manager
         [SerializeField] private GameObject buildCostArea;
         [SerializeField] private GameObject fence;
         [SerializeField] private GameObject area;
-        [SerializeField] private string areaId;
+        [SerializeField] private string _areaId;
 
         #endregion
 
@@ -87,7 +87,7 @@ namespace Manager
         {
             _buildData = GetData();
             buildCost.text = _buildData.AreaCost.ToString();
-            areaId = gameObject.name;
+            _areaId = gameObject.name;
         }
 
 
@@ -99,7 +99,7 @@ namespace Manager
 
         private void OnRefreshAreaData()
         {
-            _areaData = (AreaData)IdleSignals.Instance.onGetAreaData?.Invoke(areaId);
+            _areaData = (AreaData)IdleSignals.Instance.onGetAreaData?.Invoke(_areaId);
             CostAreaVisible();
             SetAreaTexts();
         }
@@ -205,7 +205,7 @@ namespace Manager
 
         private void OnPrepareAreaWithSave()
         {
-            IdleSignals.Instance.onSetAreaData?.Invoke(areaId, _areaData);
+            IdleSignals.Instance.onSetAreaData?.Invoke(_areaId, _areaData);
         }
     }
 }

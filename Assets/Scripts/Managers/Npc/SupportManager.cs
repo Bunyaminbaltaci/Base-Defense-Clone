@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using Abstract;
 using Controller.Npc;
-using Controllers;
+using Controller;
 using Data;
 using Datas.ValueObject;
 using Enums;
@@ -12,7 +12,7 @@ using States.Npc.SupportStates;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Manager
+namespace Controller
 {
     public class SupportManager : MonoBehaviour
     {

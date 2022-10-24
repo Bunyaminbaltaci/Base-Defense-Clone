@@ -2,63 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd9a3ebd-b6b8-47bd-898f-179f3f44ff87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAutoModeController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAutoModeController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/WorkerArea.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/WorkerArea/WorkerBuyAreaController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/WorkerArea/WorkerBuyAreaController.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_WorkerAreaData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/UnityObject/CD_WorkerAreaData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/WorkerAreaData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/WorkerAreaData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/WorkerType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/WorkerType.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/WorkerDataParams.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/WorkerDataParams.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/WorkerAreaManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/WorkerAreaManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Base-Defense-Clone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Animators/Enemy.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Animators/Enemy.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ammo/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ammo/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/Rifle Png.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/Rifle Png.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ammo/Ammo.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ammo/Ammo.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Enemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Enemy.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Harvester.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Harvester.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Hostage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Hostage.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Npc/Support.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Npc/Support.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turret/Gataling.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turret/Gataling.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turret/TurretArea.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turret/TurretArea.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_MineData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_MineData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_PoolGenerator.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_PoolGenerator.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Data/CD_TurretData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Data/CD_TurretData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Stage/Stage1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Stage/Stage1.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Base 0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Base 0.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/NavMesh-Base 0.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/NavMesh-Base 0.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main_Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main_Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Abstract/IDamageable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Abstract/IDamageable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Turret/TurretBulletBoxAddCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Turret/TurretBulletBoxAddCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/BulletController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/BulletController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/MoneyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Other/MoneyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Player/PlayerPhysicsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAttackController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretAttackController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretMovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Turret/TurretMovementController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MineData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/MineData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/TurretData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/TurretData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/WorkerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Datas/ValueObject/WorkerData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/PoolType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enums/Other/PoolType.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Keys/BaseDataParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/BaseDataParams.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Keys/TurretParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/TurretStackParams.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Keys/TurretParams.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Keys/TurretStackParams.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BaseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BaseManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BulletAreaManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/BulletAreaManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Navmesh/Enemy.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/BasePrefabs/Navmesh/Enemy.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/MoneyDepositCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Commands/Stack/MoneyDepositCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Boss/BossAttackController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controller/Npc/Boss/BossAttackController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/TurretManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/TurretManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PlayerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/PlayerManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Core/SaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/SpawnManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/EnemyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HarvesterManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HarvesterManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/BaseSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/BaseSignals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Signals/SaveSignals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Signals/SaveSignals.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/AttackTargetState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/AttackTargetState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/DeadState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/DeadState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/RushTargetState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/RushTargetState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/WalkTargetState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/States/Npc/EnemyStates/WalkTargetState.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +30,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Commands/Pool/PoolGenerateCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/MineManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/BaseDefense/SpawnManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Npc/HostageManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Npc/MinerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/Npc/SoldierManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -96,7 +59,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;RiderCSharpLiveTemplatesSettingsId&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;LiveTemplatesSettingsId&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -190,6 +153,30 @@
       <workItem from="1665422676983" duration="15053000" />
       <workItem from="1665499594601" duration="5177000" />
       <workItem from="1665514240017" duration="10809000" />
+      <workItem from="1665593437114" duration="71000" />
+      <workItem from="1665604189483" duration="8084000" />
+      <workItem from="1665621478046" duration="627000" />
+      <workItem from="1665647445982" duration="24377000" />
+      <workItem from="1665763027084" duration="6934000" />
+      <workItem from="1665828756753" duration="8173000" />
+      <workItem from="1665859991741" duration="8216000" />
+      <workItem from="1665932290352" duration="1826000" />
+      <workItem from="1665999277471" duration="11475000" />
+      <workItem from="1666103117382" duration="14930000" />
+      <workItem from="1666162031982" duration="7613000" />
+      <workItem from="1666257980943" duration="8600000" />
+      <workItem from="1666292145714" duration="11643000" />
+      <workItem from="1666325353416" duration="3570000" />
+      <workItem from="1666362665806" duration="4345000" />
+      <workItem from="1666390863176" duration="205000" />
+      <workItem from="1666440198550" duration="1192000" />
+      <workItem from="1666447294235" duration="284000" />
+      <workItem from="1666467106966" duration="6151000" />
+      <workItem from="1666516958393" duration="2163000" />
+      <workItem from="1666522517836" duration="901000" />
+      <workItem from="1666524101720" duration="2363000" />
+      <workItem from="1666529784773" duration="2265000" />
+      <workItem from="1666535174109" duration="11674000" />
     </task>
     <servers />
   </component>

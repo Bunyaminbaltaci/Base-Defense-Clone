@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Abstract;
-using Controllers;
+using Controller;
 using Datas.ValueObject;
 using DG.Tweening;
 using UnityEngine;

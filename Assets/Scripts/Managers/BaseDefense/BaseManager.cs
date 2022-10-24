@@ -5,10 +5,11 @@ using Abstract;
 using Keys;
 using Signals;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Manager
+namespace Controller
 {
     public class BaseManager : MonoBehaviour, ISavable
     {
@@ -23,6 +24,7 @@ namespace Manager
         [SerializeField] private List<GameObject> enemyTargetList;
         [SerializeField] private GameObject ammoArea;
         [SerializeField] private GameObject baseEnterPoint;
+        [SerializeField] private TextMeshPro baseText;
 
         #endregion
 
@@ -76,6 +78,7 @@ namespace Manager
             BaseSignals.Instance.onAddHaversterTargetList += OnAddHaversterTargetList;
             BaseSignals.Instance.onRemoveHaversterTargetList += OnRemoveHaversterTargetList;
 
+
             SaveSignals.Instance.onGetSaveIdleData += OnGetSaveIdleData;
         }
 
@@ -104,6 +107,8 @@ namespace Manager
             SaveSignals.Instance.onGetSaveIdleData -= OnGetSaveIdleData;
         }
 
+      
+
         private void OnTurretIsAutoSub(string name, bool isAuto)
         {
             if (!_turretIsAuto.ContainsKey(name))
@@ -131,8 +136,13 @@ namespace Manager
         private void Start()
         {
             LoadData();
+            SetBaseText(IdleSignals.Instance.onGetBaseLevel());
         }
 
+        private void SetBaseText(int level)
+        {
+            baseText.text = "Base " + (level+1);
+        }
         private bool OnTurretIsAuto(string turret)
         {
             
@@ -168,7 +178,10 @@ namespace Manager
 
         private GameObject OnGetHarvesterTarget()
         {
-            if (_moneyTransformList.Count > 0) return _moneyTransformList[Random.Range(0, _moneyTransformList.Count)];
+            if (_moneyTransformList.Count > 0)
+            {
+                return _moneyTransformList[Random.Range(0, _moneyTransformList.Count)];
+            }
 
             return null;
         }

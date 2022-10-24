@@ -6,10 +6,9 @@ namespace Enums
         AreaLevel2,
         Turret1,
         Turret2,
-        AmmoWorker,
-        Harvester,
+        Stage
 
         
 
-    }
+    }   
 }

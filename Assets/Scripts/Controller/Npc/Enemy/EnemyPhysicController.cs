@@ -1,5 +1,5 @@
 using System;
-using Manager;
+using Controller;
 using UnityEngine;
 
 namespace Controller.Npc.Enemy
@@ -30,12 +30,12 @@ namespace Controller.Npc.Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            enemyManager.CurrentInpcState.OnTriggerEnterState(other);
+            enemyManager.CurrentState.OnTriggerEnterState(other);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            enemyManager.CurrentInpcState.OnTriggerExitState(other);
+            enemyManager.CurrentState.OnTriggerExitState(other);
         }
     }
 }

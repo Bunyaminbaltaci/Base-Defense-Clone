@@ -31,9 +31,16 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - Boxophobic.PolyverseSkies.Runtime
     - Cinemachine
+    - Boxophobic.Utils.Scripts
+    - AllIn1VfxDemoScriptAssemblies
     - Sirenix.OdinInspector.CompatibilityLayer
+    - AllIn1VfxTexDemoAssembly
+    - Boxophobic.PolyverseSkies.Scripts
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
+    - Boxophobic.Utils.Editor
+    - Boxophobic.PolyverseSkies.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0

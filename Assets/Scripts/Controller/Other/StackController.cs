@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Commands;
 using Datas.ValueObject;
@@ -10,7 +11,7 @@ using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
-namespace Controllers
+namespace Controller
 {
     public class StackController : MonoBehaviour
     {
@@ -58,9 +59,55 @@ namespace Controllers
             _moneyStackData = moneyStackData;
         }
 
-        public void SetStackType(StackType stackType)
+        public void SetStackType(LayerType side)
         {
-            this.stackType = stackType;
+            StartCollect();
+            switch (side)
+            {
+                case LayerType.Default:
+                    this.stackType = StackType.Ammo;
+                    break;
+                case LayerType.BattleArea:
+                    this.stackType = StackType.Money;
+                    break;
+                    
+                
+            }
+        }
+
+        public void DropMoney()
+        {
+            var parent=BaseSignals.Instance.onGetBase?.Invoke().transform;
+            for (int i = StackList.Count-1; i >=0; i--)
+            {
+                StackList[i].transform.parent = parent;
+                StackList[i].GetComponent<MoneyController>().OnDrop();
+                StackList.RemoveAt(i);
+                
+            }
+        }
+        public IEnumerator StartBulletBoxSend(GameObject target)
+        {
+            var waiter = new WaitForSeconds(0.2f);
+            while (StackList.Count > 0)
+            {
+                if (BaseSignals.Instance.onGetTurretLimit(target) > 0)
+                    BaseSignals.Instance.onSendAmmoInStack?.Invoke(target, SendBulletBox());
+
+                yield return waiter;
+            }
+        }
+        public IEnumerator TakeBulletBox()
+        {
+            var waiter = new WaitForSeconds(0.2f);
+            while (StackList.Count < _bulletBoxStackData.StackLimit)
+            {
+                var obj = BaseSignals.Instance.onGetBulletBox?.Invoke();
+                if (obj == null)
+                    break;
+                AddStack(obj);
+                yield return waiter;
+            }
         }
 
 

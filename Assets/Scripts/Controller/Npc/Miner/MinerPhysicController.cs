@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Manager.Npc
+namespace Controller.Npc
 {
     public class MinerPhysicController : MonoBehaviour
     {

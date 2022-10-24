@@ -8,7 +8,7 @@ using Signals;
 using TMPro;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class WorkerAreaManager : MonoBehaviour, ISavable
     {
@@ -97,8 +97,8 @@ namespace Manager
         {
             var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Harvester);
             obj.transform.position = harvesterBuyArea.transform.position;
-            obj.SetActive(true);
             harvesterBuyArea.IsComplete();
+            obj.SetActive(true);
             if (!_data.WorkerDatas.WorkerList.ContainsKey(WorkerType.Harvester))
             {
                 _data.WorkerDatas.WorkerList.Add(WorkerType.Harvester, true);
@@ -108,6 +108,7 @@ namespace Manager
 
         public void BuySupport()
         {
+            
             var obj = PoolSignals.Instance.onGetPoolObject?.Invoke(PoolType.Support);
             obj.transform.position = supportBuyArea.transform.position;
             obj.SetActive(true);

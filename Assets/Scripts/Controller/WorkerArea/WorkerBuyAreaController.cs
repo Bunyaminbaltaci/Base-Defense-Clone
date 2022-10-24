@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using Enums;
-using Manager;
+using Controller;
 using Signals;
 using TMPro;
 using UnityEngine;

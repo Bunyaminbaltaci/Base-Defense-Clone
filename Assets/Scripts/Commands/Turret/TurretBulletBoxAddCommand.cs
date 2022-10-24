@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Datas.ValueObject;
 using DG.Tweening;
 using Keys;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 

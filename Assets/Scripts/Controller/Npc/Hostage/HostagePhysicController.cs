@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Manager.Npc.Hostage
+namespace Controller.Npc.Hostage
 {
     public class HostagePhysicController : MonoBehaviour
     {

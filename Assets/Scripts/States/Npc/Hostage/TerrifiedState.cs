@@ -1,6 +1,6 @@
 using Abstract;
 using Enums.Npc;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -36,6 +36,7 @@ namespace States.MinerStates
 
         public void EnterState()
         {
+            _manager.Target = null;
             _manager.SetTriggerAnim(HostageAnimType.Terrified);
         }
 

@@ -1,13 +1,13 @@
 using System;
 using DG.Tweening;
 using Enums;
-using Manager;
+using Controller;
 using Managers.Core;
 using Signals;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Controllers
+namespace Controller
 {
     public class PlayerPhysicsController : MonoBehaviour
     {
@@ -27,20 +27,11 @@ namespace Controllers
 
         #endregion
 
-        private void ChangeLayer()
+        public void ChangeLayer(LayerType type)
         {
-            playerManager.StartCollectStack();
-            if (gameObject.layer == LayerMask.NameToLayer("Default"))
-            {
-                gameObject.layer = LayerMask.NameToLayer("BattleArea");
-                playerManager.ChageStackState(StackType.Money);
-            }
-            else
-            {
-                gameObject.layer = LayerMask.NameToLayer("Default");
-                playerManager.ChageStackState(StackType.Ammo);
-            }
+            gameObject.layer = LayerMask.NameToLayer(type.ToString());
         }
+     
 
         private void OnTriggerEnter(Collider other)
         {
@@ -68,12 +59,12 @@ namespace Controllers
 
             if (other.CompareTag("TurretStack"))
             {
-                playerManager.StartCoroutine(playerManager.StartBulletBoxSend(other.gameObject));
+                playerManager.StartBulletBoxSend(other.gameObject);
             }
 
             if (other.CompareTag("BulletArea"))
             {
-                playerManager.StartCoroutine(playerManager.TakeBulletBox());
+                playerManager.TakeBulletBox();
             }
 
             if (other.CompareTag("Turret"))
@@ -89,14 +80,13 @@ namespace Controllers
         {
             if (other.CompareTag("BaseLimit"))
             {
-                ChangeLayer();
+                playerManager.ChangeLayer();
             }
 
             if (other.CompareTag("TurretStack"))
             {
                 playerManager.StopAllCoroutines();
             }
-
             if (other.CompareTag("BulletArea"))
             {
                 playerManager.StopAllCoroutines();
@@ -104,7 +94,7 @@ namespace Controllers
 
             if (other.CompareTag("Turret"))
             {
-                if (other.GetComponent<TurretManager>().TurretType == TurretState.None)
+                if (other.GetComponent<TurretManager>().TurretType == TurretState.PlayerIn)
                 {
                     playerManager.OutTurret(other.gameObject);
                 }

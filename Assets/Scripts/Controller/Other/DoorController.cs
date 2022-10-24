@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class DoorController : MonoBehaviour
     {

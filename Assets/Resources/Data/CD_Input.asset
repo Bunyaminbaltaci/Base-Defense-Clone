@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: CD_Input
   m_EditorClassIdentifier: 
   InputData:
-    PlayerInputSpeed: 2
-    ClampSides: {x: -3, y: 3, z: 0}
-    ClampSpeed: 0.007
+    PlayerInputSpeed: 4

@@ -7,7 +7,7 @@ using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class IdleManager : MonoBehaviour, ISavable
     {
@@ -61,6 +61,7 @@ namespace Manager
             IdleSignals.Instance.onSetAreaData += OnSetAreaData;
             IdleSignals.Instance.onGetAreaData += OnGetAreaData;
             IdleSignals.Instance.onBaseComplete += OnCityComplete;
+            IdleSignals.Instance.onGetBaseLevel += OnGetBaseLevel;
             
             // LevelSignals.Instance.onNextLevel += OnNextLevel;
             SaveSignals.Instance.onGetBaseData += OnGetBaseDatas;
@@ -73,12 +74,14 @@ namespace Manager
             IdleSignals.Instance.onSetAreaData -= OnSetAreaData;
             IdleSignals.Instance.onGetAreaData -= OnGetAreaData;
             IdleSignals.Instance.onBaseComplete -= OnCityComplete;
+            IdleSignals.Instance.onGetBaseLevel -= OnGetBaseLevel;
             // LevelSignals.Instance.onNextLevel -= OnNextLevel;
+            
             SaveSignals.Instance.onGetBaseData -= OnGetBaseDatas;
             
         }
 
-   
+       
 
         private void OnDisable()
         {
@@ -101,6 +104,11 @@ namespace Manager
                 AreaDictionary = _areaDictionary,
                 BaseLevel = _baseLevel,
             };
+        }
+
+        private int OnGetBaseLevel()
+        {
+            return _baseLevel;
         }
 
 

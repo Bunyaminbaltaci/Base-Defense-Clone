@@ -6,6 +6,7 @@ namespace Datas.ValueObject
     public class GunData
     {
         public int Damage;
+        public float FireRate;
         public int GunLevel;
         public int Price;
 

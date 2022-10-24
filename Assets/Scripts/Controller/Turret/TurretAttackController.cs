@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Abstract;
 using Enums;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 
-namespace Controller.Other
+namespace Controller
 {
     public class TurretAttackController : MonoBehaviour
     {
@@ -84,7 +84,7 @@ namespace Controller.Other
             if (obj != null)
             {
                 SetBullet(obj);
-                obj.GetComponent<Rigidbody>().AddForce(barrel.transform.forward * 5, ForceMode.VelocityChange);
+                obj.GetComponent<Rigidbody>().AddForce(barrel.transform.forward * 7, ForceMode.VelocityChange);
             }
         }
 
@@ -134,8 +134,7 @@ namespace Controller.Other
         {
             if (other.GetComponent<IDamageable>() != null && other.CompareTag("Enemy"))
             {
-                Damageables.Remove(other.gameObject);
-                Damageables.TrimExcess();
+                RemoveFromList(other.gameObject);
             }
         }
     }

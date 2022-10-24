@@ -1,26 +1,37 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Controller.Other;
-using Controllers;
+using Abstract;
+using Controller;
 using Data;
 using DG.Tweening;
 using Enums;
 using Keys;
-using Manager;
 using Signals;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Managers.Core
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : MonoBehaviour, IDamageable
     {
         #region Self Variables
 
         #region Public Variables
 
+        private int _health = 100;
+
+        public int Health
+        {
+            get => _health;
+            set
+            {
+                _health = value;
+                playerHealthController.SetHealthText(value);
+               
+            }
+        }
+
+
         public GameObject CurrentParent;
+        public GameObject Target;
 
         #endregion
 
@@ -29,13 +40,18 @@ namespace Managers.Core
         [SerializeField] private PlayerAnimationController playerAnimationController;
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private StackController stackController;
+        [SerializeField] private PlayerAttackController playerAttackController;
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        [SerializeField] private PlayerHealthController playerHealthController;
 
         #endregion
 
         #region Private Variables
 
+        private HostageCollectorController _hostageCollectorController;
         private PlayerData _data;
-        private List<GameObject> _hostageList;
+        private LayerType _side;
+        private bool _isDead=false;
 
         #endregion
 
@@ -45,6 +61,18 @@ namespace Managers.Core
         {
             GetReferences();
             SendPlayerDataToControllers();
+        }
+
+        private void GetReferences()
+        {
+            var manager = this;
+            _hostageCollectorController = new HostageCollectorController(ref manager);
+            _data = GetPlayerData();
+        }
+
+        private PlayerData GetPlayerData()
+        {
+            return Resources.Load<CD_Player>("Data/CD_Player").Data;
         }
 
         #region Event Subscription
@@ -57,38 +85,60 @@ namespace Managers.Core
         private void Subscribe()
         {
             InputSignals.Instance.onInputDragged += OnInputDragged;
-            CoreGameSignals.Instance.onGetHostageTarget += OnGetHostageTarget;
+            BaseSignals.Instance.onGunDataSet += OnGunDataSet;
+            BaseSignals.Instance.onRemoveInDamageableStack += OnRemoveInDamageableStack;
+            CoreGameSignals.Instance.onGetHostageTarget += _hostageCollectorController.GetHostageTarget;
         }
+
+      
 
         private void Unsubscribe()
         {
             InputSignals.Instance.onInputDragged -= OnInputDragged;
-            CoreGameSignals.Instance.onGetHostageTarget -= OnGetHostageTarget;
+            BaseSignals.Instance.onGunDataSet -= OnGunDataSet;
+            BaseSignals.Instance.onRemoveInDamageableStack += OnRemoveInDamageableStack;
+            CoreGameSignals.Instance.onGetHostageTarget -= _hostageCollectorController.GetHostageTarget;
         }
 
         private void OnDisable()
         {
             Unsubscribe();
+            StopAllCoroutines();
         }
 
         #endregion
-
-        private void GetReferences()
-        {
-            _data = GetPlayerData();
-            _hostageList = new List<GameObject>();
-        }
-
-        private PlayerData GetPlayerData()
-        {
-            return Resources.Load<CD_Player>("Data/CD_Player").Data;
-        }
 
         private void Start()
         {
             CurrentParent = transform.parent.gameObject;
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
+            OnGunDataSet();
         }
+
+        private void OnInputDragged(InputParams value)
+        {
+            if (_isDead) value=new InputParams();
+            playerMovementController.UpdateInputValue(value);
+        }
+        public void ChangeLayer()
+        {
+            switch (_side)
+            {
+                case LayerType.Default:
+                    _side = LayerType.BattleArea;
+                    break;
+                case LayerType.BattleArea:
+                    _side = LayerType.Default;
+                    break;
+            }
+            Target = null;
+            playerHealthController.ChangedLayer(_side);
+            playerPhysicsController.ChangeLayer(_side);
+            playerAttackController.ChangeLayer(_side);
+            playerAnimationController.ChangeLayer(_side);
+            stackController.SetStackType(_side);
+        }
+
 
         public void AddMoneyOnStack(GameObject obj)
         {
@@ -99,109 +149,105 @@ namespace Managers.Core
             }
         }
 
-        private void SendPlayerDataToControllers()
+
+        public void PlayFloatAnim(PlayerAnimationStates playerAnimationStates, float value)
         {
-            playerMovementController.SetMovementData(_data);
-            stackController.SetStackData(_data.BulletBoxStackData, _data.MoneyBoxStackData);
+            playerAnimationController.PlayFloatAnim(playerAnimationStates, value);
         }
 
-        private void OnInputDragged(InputParams inputParam)
+        public void PlayTriggerAnim(PlayerAnimationStates playerAnimationStates)
         {
-            playerMovementController.UpdateInputValue(inputParam);
+            playerAnimationController.PlayTriggerAnim(playerAnimationStates);
         }
 
-        public void PlayAnim(PlayerAnimationStates playerAnimationStates, float isTrue)
+        public void TakeBulletBox()
         {
-            playerAnimationController.PlayAnim(playerAnimationStates, isTrue);
+            StartCoroutine(stackController.TakeBulletBox());
         }
 
-        public void ChageStackState(StackType type)
+        public void StartBulletBoxSend(GameObject target)
         {
-            stackController.SetStackType(type);
+            StartCoroutine(stackController.StartBulletBoxSend(target));
         }
 
-        //ToDo:Controllera Ayır Bu managerın görevi değil
-        private GameObject OnGetHostageTarget(GameObject hostage)
-        {
-            if (_hostageList.Count == 0)
-            {
-                _hostageList.Add(hostage);
-                return transform.gameObject;
-            }
-
-            _hostageList.Add(hostage);
-            return _hostageList[_hostageList.Count - 2];
-        }
-
-        public void HostageAddMine()
-        {
-            while (BaseSignals.Instance.onGetMinerCapacity() > 0 && _hostageList.Count > 0)
-            {
-                var lastHostage = _hostageList.Count - 1;
-                var obj = PoolSignals.Instance.onGetPoolObject(PoolType.Miner);
-                obj.transform.position = _hostageList[lastHostage].transform.position;
-                obj.transform.rotation = _hostageList[lastHostage].transform.rotation;
-                PoolSignals.Instance.onSendPool(_hostageList[lastHostage], PoolType.Hostage);
-                obj.SetActive(true);
-                BaseSignals.Instance.onAddMinerInMine?.Invoke(obj);
-                _hostageList.RemoveAt(lastHostage);
-                _hostageList.TrimExcess();
-            }
-        }
-        //_____________________________________________________________________________
-
-        public void StartCollectStack()
-        {
-            stackController.StartCollect();
-        }
-
-        public void ChangeMovement(PlayerMovementState state)
-        {
-            playerMovementController.ChangeState(state);
-        }
-
-        public IEnumerator StartBulletBoxSend(GameObject target)
-        {
-            var waiter = new WaitForSeconds(0.2f);
-            while (stackController.StackList.Count > 0)
-            {
-                if (BaseSignals.Instance.onGetTurretLimit(target) > 0)
-                    BaseSignals.Instance.onSendAmmoInStack?.Invoke(target, stackController.SendBulletBox());
-
-                yield return waiter;
-            }
-        }
+        #region Turret
 
         public void InTurret(GameObject other)
         {
             var newparent = other.GetComponent<TurretManager>().PlayerHandle.transform;
             transform.parent = newparent;
-            transform.DOLocalMove(new Vector3(0, transform.localPosition.y, 0), .5f);
-            transform.DOLocalRotate(Vector3.zero, 0.5f);
+            transform.DOLocalMove(new Vector3(0, transform.localPosition.y, 0.30f), .5f);
+            transform.DOLocalRotate(new Vector3(0,180,0), 0.5f).SetDelay(0.2f);
             ChangeMovement(PlayerMovementState.Turret);
             BaseSignals.Instance.onPlayerInTurret.Invoke(other.gameObject);
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Turret);
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(newparent.transform.parent);
+            PlayTriggerAnim(PlayerAnimationStates.Hold);
         }
 
         public void OutTurret(GameObject other)
         {
             BaseSignals.Instance.onPlayerOutTurret?.Invoke(other.gameObject);
             transform.parent = CurrentParent.transform;
+            transform.DOLocalRotate(Vector3.zero, 0.5f);
             CoreGameSignals.Instance.onChangeGameState?.Invoke(GameStates.Idle);
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke(transform);
         }
 
-        public IEnumerator TakeBulletBox()
+        #endregion
+
+        public void ChangeMovement(PlayerMovementState state)
         {
-            var waiter = new WaitForSeconds(0.2f);
-            while (stackController.StackList.Count < _data.BulletBoxStackData.StackLimit)
+            playerMovementController.ChangedState(state);
+        }
+
+        public void HostageAddMine()
+        {
+            _hostageCollectorController.HostageAddMine();
+        }
+
+        private void OnRemoveInDamageableStack(GameObject enemy)
+        {
+            playerAttackController.RemoveFromList(enemy);
+        }
+
+        private void OnGunDataSet()
+        {
+            playerAttackController.GunDataSet();
+        }
+
+        private void SendPlayerDataToControllers()
+        {
+            playerMovementController.SetMovementData(_data);
+            stackController.SetStackData(_data.BulletBoxStackData, _data.MoneyBoxStackData);
+        }
+
+        private IEnumerator isDead()
+        {
+            WaitForSeconds waiter = new WaitForSeconds(2f);
+            stackController.DropMoney();
+            _hostageCollectorController.DropFollowers();
+            _isDead = true;
+            PlayTriggerAnim(PlayerAnimationStates.Dead);
+            ChangeLayer();
+            yield return waiter;
+        
+            PlayTriggerAnim(PlayerAnimationStates.Run); 
+            _isDead = false;
+            transform.position = BaseSignals.Instance.onGetEnter.Invoke().transform.position;
+        }
+
+        public void Damage(int damage)
+        {
+            if (_isDead==false)
             {
-                var obj = BaseSignals.Instance.onGetBulletBox?.Invoke();
-                if (obj == null)
-                    break;
-                stackController.AddStack(obj);
-                yield return waiter;
+                Health -= damage;
+                if (Health<=0)
+                {
+                    Health = 0;
+                    StartCoroutine(isDead());
+             
+                }
             }
         }
     }

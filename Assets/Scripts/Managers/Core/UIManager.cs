@@ -1,9 +1,9 @@
-using Controllers;
+using Controller;
 using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Manager
+namespace Controller
 {
     public class UIManager : MonoBehaviour
     {

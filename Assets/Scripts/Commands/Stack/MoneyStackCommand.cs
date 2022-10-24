@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Controllers;
+using Controller;
 using Datas.ValueObject;
 using DG.Tweening;
 using UnityEngine;

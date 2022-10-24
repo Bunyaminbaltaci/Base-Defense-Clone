@@ -1,5 +1,5 @@
 using System;
-using Manager;
+using Controller;
 using UnityEngine;
 
 namespace Controller.Npc

@@ -1,6 +1,6 @@
 using System.Collections;
 using Abstract;
-using Manager;
+using Controller;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -39,8 +39,8 @@ namespace States.HarvesterStates
 
         public void EnterState()
         {
+         
             _manager.SetTriggerAnim(WorkerAnimType.Idle);
-            
             _manager.StartCort(WaitForTarget());
         }
 

@@ -44,6 +44,7 @@ namespace Signals
         public Func<GunsDataParams>onGetGunShopData= delegate { return default;};
         public Func<GunsDataParams> onLoadGunShopData = delegate { return default; };  
         
+        
         #endregion
 
         #region WorkerArea
